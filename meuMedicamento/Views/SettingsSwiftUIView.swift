@@ -94,7 +94,7 @@ struct SettingsSwiftUIView: View {
             Button(action: {
                 openURL(URL(string: "https://github.com/FabioFiorita/meuMedicamento")!)
             }) {
-                Text("Código-Fonte")
+                Text("Sobre-nós")
                 Spacer()
                 Image(systemName: "chevron.right")
                     .foregroundColor(Color.gray)

@@ -107,12 +107,11 @@ final class MedicationManager: ObservableObject {
             if !(medication.repeatPeriod == "Nunca") {
                 rescheduleNotification(forMedication: medication, forHistoric: historic)
             }
-            
             if historic.medicationStatus == "Não tomou" {
                 success = false
             }
             saveContext(viewContext: viewContext)
-            success = true
+            
         } else {
             deleteMedication(medication: medication, viewContext: viewContext)
             success = false
