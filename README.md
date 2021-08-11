@@ -2,11 +2,11 @@
 
 meuMedicamento tem como objetivo ajudar pessoas a controlar seus medicamentos, por meio dele o usuário consegue receber notificações, alertas se o medicamento estiver acabando e é preciso comprar mais e visualizar um mapa com todas as farmácias próximas da sua localização.
 
-<img src="https://raw.githubusercontent.com/FabioFiorita/MedControl/gh-pages/images/Logo.jpg" width="350">
+<img src="https://raw.githubusercontent.com/FabioFiorita/meuMedicamento/gh-pages/images/Logo.jpg" width="350">
 
 ### Interface
 
-<img src="https://raw.githubusercontent.com/FabioFiorita/MedControl/gh-pages/images/list.jpg" width="350"> <img src="https://raw.githubusercontent.com/FabioFiorita/MedControl/gh-pages/images/detail.jpg" width="350"> <img src="https://raw.githubusercontent.com/FabioFiorita/MedControl/gh-pages/images/map.jpg" width="350"> <img src="https://raw.githubusercontent.com/FabioFiorita/MedControl/gh-pages/images/settings.jpg" width="350"> <img src="https://raw.githubusercontent.com/FabioFiorita/MedControl/gh-pages/images/darkmode.jpg" width="350">
+<img src="https://raw.githubusercontent.com/FabioFiorita/meuMedicamento/gh-pages/images/list.jpg" width="350"> <img src="https://raw.githubusercontent.com/FabioFiorita/meuMedicamento/gh-pages/images/detail.jpg" width="350"> <img src="https://raw.githubusercontent.com/FabioFiorita/meuMedicamento/gh-pages/images/map.jpg" width="350"> <img src="https://raw.githubusercontent.com/FabioFiorita/meuMedicamento/gh-pages/images/settings.jpg" width="350"> <img src="https://raw.githubusercontent.com/FabioFiorita/meuMedicamento/gh-pages/images/darkmode.jpg" width="350">
 
 ## Funcionalidades existentes
 
@@ -23,6 +23,6 @@ meuMedicamento tem como objetivo ajudar pessoas a controlar seus medicamentos, p
 
 ### Contato: fabiolfp@gmail.com
 
-### [Política de Privacidade](https://raw.githubusercontent.com/FabioFiorita/meuMedicamento/privacyAndTerms/Privacy%20Policy)
+### [Política de Privacidade](privacyPolicy.md)
 
-### [Termos de Uso](https://raw.githubusercontent.com/FabioFiorita/meuMedicamento/privacyAndTerms/Terms%20%26%20Conditions)
+### [Termos de Uso](Terms&Conditions.md)
