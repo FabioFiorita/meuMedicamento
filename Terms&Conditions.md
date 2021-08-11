@@ -1,3 +1,9 @@
+---
+title: Terms & Conditions
+layout: template
+filename: Terms&Conditions.md
+--- 
+
 # Terms & Conditions
 
 ###
