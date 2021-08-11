@@ -23,6 +23,6 @@ meuMedicamento tem como objetivo ajudar pessoas a controlar seus medicamentos, p
 
 ### Contato: fabiolfp@gmail.com
 
-### [Política de Privacidade](https://raw.githubusercontent.com/FabioFiorita/MedControl/main/Privacy%20Policy)
+### [Política de Privacidade](https://raw.githubusercontent.com/FabioFiorita/meuMedicamento/privacyAndTerms/Privacy%20Policy)
 
-### [Termos de Uso](https://raw.githubusercontent.com/FabioFiorita/MedControl/main/Terms%20%26%20Conditions)
+### [Termos de Uso](https://raw.githubusercontent.com/FabioFiorita/meuMedicamento/privacyAndTerms/Terms%20%26%20Conditions)
