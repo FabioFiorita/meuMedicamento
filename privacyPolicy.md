@@ -1,3 +1,9 @@
+---
+title: Privacy Policy
+layout: template
+filename: privacyPolicy.md
+--- 
+
 # Privacy Policy
 ###
 Fabio Luiz Fiorita Pontes built the meuMedicamento app as a Free app. This SERVICE is provided by Fabio Luiz Fiorita Pontes at no cost and is intended for use as is.
