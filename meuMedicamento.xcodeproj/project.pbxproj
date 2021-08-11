@@ -7,12 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C143FD5526C473A20041BCED /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C143FD5426C473A20041BCED /* Launch Screen.storyboard */; };
 		C1D9471526C408A300A05884 /* meuMedicamentoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1D9471426C408A300A05884 /* meuMedicamentoApp.swift */; };
 		C1D9471726C408A300A05884 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1D9471626C408A300A05884 /* ContentView.swift */; };
 		C1D9471926C408A500A05884 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C1D9471826C408A500A05884 /* Assets.xcassets */; };
 		C1D9471C26C408A500A05884 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C1D9471B26C408A500A05884 /* Preview Assets.xcassets */; };
 		C1DE8CC126C4093C004E7754 /* meuMedicamento.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C1DE8CBF26C4093C004E7754 /* meuMedicamento.xcdatamodeld */; };
-		C1DE8CC326C40A92004E7754 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C1DE8CC226C40A92004E7754 /* Launch Screen.storyboard */; };
 		C1DE8CDA26C40E7F004E7754 /* Persistance.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1DE8CD326C40E7F004E7754 /* Persistance.swift */; };
 		C1DE8CDB26C40E7F004E7754 /* MedicationModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1DE8CD426C40E7F004E7754 /* MedicationModels.swift */; };
 		C1DE8CDC26C40E7F004E7754 /* PlaceListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1DE8CD526C40E7F004E7754 /* PlaceListViewModel.swift */; };
@@ -41,6 +41,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		C143FD5426C473A20041BCED /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		C1D9471126C408A300A05884 /* meuMedicamento.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = meuMedicamento.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C1D9471426C408A300A05884 /* meuMedicamentoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = meuMedicamentoApp.swift; sourceTree = "<group>"; };
 		C1D9471626C408A300A05884 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -48,7 +49,6 @@
 		C1D9471B26C408A500A05884 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		C1D9471D26C408A500A05884 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C1DE8CC026C4093C004E7754 /* meuMedicamento.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = meuMedicamento.xcdatamodel; sourceTree = "<group>"; };
-		C1DE8CC226C40A92004E7754 /* Launch Screen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		C1DE8CD326C40E7F004E7754 /* Persistance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Persistance.swift; sourceTree = "<group>"; };
 		C1DE8CD426C40E7F004E7754 /* MedicationModels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MedicationModels.swift; sourceTree = "<group>"; };
 		C1DE8CD526C40E7F004E7754 /* PlaceListViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaceListViewModel.swift; sourceTree = "<group>"; };
@@ -138,7 +138,7 @@
 				C1DE8CEB26C40F4B004E7754 /* MapSwiftUIView.swift */,
 				C1DE8CEE26C40F4B004E7754 /* MedicationDetailSwiftUIView.swift */,
 				C1DE8CED26C40F4B004E7754 /* SettingsSwiftUIView.swift */,
-				C1DE8CC226C40A92004E7754 /* Launch Screen.storyboard */,
+				C143FD5426C473A20041BCED /* Launch Screen.storyboard */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -255,7 +255,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C1DE8CC326C40A92004E7754 /* Launch Screen.storyboard in Resources */,
+				C143FD5526C473A20041BCED /* Launch Screen.storyboard in Resources */,
 				C1D9471C26C408A500A05884 /* Preview Assets.xcassets in Resources */,
 				C1D9471926C408A500A05884 /* Assets.xcassets in Resources */,
 			);
@@ -424,7 +424,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_ASSET_PATHS = "\"meuMedicamento/Preview Content\"";
 				DEVELOPMENT_TEAM = 9QH8M89WF9;
 				ENABLE_PREVIEWS = YES;
@@ -447,7 +447,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_ASSET_PATHS = "\"meuMedicamento/Preview Content\"";
 				DEVELOPMENT_TEAM = 9QH8M89WF9;
 				ENABLE_PREVIEWS = YES;

@@ -92,7 +92,7 @@ struct SettingsSwiftUIView: View {
             }
             Divider()
             Button(action: {
-                openURL(URL(string: "https://github.com/FabioFiorita/meuMedicamento")!)
+                openURL(URL(string: "https://fabiofiorita.github.io/meuMedicamento")!)
             }) {
                 Text("Sobre-nós")
                 Spacer()
@@ -119,7 +119,7 @@ struct SettingsSwiftUIView: View {
     private var policies: some View {
         VStack(alignment: .leading, spacing: 15.0) {
             Button(action: {
-                openURL(URL(string: "https://raw.githubusercontent.com/FabioFiorita/meuMedicamento/privacyAndTerms/Terms%20%26%20Conditions")!)
+                openURL(URL(string: "https://fabiofiorita.github.io/meuMedicamento/Terms&Conditions.html")!)
             }) {
                 Text("Termos de Uso")
                 Spacer()
@@ -128,7 +128,7 @@ struct SettingsSwiftUIView: View {
             }
             Divider()
             Button(action: {
-                openURL(URL(string: "https://raw.githubusercontent.com/FabioFiorita/meuMedicamento/privacyAndTerms/Privacy%20Policy")!)
+                openURL(URL(string: "https://fabiofiorita.github.io/meuMedicamento/privacyPolicy.html")!)
             }, label: {
                 Text("Política de Privacidade")
                 Spacer()

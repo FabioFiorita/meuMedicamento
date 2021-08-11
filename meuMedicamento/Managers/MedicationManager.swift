@@ -114,7 +114,6 @@ final class MedicationManager: ObservableObject {
             
         } else {
             deleteMedication(medication: medication, viewContext: viewContext)
-            success = false
         }
         return success
     }

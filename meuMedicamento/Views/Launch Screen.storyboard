@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
-    <device id="retina6_5" orientation="portrait" appearance="light"/>
+    <device id="retina6_0" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
@@ -13,29 +13,30 @@
             <objects>
                 <viewController id="01J-lp-oVM" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Ze5-6b-2t3">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Logo" translatesAutoresizingMaskIntoConstraints="NO" id="LLo-8i-Ldj">
-                                <rect key="frame" x="27.666666666666657" y="-1851" width="358.66666666666674" height="4608"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logoPNG" translatesAutoresizingMaskIntoConstraints="NO" id="eGV-cC-ZXe">
+                                <rect key="frame" x="14" y="-346" width="362" height="1536"/>
                             </imageView>
                         </subviews>
-                        <viewLayoutGuide key="safeArea" id="Bcu-3y-fUS"/>
+                        <viewLayoutGuide key="safeArea" id="BmX-5R-CMz"/>
                         <color key="backgroundColor" name="main"/>
                         <constraints>
-                            <constraint firstItem="LLo-8i-Ldj" firstAttribute="centerX" secondItem="Bcu-3y-fUS" secondAttribute="centerX" id="STx-iP-j7L"/>
-                            <constraint firstItem="LLo-8i-Ldj" firstAttribute="centerY" secondItem="Bcu-3y-fUS" secondAttribute="centerY" id="X8z-Oj-dFD"/>
-                            <constraint firstItem="LLo-8i-Ldj" firstAttribute="width" secondItem="Ze5-6b-2t3" secondAttribute="height" multiplier="0.4" id="e9B-VX-gov"/>
+                            <constraint firstItem="eGV-cC-ZXe" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="AtY-Mc-pVL"/>
+                            <constraint firstItem="eGV-cC-ZXe" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="FXk-d7-1vh"/>
+                            <constraint firstItem="eGV-cC-ZXe" firstAttribute="width" secondItem="Ze5-6b-2t3" secondAttribute="height" multiplier="3:7" id="jUs-0g-7dd"/>
                         </constraints>
                     </view>
+                    <extendedEdge key="edgesForExtendedLayout"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="53" y="375"/>
+            <point key="canvasLocation" x="52.173913043478265" y="375"/>
         </scene>
     </scenes>
     <resources>
-        <image name="Logo" width="4608" height="4608"/>
+        <image name="logoPNG" width="1536" height="1536"/>
         <namedColor name="main">
             <color red="0.071000002324581146" green="0.27099999785423279" blue="0.5690000057220459" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
