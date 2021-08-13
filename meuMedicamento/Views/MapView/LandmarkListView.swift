@@ -10,7 +10,10 @@ struct LandmarkListView: View {
                 Text(landmark.name)
                     .font(.headline)
                 Text(landmark.title)
-            }
+            }.onTapGesture(perform: {
+                guard let url = URL(string:"http://maps.apple.com/?daddr=\(landmark.coordinate.latitude),\(landmark.coordinate.longitude)") else { return }
+                UIApplication.shared.open(url)
+            })
         }
     }
 }
