@@ -10,7 +10,7 @@ struct ButtonsView: View {
                     Text(buttonLabel)
                         .fontWeight(.heavy)
                         .padding()
-                        .frame(width: 150, height: 44)
+                        //.frame(width: 150, height: 44)
                         .background(Color.black.opacity(0.27))
                         .cornerRadius(12)
                         .padding(.horizontal)
@@ -18,7 +18,7 @@ struct ButtonsView: View {
             }
         }
         .foregroundColor(.white)
-        .padding()
+        //.padding()
     }
     
     func buttonAction(_ buttonLabel: String) {

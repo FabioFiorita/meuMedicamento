@@ -14,7 +14,7 @@ struct TabDetailsView: View {
                 .bold()
             
             Text(tabs[index].text)
-                .padding()
+                //.padding()
                 .allowsTightening(true)
                 .minimumScaleFactor(0.01)
                 .lineLimit(8)
