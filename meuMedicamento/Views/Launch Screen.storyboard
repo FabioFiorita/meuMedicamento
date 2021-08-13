@@ -16,8 +16,13 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+<<<<<<< Updated upstream
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Logo main" translatesAutoresizingMaskIntoConstraints="NO" id="LLo-8i-Ldj">
                                 <rect key="frame" x="139.66666666666669" y="249" width="134.66666666666669" height="408"/>
+=======
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Logo" translatesAutoresizingMaskIntoConstraints="NO" id="eGV-cC-ZXe">
+                                <rect key="frame" x="14" y="22" width="362" height="800"/>
+>>>>>>> Stashed changes
                             </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Bcu-3y-fUS"/>
@@ -35,7 +40,11 @@
         </scene>
     </scenes>
     <resources>
+<<<<<<< Updated upstream
         <image name="Logo main" width="444" height="408"/>
+=======
+        <image name="Logo" width="1300" height="800"/>
+>>>>>>> Stashed changes
         <namedColor name="main">
             <color red="0.071000002324581146" green="0.27099999785423279" blue="0.5690000057220459" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
