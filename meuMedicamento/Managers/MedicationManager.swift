@@ -58,8 +58,9 @@ final class MedicationManager: ObservableObject {
         
         guard let timeInterval = medication.date?.timeIntervalSinceNow else {return}
         guard let identifier = medication.id else {return}
+        let identifierRepeat = (medication.id ?? UUID().uuidString) + "-Repiting"
         if timeInterval > 0 {
-            notificationManager.deleteLocalNotifications(identifiers: [identifier])
+            notificationManager.deleteLocalNotifications(identifiers: [identifier,identifierRepeat])
             notificationManager.createLocalNotificationByTimeInterval(identifier: identifier, title: "Tomar \(medication.name ?? "Medicamento")", timeInterval: timeInterval) { error in
                 if error == nil {
                     print("Notificação criada com id: \(identifier)")

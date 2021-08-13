@@ -18,6 +18,7 @@ struct EditMedicationSwiftUIView: View {
     @State var showAlert = false
     @State private var pickerView = true
     @StateObject private var medicationManager = MedicationManager()
+    @State private var showDatePicker = false
     
     var body: some View {
         NavigationView{
@@ -28,7 +29,14 @@ struct EditMedicationSwiftUIView: View {
                     TextField("Quantidade na Caixa", text: $boxQuantity).keyboardType(.numberPad)
                     Section {
                         notificationTypePicker
-                        DatePicker("Data de Início", selection: $date, in: Date()...)
+                        Group {
+                            Text("Data de Início: ") + Text("\(date, formatter: itemFormatter)").foregroundColor(showDatePicker ? .blue : .secondary)
+                        }.onTapGesture(perform: {
+                            showDatePicker.toggle()
+                        })
+                        if showDatePicker {
+                            DatePicker("", selection: $date, in: Date()...).datePickerStyle(GraphicalDatePickerStyle())
+                        }
                         Picker(selection: $repeatPeriod, label: Text("Repetir")) {
                             ForEach(RepeatPeriod.periods, id: \.self) { periods in
                                 Text(periods).tag(periods)
@@ -109,6 +117,13 @@ struct EditMedicationSwiftUIView: View {
         }
     }
     
+    private let itemFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateStyle = .full
+        formatter.timeStyle = .short
+        formatter.locale = Locale(identifier: "pt-BR")
+        return formatter
+    }()
 }
 
 

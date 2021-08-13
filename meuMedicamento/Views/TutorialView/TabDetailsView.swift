@@ -15,6 +15,10 @@ struct TabDetailsView: View {
             
             Text(tabs[index].text)
                 .padding()
+                .allowsTightening(true)
+                .minimumScaleFactor(0.01)
+                .lineLimit(8)
+    
     }
         .foregroundColor(.white)
 }
