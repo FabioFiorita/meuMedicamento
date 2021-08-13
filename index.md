@@ -4,7 +4,10 @@ meuMedicamento tem como objetivo ajudar pessoas a controlar seus medicamentos, p
 
 <img src="https://raw.githubusercontent.com/FabioFiorita/meuMedicamento/gh-pages/images/Logo.jpg" width="350">
 
-### Interface
+## Como baixar
+<a href="https://apps.apple.com/br/app/meumedicamento/id1580757092"><img src="https://raw.githubusercontent.com/FabioFiorita/meuMedicamento/gh-pages/images/appstore.png" alt="meuMedicamentoAppStore" width="350"></a>
+
+## Interface
 
 <img src="https://raw.githubusercontent.com/FabioFiorita/meuMedicamento/gh-pages/images/list.jpg" width="350"> <img src="https://raw.githubusercontent.com/FabioFiorita/meuMedicamento/gh-pages/images/detail.jpg" width="350"> <img src="https://raw.githubusercontent.com/FabioFiorita/meuMedicamento/gh-pages/images/map.jpg" width="350"> <img src="https://raw.githubusercontent.com/FabioFiorita/meuMedicamento/gh-pages/images/settings.jpg" width="350"> <img src="https://raw.githubusercontent.com/FabioFiorita/meuMedicamento/gh-pages/images/darkmode.jpg" width="350">
 
