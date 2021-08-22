@@ -26,7 +26,11 @@ final class MedicationManager: ObservableObject {
         newMedication.boxQuantity = boxQuantity
         newMedication.id = UUID().uuidString
         newMedication.date = date
-        newMedication.repeatPeriod = repeatPeriod
+        if repeatPeriod == "" {
+            newMedication.repeatPeriod = "Nunca"
+        } else {
+            newMedication.repeatPeriod = repeatPeriod
+        }
         newMedication.notes = notes
         newMedication.isSelected = false
         newMedication.repeatSeconds = convertToSeconds(newMedication.repeatPeriod ?? "")
@@ -61,9 +65,12 @@ final class MedicationManager: ObservableObject {
         medication.name = name
         medication.remainingQuantity = remainingQuantity
         medication.boxQuantity = boxQuantity
-        medication.id = UUID().uuidString
         medication.date = date
-        medication.repeatPeriod = repeatPeriod
+        if repeatPeriod == "" {
+            medication.repeatPeriod = "Nunca"
+        } else {
+            medication.repeatPeriod = repeatPeriod
+        }
         medication.notes = notes
         medication.isSelected = false
         medication.repeatSeconds = convertToSeconds(medication.repeatPeriod ?? "")

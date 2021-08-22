@@ -73,6 +73,7 @@ struct EditMedicationSwiftUIView: View {
                                             showAlert = false
                                         } else {
                                             showAlert = true
+                                            self.presentationMode.wrappedValue.dismiss()
                                         }
                                         
                                     }).foregroundColor(.white)
