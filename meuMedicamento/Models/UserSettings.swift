@@ -18,11 +18,17 @@ class UserSettings: ObservableObject {
         }
     }
     
+    @Published var reviewCount: Int {
+        didSet {
+            UserDefaults.standard.set(reviewCount, forKey: "reviewCount")
+        }
+    }
     
     init() {
         self.limitMedication = UserDefaults.standard.object(forKey: "limitMedication") as? Double ?? 20.0
         self.limitNotification = UserDefaults.standard.object(forKey: "limitNotification") as? Bool ?? true
         self.limitDate = UserDefaults.standard.object(forKey: "limitDate") as? Date ?? Date()
+        self.reviewCount = UserDefaults.standard.object(forKey: "reviewCount") as? Int ?? 0
     }
 }
 

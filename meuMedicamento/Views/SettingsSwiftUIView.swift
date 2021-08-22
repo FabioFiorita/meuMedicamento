@@ -72,14 +72,20 @@ struct SettingsSwiftUIView: View {
     private var links: some View {
         VStack(alignment: .leading, spacing: 15.0) {
             Button(action: {
-                if let scene = UIApplication.shared.connectedScenes.first(where: {$0.activationState == .foregroundActive}) as? UIWindowScene {
-                    SKStoreReviewController.requestReview(in: scene)
+                if userSettings.reviewCount <= 3 {
+                    if let scene = UIApplication.shared.connectedScenes.first(where: {$0.activationState == .foregroundActive}) as? UIWindowScene {
+                        SKStoreReviewController.requestReview(in: scene)
+                        userSettings.reviewCount += 1
+                    } else {
+                        print("Review Error")
+                    }
                 } else {
                     guard let writeReviewURL = URL(string: "https://apps.apple.com/app/id1580757092?action=write-review")
                         else {
                             fatalError("Expected a valid URL")
                     }
                         UIApplication.shared.open(writeReviewURL, options: [:], completionHandler: nil)
+                        userSettings.reviewCount += 1
                 }
             }) {
                 Text("Avalie!")
