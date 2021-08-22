@@ -5,78 +5,108 @@ final class MedicationManager: ObservableObject {
     private var notificationManager = NotificationManager()
     private var userSettings = UserSettings()
     
-    func saveContext(viewContext: NSManagedObjectContext) {
+    func saveContext(viewContext: NSManagedObjectContext) -> Bool {
+        var sucess = true;
         do {
             try viewContext.save()
         } catch {
             let error = error as NSError
-            fatalError("Failed to save Medication: \(error)")
+            print(error)
+            sucess = false
+            //fatalError("Failed to save Medication: \(error)")
         }
+        return sucess
     }
     
     
-    func addMedication(name: String, remainingQuantity: Int32, boxQuantity: Int32, date: Date, repeatPeriod: String, notes: String, notificationType: String, viewContext: NSManagedObjectContext) {
-        
+    func addMedication(name: String, remainingQuantity: Int32, boxQuantity: Int32, date: Date, repeatPeriod: String, notes: String, notificationType: String, viewContext: NSManagedObjectContext) -> Bool {
         let newMedication = Medication(context: viewContext)
         newMedication.name = name
         newMedication.remainingQuantity = remainingQuantity
         newMedication.boxQuantity = boxQuantity
         newMedication.id = UUID().uuidString
         newMedication.date = date
-        newMedication.repeatPeriod = repeatPeriod
+        if repeatPeriod == "" {
+            newMedication.repeatPeriod = "Nunca"
+        } else {
+            newMedication.repeatPeriod = repeatPeriod
+        }
         newMedication.notes = notes
         newMedication.isSelected = false
         newMedication.repeatSeconds = convertToSeconds(newMedication.repeatPeriod ?? "")
         newMedication.notificationType = notificationType
         
-        guard let timeInterval = newMedication.date?.timeIntervalSinceNow else {return}
-        guard let identifier = newMedication.id else {return}
-        if timeInterval > 0 {
-            notificationManager.deleteLocalNotifications(identifiers: [identifier])
-            notificationManager.createLocalNotificationByTimeInterval(identifier: identifier, title: "Tomar \(newMedication.name ?? "Medicamento")", timeInterval: timeInterval) { error in
-                if error == nil {
-                    print("Notificação criada com id: \(identifier)")
+        var sucess = true
+        sucess = saveContext(viewContext: viewContext)
+        if sucess {
+            guard let timeInterval = newMedication.date?.timeIntervalSinceNow else {
+                sucess = false
+                return sucess
+            }
+            guard let identifier = newMedication.id else {
+                sucess = false
+                return sucess
+            }
+            if timeInterval > 0 {
+                notificationManager.deleteLocalNotifications(identifiers: [identifier])
+                notificationManager.createLocalNotificationByTimeInterval(identifier: identifier, title: "Tomar \(newMedication.name ?? "Medicamento")", timeInterval: timeInterval) { error in
+                    if error == nil {
+                        print("Notificação criada com id: \(identifier)")
+                        sucess = true
+                    }
                 }
             }
         }
-        
-        saveContext(viewContext: viewContext)
+        return sucess
     }
     
-    func editMedication(name: String, remainingQuantity: Int32, boxQuantity: Int32, date: Date, repeatPeriod: String, notes: String, notificationType: String, viewContext: NSManagedObjectContext, medication: Medication) {
+    func editMedication(name: String, remainingQuantity: Int32, boxQuantity: Int32, date: Date, repeatPeriod: String, notes: String, notificationType: String, viewContext: NSManagedObjectContext, medication: Medication) -> Bool {
         
         medication.name = name
         medication.remainingQuantity = remainingQuantity
         medication.boxQuantity = boxQuantity
-        medication.id = UUID().uuidString
         medication.date = date
-        medication.repeatPeriod = repeatPeriod
+        if repeatPeriod == "" {
+            medication.repeatPeriod = "Nunca"
+        } else {
+            medication.repeatPeriod = repeatPeriod
+        }
         medication.notes = notes
         medication.isSelected = false
         medication.repeatSeconds = convertToSeconds(medication.repeatPeriod ?? "")
         medication.notificationType = notificationType
         
-        guard let timeInterval = medication.date?.timeIntervalSinceNow else {return}
+        var sucess = true
+        sucess = saveContext(viewContext: viewContext)
+        
+        guard let timeInterval = medication.date?.timeIntervalSinceNow else {
+            sucess = false
+            return sucess
+        }
         let identifierRepeat = (medication.id ?? UUID().uuidString) + "-Repiting"
-        guard let identifier = medication.id else {return}
+        guard let identifier = medication.id else {
+            sucess = false
+            return sucess
+        }
         if timeInterval > 0 {
             notificationManager.deleteLocalNotifications(identifiers: [identifier, identifierRepeat])
             notificationManager.createLocalNotificationByTimeInterval(identifier: identifier, title: "Tomar \(medication.name ?? "Medicamento")", timeInterval: timeInterval) { error in
                 if error == nil {
                     print("Notificação criada com id: \(identifier)")
+                    sucess = true
                 }
             }
         }
-        
-        saveContext(viewContext: viewContext)
+        return sucess
     }
     
     func deleteMedication(medication: Medication, viewContext: NSManagedObjectContext) {
         guard let identifier = medication.id else {return}
-        let identifierRepeat = (medication.id ?? UUID().uuidString) + "-Repiting"
+        let identifierRepeat = identifier + "-Repiting"
         notificationManager.deleteLocalNotifications(identifiers: [identifier, identifierRepeat])
         viewContext.delete(medication)
-        saveContext(viewContext: viewContext)
+        let sucess = saveContext(viewContext: viewContext)
+        print(sucess)
     }
     
     func updateRemainingQuantity(medication: Medication, viewContext: NSManagedObjectContext) -> Bool {
@@ -105,14 +135,13 @@ final class MedicationManager: ObservableObject {
             let historic = Historic(context: viewContext)
             historic.dates = Date()
             historic.medication = medication
+            success = saveContext(viewContext: viewContext)
             if !(medication.repeatPeriod == "Nunca") {
                 rescheduleNotification(forMedication: medication, forHistoric: historic)
             }
             if historic.medicationStatus == "Não tomou" {
                 success = false
             }
-            saveContext(viewContext: viewContext)
-            
         } else {
             deleteMedication(medication: medication, viewContext: viewContext)
         }
@@ -152,7 +181,8 @@ final class MedicationManager: ObservableObject {
     
     func refreshRemainingQuantity(medication: Medication, viewContext: NSManagedObjectContext) {
         medication.remainingQuantity += medication.boxQuantity
-        saveContext(viewContext: viewContext)
+        let sucess = saveContext(viewContext: viewContext)
+        print(sucess)
         guard let id = medication.id else {return}
         let identifier = id + "-Repiting"
         notificationManager.deleteLocalNotifications(identifiers: [identifier])
