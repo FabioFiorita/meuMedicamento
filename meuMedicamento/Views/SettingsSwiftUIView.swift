@@ -74,6 +74,12 @@ struct SettingsSwiftUIView: View {
             Button(action: {
                 if let scene = UIApplication.shared.connectedScenes.first(where: {$0.activationState == .foregroundActive}) as? UIWindowScene {
                     SKStoreReviewController.requestReview(in: scene)
+                } else {
+                    guard let writeReviewURL = URL(string: "https://apps.apple.com/app/id1580757092?action=write-review")
+                        else {
+                            fatalError("Expected a valid URL")
+                    }
+                        UIApplication.shared.open(writeReviewURL, options: [:], completionHandler: nil)
                 }
             }) {
                 Text("Avalie!")

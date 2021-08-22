@@ -19,7 +19,6 @@ struct ContentView: View {
     @AppStorage("TutorialView") var isWalkthroughViewShowing = true
     
     init(){
-        //UITableView.appearance().backgroundColor = UIColor(colorScheme == .dark ? Color.black : Color(.systemGray6))
         coloredNavAppearance.configureWithOpaqueBackground()
         coloredNavAppearance.backgroundColor = UIColor(Color("main"))
         coloredNavAppearance.titleTextAttributes = [.foregroundColor: UIColor(Color.white)]
@@ -164,17 +163,29 @@ struct ContentView: View {
             if Double(medication.remainingQuantity) <= Double(medication.boxQuantity) * (userSettings.limitMedication/100.0) {
                 Text("\(medication.remainingQuantity)")
                     .font(.body)
-                    .fontWeight(.light).foregroundColor(.red)
+                    .fontWeight(.light)
+                    .foregroundColor(.red)
             } else {
-                Text("\(medication.remainingQuantity)").font(.body)
+                Text("\(medication.remainingQuantity)")
+                    .font(.body)
                     .fontWeight(.light)
             }
         }
     }
     private func medicationDate(forMedication medication: Medication) -> some View {
-        Text("Proximo: \(medication.date ?? Date() ,formatter: itemFormatter)")
-            .font(.body)
-            .fontWeight(.light)
+        Group {
+            if medication.date?.timeIntervalSinceNow ?? Date().timeIntervalSinceNow < 0 {
+                Text("Proximo: ") +
+                    Text("\(medication.date ?? Date() ,formatter: itemFormatter)")
+                        .font(.body)
+                        .fontWeight(.light)
+                        .foregroundColor(.red)
+            } else {
+                Text("Proximo: \(medication.date ?? Date() ,formatter: itemFormatter)")
+                    .font(.body)
+                    .fontWeight(.light)
+            }
+        }
     }
     
     private func row(forMedication medication: Medication) -> some View {

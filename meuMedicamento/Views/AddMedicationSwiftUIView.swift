@@ -6,7 +6,6 @@ import NotificationCenter
 struct AddMedicationSwiftUIView: View {
     @Environment(\.managedObjectContext) private var viewContext
     @Environment(\.presentationMode) var presentationMode
-    //@StateObject private var notificationManager = NotificationManager()
     @State private var name = ""
     @State private var boxQuantity = ""
     @State private var date = Date()
@@ -62,11 +61,12 @@ struct AddMedicationSwiftUIView: View {
                                             showAlert = false
                                         } else {
                                             showAlert = true
+                                            self.presentationMode.wrappedValue.dismiss()
                                         }
                                         
                                     }).foregroundColor(.white)
                                     .alert(isPresented: $showAlert, content: {
-                                        let alert = Alert(title: Text("Erro na criação do medicamento"), message: Text("Confira os dados inseridos"), dismissButton: Alert.Button.default(Text("OK")))
+                                        let alert = Alert(title: Text("Erro na criação do medicamento"), message: Text("Cadastre novamente"), dismissButton: Alert.Button.default(Text("OK")))
                                         return alert
                                     })
             )
@@ -99,8 +99,8 @@ struct AddMedicationSwiftUIView: View {
         withAnimation {
             let remainingQuantity = Int32(remainingQuantity) ?? 0
             let boxQuantity = Int32(boxQuantity) ?? 0
-            medicationManager.addMedication(name: name, remainingQuantity: remainingQuantity, boxQuantity: boxQuantity, date: date, repeatPeriod: repeatPeriod, notes: notes, notificationType: notificationType, viewContext: viewContext)
-            return true
+            let sucess = medicationManager.addMedication(name: name, remainingQuantity: remainingQuantity, boxQuantity: boxQuantity, date: date, repeatPeriod: repeatPeriod, notes: notes, notificationType: notificationType, viewContext: viewContext)
+            return sucess
         }
     }
     
