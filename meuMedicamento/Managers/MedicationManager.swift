@@ -135,10 +135,10 @@ final class MedicationManager: ObservableObject {
             let historic = Historic(context: viewContext)
             historic.dates = Date()
             historic.medication = medication
-            success = saveContext(viewContext: viewContext)
             if !(medication.repeatPeriod == "Nunca") {
                 rescheduleNotification(forMedication: medication, forHistoric: historic)
             }
+            success = saveContext(viewContext: viewContext)
             if historic.medicationStatus == "Não tomou" {
                 success = false
             }
