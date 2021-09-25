@@ -1,5 +1,6 @@
 import SwiftUI
 import StoreKit
+import EmailComposer
 
 struct SettingsSwiftUIView: View {
     
@@ -12,6 +13,7 @@ struct SettingsSwiftUIView: View {
     @State private var limitMedication = 20.0
     @State private var limitDate = Date()
     @State private var didSave = false
+    @State private var showEmailComposer = false
     
     var body: some View {
         NavigationView {
@@ -113,18 +115,22 @@ struct SettingsSwiftUIView: View {
             }
             Divider()
             Button(action: {
-                EmailHelper.shared.sendEmail(subject: "", body: "", to: "fabiolfp@gmail.com")
+                showEmailComposer = true
             }) {
                 Text("Fale Conosco")
                 Spacer()
                 Image(systemName: "chevron.right")
                     .foregroundColor(Color.gray)
             }
+            .emailComposer(isPresented: $showEmailComposer, emailData: EmailData(recipients: ["fabiolfp@gmail.com"]), result:  { result in
+                print("Email sucess")
+            })
             
             
             
         }
         .padding()
+        .accentColor(Color.primary)
         .background(Color(colorScheme == .dark ? .systemGray6 : .systemBackground))
         .cornerRadius(10.0)
     }
@@ -149,6 +155,7 @@ struct SettingsSwiftUIView: View {
             })
         }
         .padding()
+        .accentColor(Color.primary)
         .background(Color(colorScheme == .dark ? .systemGray6 : .systemBackground))
         .cornerRadius(10.0)
     }

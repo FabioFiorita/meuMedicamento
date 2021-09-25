@@ -2,13 +2,11 @@ import SwiftUI
 
 
 struct ContentView: View {
-    
-    let coloredNavAppearance = UINavigationBarAppearance()
     @Environment(\.managedObjectContext) private var viewContext
     @State private var showModalAdd = false
+    @State private var showModalEdit = false
     @State private var showTimeIntervalAlert = false
     @State private var authorizationDenied = false
-    @State private var showModalEdit = false
     @Environment(\.presentationMode) var presentationMode
     @FetchRequest(entity: Medication.entity(), sortDescriptors: [NSSortDescriptor(keyPath: \Medication.date, ascending: true)])
     private var medications: FetchedResults<Medication>
@@ -19,12 +17,18 @@ struct ContentView: View {
     @AppStorage("TutorialView") var isWalkthroughViewShowing = true
     
     init(){
-        coloredNavAppearance.configureWithOpaqueBackground()
+        let coloredNavAppearance = UINavigationBarAppearance()
+        //coloredNavAppearance.configureWithOpaqueBackground()
         coloredNavAppearance.backgroundColor = UIColor(Color("main"))
         coloredNavAppearance.titleTextAttributes = [.foregroundColor: UIColor(Color.white)]
         coloredNavAppearance.largeTitleTextAttributes = [.foregroundColor: UIColor(Color.white)]
         UINavigationBar.appearance().standardAppearance = coloredNavAppearance
         UINavigationBar.appearance().scrollEdgeAppearance = coloredNavAppearance
+        let appearance = UITabBarAppearance()
+        appearance.backgroundColor = UIColor.systemBackground
+        appearance.configureWithOpaqueBackground()
+        UITabBar.appearance().standardAppearance = appearance
+        UITabBar.appearance().scrollEdgeAppearance = appearance
     }
     
     var body: some View {
@@ -40,16 +44,18 @@ struct ContentView: View {
                             }
                             .onDelete(perform: deleteMedication)
                         }
-                        .navigationBarTitle(Text(verbatim: "Medicamentos"),displayMode: .inline)
-                        .navigationBarItems(trailing:
-                                                Button(action: {
-                                                    self.showModalAdd = true
-                                                }) {
-                                                    Image(systemName: "plus").imageScale(.large).foregroundColor(.white)
-                                                }.sheet(isPresented: self.$showModalAdd) {
-                                                    AddMedicationSwiftUIView()
-                                                }
-                        )
+                        .navigationBarTitle("Medicamentos",displayMode: .inline)
+                        .toolbar(content: {
+                            ToolbarItem {
+                                Button {
+                                    self.showModalAdd = true
+                                } label: {
+                                    Image(systemName: "plus").imageScale(.large).foregroundColor(.white)
+                                }.sheet(isPresented: $showModalAdd) {
+                                    AddMedicationSwiftUIView()
+                                }
+                            }
+                        })
                         .listStyle(InsetGroupedListStyle())
                         .onAppear(perform: {
                             notificationManager.reloadAuthorizationStatus()
@@ -98,6 +104,7 @@ struct ContentView: View {
                             Text("Ajustes")
                         }
                 }
+                .accentColor(Color("main"))
             }
         }
     }

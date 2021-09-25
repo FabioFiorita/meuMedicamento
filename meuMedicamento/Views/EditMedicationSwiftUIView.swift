@@ -1,6 +1,5 @@
 import SwiftUI
 import CoreData
-import NotificationCenter
 
 
 struct EditMedicationSwiftUIView: View {
@@ -31,6 +30,7 @@ struct EditMedicationSwiftUIView: View {
                         Group {
                             Text("Data de Início: ") + Text("\(date, formatter: itemFormatter)").foregroundColor(showDatePicker ? .blue : .secondary)
                         }.onTapGesture(perform: {
+                            self.dismissKeyboard()
                             showDatePicker.toggle()
                         })
                         if showDatePicker {
@@ -47,7 +47,7 @@ struct EditMedicationSwiftUIView: View {
                     }
                     Section{
                         Text("Notas")
-                        TextEditor(text: $notes).padding()
+                        TextField("",text: $notes).padding()
                     }
                 }
                 .onAppear {
@@ -61,27 +61,30 @@ struct EditMedicationSwiftUIView: View {
                     }
                 }
             }
-            .navigationBarTitle(Text("Editar Medicamento"),displayMode: .inline)
-            .navigationBarItems(leading:
-                                    Button("Cancelar", action: {
-                                        self.presentationMode.wrappedValue.dismiss()
-                                    }).foregroundColor(.white)
-                                , trailing:
-                                    Button("Salvar", action: {
-                                        if editMedication(medication: medication) {
-                                            self.presentationMode.wrappedValue.dismiss()
-                                            showAlert = false
-                                        } else {
-                                            showAlert = true
-                                            self.presentationMode.wrappedValue.dismiss()
-                                        }
-                                        
-                                    }).foregroundColor(.white)
-                                    .alert(isPresented: $showAlert, content: {
-                                        let alert = Alert(title: Text("Erro na criação do medicamento"), message: Text("Cadastre novamente"), dismissButton: Alert.Button.default(Text("OK")))
-                                        return alert
-                                    })
-            )
+            .navigationBarTitle("Editar Medicamento",displayMode: .inline)
+            .toolbar(content: {
+                ToolbarItem {
+                    Button("Salvar", action: {
+                        if editMedication(medication: medication) {
+                            self.presentationMode.wrappedValue.dismiss()
+                            showAlert = false
+                        } else {
+                            showAlert = true
+                            self.presentationMode.wrappedValue.dismiss()
+                        }
+                        
+                    }).foregroundColor(.white)
+                    .alert(isPresented: $showAlert, content: {
+                        let alert = Alert(title: Text("Erro na edição do medicamento"), message: Text("Cadastre novamente"), dismissButton: Alert.Button.default(Text("OK")))
+                        return alert
+                    })
+                }
+                ToolbarItem(placement: .navigationBarLeading) {
+                    Button("Cancelar", action: {
+                        self.presentationMode.wrappedValue.dismiss()
+                    }).foregroundColor(.white)
+                }
+            })
         }
     }
     private var notificationTypePicker: some View {

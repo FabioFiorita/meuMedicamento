@@ -1,0 +1,16 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "EmailComposer",
+        "repositoryURL": "https://github.com/gabrieltheodoropoulos/EmailComposer",
+        "state": {
+          "branch": null,
+          "revision": "6c35d94b4abd760c3d1eb513ea59baabaecad607",
+          "version": "1.0.2"
+        }
+      }
+    ]
+  },
+  "version": 1
+}
