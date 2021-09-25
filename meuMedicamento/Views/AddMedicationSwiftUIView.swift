@@ -44,7 +44,7 @@ struct AddMedicationSwiftUIView: View {
                 }
                 Section{
                     Text("Notas")
-                    TextEditor(text: $notes).padding()
+                    TextField("",text: $notes).padding()
                 }
             }
             .navigationBarTitle("Novo Medicamento",displayMode: .inline)

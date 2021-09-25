@@ -2,8 +2,6 @@ import SwiftUI
 
 
 struct ContentView: View {
-    
-    
     @Environment(\.managedObjectContext) private var viewContext
     @State private var showModalAdd = false
     @State private var showModalEdit = false
