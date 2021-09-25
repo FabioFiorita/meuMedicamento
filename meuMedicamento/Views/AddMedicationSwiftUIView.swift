@@ -1,7 +1,4 @@
 import SwiftUI
-import NotificationCenter
-
-
 
 struct AddMedicationSwiftUIView: View {
     @Environment(\.managedObjectContext) private var viewContext
@@ -30,6 +27,7 @@ struct AddMedicationSwiftUIView: View {
                     Group {
                         Text("Data de Início: ") + Text("\(date, formatter: itemFormatter)").foregroundColor(showDatePicker ? .blue : .secondary)
                     }.onTapGesture(perform: {
+                        self.dismissKeyboard()
                         showDatePicker.toggle()
                     })
                     if showDatePicker {
@@ -49,27 +47,30 @@ struct AddMedicationSwiftUIView: View {
                     TextEditor(text: $notes).padding()
                 }
             }
-            .navigationBarTitle(Text("Novo Medicamento"),displayMode: .inline)
-            .navigationBarItems(leading:
-                                    Button("Cancelar", action: {
-                                        self.presentationMode.wrappedValue.dismiss()
-                                    }).foregroundColor(.white)
-                                , trailing:
-                                    Button("Salvar", action: {
-                                        if addMedication() {
-                                            self.presentationMode.wrappedValue.dismiss()
-                                            showAlert = false
-                                        } else {
-                                            showAlert = true
-                                            self.presentationMode.wrappedValue.dismiss()
-                                        }
-                                        
-                                    }).foregroundColor(.white)
-                                    .alert(isPresented: $showAlert, content: {
-                                        let alert = Alert(title: Text("Erro na criação do medicamento"), message: Text("Cadastre novamente"), dismissButton: Alert.Button.default(Text("OK")))
-                                        return alert
-                                    })
-            )
+            .navigationBarTitle("Novo Medicamento",displayMode: .inline)
+            .toolbar(content: {
+                ToolbarItem {
+                    Button("Salvar", action: {
+                        if addMedication() {
+                            self.presentationMode.wrappedValue.dismiss()
+                            showAlert = false
+                        } else {
+                            showAlert = true
+                            self.presentationMode.wrappedValue.dismiss()
+                        }
+                        
+                    }).foregroundColor(.white)
+                    .alert(isPresented: $showAlert, content: {
+                        let alert = Alert(title: Text("Erro na criação do medicamento"), message: Text("Cadastre novamente"), dismissButton: Alert.Button.default(Text("OK")))
+                        return alert
+                    })
+                }
+                ToolbarItem(placement: .navigationBarLeading) {
+                    Button("Cancelar", action: {
+                        self.presentationMode.wrappedValue.dismiss()
+                    }).foregroundColor(.white)
+                }
+            })
         }
     }
     
@@ -125,3 +126,8 @@ struct AddEditMedicationSwiftUIView_Previews: PreviewProvider {
     }
 }
 
+extension View {
+    func dismissKeyboard() {
+        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+    }
+}

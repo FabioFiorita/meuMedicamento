@@ -47,14 +47,15 @@ struct MedicationDetailSwiftUIView: View {
             .navigationBarTitle("\(medication.name ?? "Medicamento")", displayMode: .inline)
             
         }
-        .navigationBarItems(trailing: Button(action: {
-            self.showModal = true
-        }) {
-            Text("Editar").foregroundColor(.white)
-        }.sheet(isPresented: self.$showModal) {
-            EditMedicationSwiftUIView(medication: medication)
-        }
-        )
+        .toolbar(content: {
+            Button(action: {
+                self.showModal = true
+            }) {
+                Text("Editar").foregroundColor(.white)
+            }.sheet(isPresented: self.$showModal) {
+                EditMedicationSwiftUIView(medication: medication)
+            }
+        })
     }
     
     private func medicationInformation(forMedication medication: Medication) -> some View {

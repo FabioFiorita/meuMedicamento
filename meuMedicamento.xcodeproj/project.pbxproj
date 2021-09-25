@@ -3,11 +3,12 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		C143FD5526C473A20041BCED /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C143FD5426C473A20041BCED /* Launch Screen.storyboard */; };
+		C1C675AA26FF99E200A51C4F /* EmailComposer in Frameworks */ = {isa = PBXBuildFile; productRef = C1C675A926FF99E200A51C4F /* EmailComposer */; };
 		C1D9471526C408A300A05884 /* meuMedicamentoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1D9471426C408A300A05884 /* meuMedicamentoApp.swift */; };
 		C1D9471726C408A300A05884 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1D9471626C408A300A05884 /* ContentView.swift */; };
 		C1D9471926C408A500A05884 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C1D9471826C408A500A05884 /* Assets.xcassets */; };
@@ -18,7 +19,6 @@
 		C1DE8CDC26C40E7F004E7754 /* PlaceListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1DE8CD526C40E7F004E7754 /* PlaceListViewModel.swift */; };
 		C1DE8CDD26C40E7F004E7754 /* Landmark.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1DE8CD626C40E7F004E7754 /* Landmark.swift */; };
 		C1DE8CDE26C40E7F004E7754 /* TutorialModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1DE8CD726C40E7F004E7754 /* TutorialModel.swift */; };
-		C1DE8CDF26C40E7F004E7754 /* EmailHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1DE8CD826C40E7F004E7754 /* EmailHelper.swift */; };
 		C1DE8CE026C40E7F004E7754 /* UserSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1DE8CD926C40E7F004E7754 /* UserSettings.swift */; };
 		C1DE8CE426C40ECA004E7754 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1DE8CE126C40ECA004E7754 /* LocationManager.swift */; };
 		C1DE8CE526C40ECA004E7754 /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1DE8CE226C40ECA004E7754 /* NotificationManager.swift */; };
@@ -55,7 +55,6 @@
 		C1DE8CD526C40E7F004E7754 /* PlaceListViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaceListViewModel.swift; sourceTree = "<group>"; };
 		C1DE8CD626C40E7F004E7754 /* Landmark.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Landmark.swift; sourceTree = "<group>"; };
 		C1DE8CD726C40E7F004E7754 /* TutorialModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TutorialModel.swift; sourceTree = "<group>"; };
-		C1DE8CD826C40E7F004E7754 /* EmailHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmailHelper.swift; sourceTree = "<group>"; };
 		C1DE8CD926C40E7F004E7754 /* UserSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserSettings.swift; sourceTree = "<group>"; };
 		C1DE8CE126C40ECA004E7754 /* LocationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		C1DE8CE226C40ECA004E7754 /* NotificationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
@@ -82,6 +81,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C1C675AA26FF99E200A51C4F /* EmailComposer in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -158,7 +158,6 @@
 		C1DE8CC626C40AD9004E7754 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				C1DE8CD826C40E7F004E7754 /* EmailHelper.swift */,
 				C1DE8CD626C40E7F004E7754 /* Landmark.swift */,
 				C1DE8CD426C40E7F004E7754 /* MedicationModels.swift */,
 				C1DE8CD326C40E7F004E7754 /* Persistance.swift */,
@@ -216,6 +215,9 @@
 			dependencies = (
 			);
 			name = meuMedicamento;
+			packageProductDependencies = (
+				C1C675A926FF99E200A51C4F /* EmailComposer */,
+			);
 			productName = meuMedicamento;
 			productReference = C1D9471126C408A300A05884 /* meuMedicamento.app */;
 			productType = "com.apple.product-type.application";
@@ -243,6 +245,9 @@
 				Base,
 			);
 			mainGroup = C1D9470826C408A300A05884;
+			packageReferences = (
+				C1C675A826FF99E200A51C4F /* XCRemoteSwiftPackageReference "EmailComposer" */,
+			);
 			productRefGroup = C1D9471226C408A300A05884 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -289,7 +294,6 @@
 				C1DE8CE926C40F06004E7754 /* MKCoordinateRegion+Extensions.swift in Sources */,
 				C1DE8CDC26C40E7F004E7754 /* PlaceListViewModel.swift in Sources */,
 				C1DE8D0726C40F53004E7754 /* GradientView.swift in Sources */,
-				C1DE8CDF26C40E7F004E7754 /* EmailHelper.swift in Sources */,
 				C1DE8CDA26C40E7F004E7754 /* Persistance.swift in Sources */,
 				C1DE8D0526C40F53004E7754 /* TabDetailsView.swift in Sources */,
 				C1DE8CFF26C40F53004E7754 /* RecenterButton.swift in Sources */,
@@ -492,6 +496,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		C1C675A826FF99E200A51C4F /* XCRemoteSwiftPackageReference "EmailComposer" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/gabrieltheodoropoulos/EmailComposer";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		C1C675A926FF99E200A51C4F /* EmailComposer */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C1C675A826FF99E200A51C4F /* XCRemoteSwiftPackageReference "EmailComposer" */;
+			productName = EmailComposer;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		C1DE8CBF26C4093C004E7754 /* meuMedicamento.xcdatamodeld */ = {
