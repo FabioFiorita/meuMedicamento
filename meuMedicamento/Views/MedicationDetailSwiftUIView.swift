@@ -83,7 +83,7 @@ struct MedicationDetailSwiftUIView: View {
                     Text("\(medication.notes ?? "")").frame(minWidth: 0, maxWidth: .infinity, alignment: .topLeading)
                         .padding()
                 }.padding()
-                .background(Color(.secondarySystemBackground))
+                .background(Color(colorScheme == .dark ? .systemGray6 : .systemBackground))
                 .cornerRadius(10.0)
             }
         }
