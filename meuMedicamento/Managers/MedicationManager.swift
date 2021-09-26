@@ -1,5 +1,6 @@
 import Foundation
 import CoreData
+import Time
 
 final class MedicationManager: ObservableObject {
     private var notificationManager = NotificationManager()
@@ -194,33 +195,33 @@ final class MedicationManager: ObservableObject {
         case "Nunca":
             seconds = 0.0
         case "1 hora":
-            seconds = 3600.0
+            seconds = 1.hours.inSeconds.value
         case "2 horas":
-            seconds = 7200.0
+            seconds = 2.hours.inSeconds.value
         case "4 horas":
-            seconds = 14400.0
+            seconds = 4.hours.inSeconds.value
         case "6 horas":
-            seconds = 21600.0
+            seconds = 6.hours.inSeconds.value
         case "8 horas":
-            seconds = 28800.0
+            seconds = 8.hours.inSeconds.value
         case "12 horas":
-            seconds = 43200.0
+            seconds = 12.hours.inSeconds.value
         case "1 dia":
-            seconds = 86400.0
+            seconds = 1.days.inSeconds.value
         case "2 dias":
-            seconds = 172800.0
+            seconds = 2.days.inSeconds.value
         case "5 dias":
-            seconds = 432000.0
+            seconds = 5.days.inSeconds.value
         case "1 semana":
-            seconds = 604800.0
+            seconds = 7.days.inSeconds.value
         case "2 semanas":
-            seconds = 1209600.0
+            seconds = 14.days.inSeconds.value
         case "1 mês":
-            seconds = 2419200.0
+            seconds = 30.days.inSeconds.value
         case "3 meses":
-            seconds = 72576000.0
+            seconds = 90.days.inSeconds.value
         case "6 meses":
-            seconds = 145152000.0
+            seconds = 180.days.inSeconds.value
         default:
             break
         }

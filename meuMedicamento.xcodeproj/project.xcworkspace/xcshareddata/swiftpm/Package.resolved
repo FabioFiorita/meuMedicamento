@@ -9,6 +9,15 @@
           "revision": "6c35d94b4abd760c3d1eb513ea59baabaecad607",
           "version": "1.0.2"
         }
+      },
+      {
+        "package": "Time",
+        "repositoryURL": "https://github.com/dreymonde/Time",
+        "state": {
+          "branch": null,
+          "revision": "c5cebb3c6c4590969a7aa3d7e7f3e58e827ed0a8",
+          "version": "1.0.1"
+        }
       }
     ]
   },

@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		C143FD5526C473A20041BCED /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C143FD5426C473A20041BCED /* Launch Screen.storyboard */; };
 		C1C675AA26FF99E200A51C4F /* EmailComposer in Frameworks */ = {isa = PBXBuildFile; productRef = C1C675A926FF99E200A51C4F /* EmailComposer */; };
+		C1C675AD26FFB00D00A51C4F /* Time in Frameworks */ = {isa = PBXBuildFile; productRef = C1C675AC26FFB00D00A51C4F /* Time */; };
 		C1D9471526C408A300A05884 /* meuMedicamentoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1D9471426C408A300A05884 /* meuMedicamentoApp.swift */; };
 		C1D9471726C408A300A05884 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1D9471626C408A300A05884 /* ContentView.swift */; };
 		C1D9471926C408A500A05884 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C1D9471826C408A500A05884 /* Assets.xcassets */; };
@@ -82,6 +83,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C1C675AA26FF99E200A51C4F /* EmailComposer in Frameworks */,
+				C1C675AD26FFB00D00A51C4F /* Time in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -217,6 +219,7 @@
 			name = meuMedicamento;
 			packageProductDependencies = (
 				C1C675A926FF99E200A51C4F /* EmailComposer */,
+				C1C675AC26FFB00D00A51C4F /* Time */,
 			);
 			productName = meuMedicamento;
 			productReference = C1D9471126C408A300A05884 /* meuMedicamento.app */;
@@ -247,6 +250,7 @@
 			mainGroup = C1D9470826C408A300A05884;
 			packageReferences = (
 				C1C675A826FF99E200A51C4F /* XCRemoteSwiftPackageReference "EmailComposer" */,
+				C1C675AB26FFB00D00A51C4F /* XCRemoteSwiftPackageReference "Time" */,
 			);
 			productRefGroup = C1D9471226C408A300A05884 /* Products */;
 			projectDirPath = "";
@@ -506,6 +510,14 @@
 				minimumVersion = 1.0.0;
 			};
 		};
+		C1C675AB26FFB00D00A51C4F /* XCRemoteSwiftPackageReference "Time" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/dreymonde/Time";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -513,6 +525,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = C1C675A826FF99E200A51C4F /* XCRemoteSwiftPackageReference "EmailComposer" */;
 			productName = EmailComposer;
+		};
+		C1C675AC26FFB00D00A51C4F /* Time */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C1C675AB26FFB00D00A51C4F /* XCRemoteSwiftPackageReference "Time" */;
+			productName = Time;
 		};
 /* End XCSwiftPackageProductDependency section */
 
