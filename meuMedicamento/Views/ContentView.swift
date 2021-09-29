@@ -73,17 +73,18 @@ struct ContentView: View {
                         .onReceive(NotificationCenter.default.publisher(for: UIApplication.willEnterForegroundNotification)) { _ in
                             notificationManager.reloadAuthorizationStatus()
                         }
-                        .alert(isPresented: $authorizationDenied) {
-                            Alert(
-                                title: Text("Notificações desativadas"),
-                                message: Text("Abra o App Ajustes e habilite as notificações para monitorar seus medicamentos"),
-                                primaryButton: .cancel(Text("Cancelar")),
-                                secondaryButton: .default(Text("Abrir Ajustes"), action: {
-                                    if let url = URL(string: UIApplication.openSettingsURLString), UIApplication.shared.canOpenURL(url) {
-                                        UIApplication.shared.open(url, options: [:], completionHandler: nil)
-                                    }
-                                }))
-                        }
+                        .alert("Notificações desativadas", isPresented: $authorizationDenied, actions: {
+                            Button("Cancelar", role: .cancel) { }
+                            Button {
+                                if let url = URL(string: UIApplication.openSettingsURLString), UIApplication.shared.canOpenURL(url) {
+                                    UIApplication.shared.open(url, options: [:], completionHandler: nil)
+                                }
+                            } label: {
+                                Text("Abrir Ajustes")
+                            }
+                        }, message: {
+                            Text("Abra o App Ajustes e habilite as notificações para monitorar seus medicamentos")
+                        })
                     }
                     .accentColor(.white)
                     .tabItem {
@@ -119,10 +120,8 @@ struct ContentView: View {
     
     private func updateQuantity(medication: FetchedResults<Medication>.Element) {
         withAnimation {
-            if medicationManager.updateRemainingQuantity(medication: medication) {
-                print("updateQuantity sucess")
-            } else {
-                self.showTimeIntervalAlert = true
+            if !medicationManager.updateRemainingQuantity(medication: medication) {
+                showTimeIntervalAlert = true
             }
         }
     }
@@ -142,19 +141,19 @@ struct ContentView: View {
                     }
                 }
             }
-            .alert(isPresented: $showTimeIntervalAlert, content: {
-                Alert(
-                    title: Text("Erro na hora de agendar a notificação"),
-                    message: Text("Configure a Data de início novamente"),
-                    primaryButton: .cancel(Text("Cancelar")),
-                    secondaryButton: .default(Text("Editar Medicamento")) {
-                        self.showModalEdit = true
-                    }
-                )
+            .alert("Erro na hora de agendar a notificação", isPresented: $showTimeIntervalAlert, actions: {
+                Button {
+                    self.showModalEdit = true
+                } label: {
+                    Text("Editar Medicamento")
+                }
+                Button("Cancelar", role: .cancel) { }
+            }, message: {
+                Text("Configure a data de início novamente")
             })
-            .sheet(isPresented: $showModalEdit) {
+            .sheet(isPresented: $showModalEdit, onDismiss: medicationManager.fetchMedications, content: {
                 EditMedicationSwiftUIView(medication: medication)
-            }
+            })
         
     }
     private func medicationName(forMedication medication: Medication) -> some View {
