@@ -3,7 +3,6 @@ import CoreData
 
 
 struct EditMedicationSwiftUIView: View {
-    @Environment(\.managedObjectContext) private var viewContext
     @Environment(\.presentationMode) var presentationMode
     let medication: Medication
     @State private var name = ""
@@ -115,7 +114,7 @@ struct EditMedicationSwiftUIView: View {
         withAnimation {
             let remainingQuantity = Int32(remainingQuantity) ?? 0
             let boxQuantity = Int32(boxQuantity) ?? 0
-            let sucess = medicationManager.editMedication(name: name, remainingQuantity: remainingQuantity, boxQuantity: boxQuantity, date: date, repeatPeriod: repeatPeriod, notes: notes, notificationType: notificationType, viewContext: viewContext, medication: medication)
+            let sucess = medicationManager.editMedication(name: name, remainingQuantity: remainingQuantity, boxQuantity: boxQuantity, date: date, repeatPeriod: repeatPeriod, notes: notes, notificationType: notificationType, medication: medication)
             return sucess
         }
     }

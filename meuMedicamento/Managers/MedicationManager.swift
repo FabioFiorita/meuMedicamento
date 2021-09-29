@@ -5,23 +5,46 @@ import Time
 final class MedicationManager: ObservableObject {
     private var notificationManager = NotificationManager()
     private var userSettings = UserSettings()
+    let container: NSPersistentContainer
+    @Published var savedMedications: [Medication] = []
     
-    func saveContext(viewContext: NSManagedObjectContext) -> Bool {
+    init() {
+        container = NSPersistentContainer(name: "meuMedicamento")
+        container.loadPersistentStores { description, error in
+            if let error = error {
+                print("ERROR LOADING CORE DATA. \(error)")
+            }
+        }
+        fetchMedications()
+    }
+    
+    func fetchMedications() {
+        let request = NSFetchRequest<Medication>(entityName: "Medication")
+        let sortDescriptor = NSSortDescriptor(key: "date", ascending: true)
+        request.sortDescriptors = [sortDescriptor]
+        do {
+            savedMedications = try container.viewContext.fetch(request)
+        } catch {
+            print("Error fetching \(error)")
+        }
+    }
+    
+    
+    func saveData() -> Bool {
         var sucess = true;
         do {
-            try viewContext.save()
-        } catch {
-            let error = error as NSError
-            print(error)
+            try container.viewContext.save()
+            fetchMedications()
+        } catch let error {
+            print("Error saving \(error)")
             sucess = false
-            //fatalError("Failed to save Medication: \(error)")
         }
         return sucess
     }
     
     
-    func addMedication(name: String, remainingQuantity: Int32, boxQuantity: Int32, date: Date, repeatPeriod: String, notes: String, notificationType: String, viewContext: NSManagedObjectContext) -> Bool {
-        let newMedication = Medication(context: viewContext)
+    func addMedication(name: String, remainingQuantity: Int32, boxQuantity: Int32, date: Date, repeatPeriod: String, notes: String, notificationType: String) -> Bool {
+        let newMedication = Medication(context: container.viewContext)
         newMedication.name = name
         newMedication.remainingQuantity = remainingQuantity
         newMedication.boxQuantity = boxQuantity
@@ -38,7 +61,7 @@ final class MedicationManager: ObservableObject {
         newMedication.notificationType = notificationType
         
         var sucess = true
-        sucess = saveContext(viewContext: viewContext)
+        sucess = saveData()
         if sucess {
             guard let timeInterval = newMedication.date?.timeIntervalSinceNow else {
                 sucess = false
@@ -61,7 +84,7 @@ final class MedicationManager: ObservableObject {
         return sucess
     }
     
-    func editMedication(name: String, remainingQuantity: Int32, boxQuantity: Int32, date: Date, repeatPeriod: String, notes: String, notificationType: String, viewContext: NSManagedObjectContext, medication: Medication) -> Bool {
+    func editMedication(name: String, remainingQuantity: Int32, boxQuantity: Int32, date: Date, repeatPeriod: String, notes: String, notificationType: String, medication: Medication) -> Bool {
         
         medication.name = name
         medication.remainingQuantity = remainingQuantity
@@ -78,7 +101,7 @@ final class MedicationManager: ObservableObject {
         medication.notificationType = notificationType
         
         var sucess = true
-        sucess = saveContext(viewContext: viewContext)
+        sucess = saveData()
         
         guard let timeInterval = medication.date?.timeIntervalSinceNow else {
             sucess = false
@@ -101,16 +124,16 @@ final class MedicationManager: ObservableObject {
         return sucess
     }
     
-    func deleteMedication(medication: Medication, viewContext: NSManagedObjectContext) {
+    func deleteMedication(medication: Medication) {
         guard let identifier = medication.id else {return}
         let identifierRepeat = identifier + "-Repiting"
         notificationManager.deleteLocalNotifications(identifiers: [identifier, identifierRepeat])
-        viewContext.delete(medication)
-        let sucess = saveContext(viewContext: viewContext)
+        container.viewContext.delete(medication)
+        let sucess = saveData()
         print(sucess)
     }
     
-    func updateRemainingQuantity(medication: Medication, viewContext: NSManagedObjectContext) -> Bool {
+    func updateRemainingQuantity(medication: Medication) -> Bool {
         var success = true
         if medication.remainingQuantity > 1 {
             if Double(medication.remainingQuantity) <= Double(medication.boxQuantity) * (userSettings.limitMedication/100.0) {
@@ -133,18 +156,15 @@ final class MedicationManager: ObservableObject {
             }
             medication.remainingQuantity -= 1
             
-            let historic = Historic(context: viewContext)
+            let historic = Historic(context: container.viewContext)
             historic.dates = Date()
             historic.medication = medication
             if !(medication.repeatPeriod == "Nunca") {
                 rescheduleNotification(forMedication: medication, forHistoric: historic)
             }
-            success = saveContext(viewContext: viewContext)
-            if historic.medicationStatus == "Não tomou" {
-                success = false
-            }
+            success = saveData()
         } else {
-            deleteMedication(medication: medication, viewContext: viewContext)
+            deleteMedication(medication: medication)
         }
         return success
     }
@@ -164,6 +184,7 @@ final class MedicationManager: ObservableObject {
                 if error == nil {}
             }
         } else {
+            rescheduleNotification(forMedication: medication, forHistoric: historic)
             historic.medicationStatus = "Não tomou"
         }
     }
@@ -180,9 +201,9 @@ final class MedicationManager: ObservableObject {
         }
     }
     
-    func refreshRemainingQuantity(medication: Medication, viewContext: NSManagedObjectContext) {
+    func refreshRemainingQuantity(medication: Medication) {
         medication.remainingQuantity += medication.boxQuantity
-        let sucess = saveContext(viewContext: viewContext)
+        let sucess = saveData()
         print(sucess)
         guard let id = medication.id else {return}
         let identifier = id + "-Repiting"
@@ -230,3 +251,12 @@ final class MedicationManager: ObservableObject {
 }
 
 
+public extension NSManagedObject {
+
+    convenience init(context: NSManagedObjectContext) {
+        let name = String(describing: type(of: self))
+        let entity = NSEntityDescription.entity(forEntityName: name, in: context)!
+        self.init(entity: entity, insertInto: context)
+    }
+
+}

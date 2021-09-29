@@ -1,8 +1,7 @@
 import SwiftUI
 
 struct AddMedicationSwiftUIView: View {
-    @Environment(\.managedObjectContext) private var viewContext
-    @Environment(\.presentationMode) var presentationMode
+    @Environment(\.dismiss) var dismiss
     @State private var name = ""
     @State private var boxQuantity = ""
     @State private var date = Date()
@@ -15,6 +14,7 @@ struct AddMedicationSwiftUIView: View {
     @ObservedObject var userSettings = UserSettings()
     @StateObject private var medicationManager = MedicationManager()
     @State private var showDatePicker = false
+    
     
     var body: some View {
         NavigationView{
@@ -52,11 +52,11 @@ struct AddMedicationSwiftUIView: View {
                 ToolbarItem {
                     Button("Salvar", action: {
                         if addMedication() {
-                            self.presentationMode.wrappedValue.dismiss()
                             showAlert = false
+                            dismiss()
                         } else {
                             showAlert = true
-                            self.presentationMode.wrappedValue.dismiss()
+                            dismiss()
                         }
                         
                     }).foregroundColor(.white)
@@ -67,7 +67,7 @@ struct AddMedicationSwiftUIView: View {
                 }
                 ToolbarItem(placement: .navigationBarLeading) {
                     Button("Cancelar", action: {
-                        self.presentationMode.wrappedValue.dismiss()
+                        dismiss()
                     }).foregroundColor(.white)
                 }
             })
@@ -100,7 +100,7 @@ struct AddMedicationSwiftUIView: View {
         withAnimation {
             let remainingQuantity = Int32(remainingQuantity) ?? 0
             let boxQuantity = Int32(boxQuantity) ?? 0
-            let sucess = medicationManager.addMedication(name: name, remainingQuantity: remainingQuantity, boxQuantity: boxQuantity, date: date, repeatPeriod: repeatPeriod, notes: notes, notificationType: notificationType, viewContext: viewContext)
+            let sucess = medicationManager.addMedication(name: name, remainingQuantity: remainingQuantity, boxQuantity: boxQuantity, date: date, repeatPeriod: repeatPeriod, notes: notes, notificationType: notificationType)
             return sucess
         }
     }

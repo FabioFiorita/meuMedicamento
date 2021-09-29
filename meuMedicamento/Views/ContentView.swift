@@ -2,14 +2,10 @@ import SwiftUI
 
 
 struct ContentView: View {
-    @Environment(\.managedObjectContext) private var viewContext
     @State private var showModalAdd = false
     @State private var showModalEdit = false
     @State private var showTimeIntervalAlert = false
     @State private var authorizationDenied = false
-    @Environment(\.presentationMode) var presentationMode
-    @FetchRequest(entity: Medication.entity(), sortDescriptors: [NSSortDescriptor(keyPath: \Medication.date, ascending: true)])
-    private var medications: FetchedResults<Medication>
     @StateObject private var notificationManager = NotificationManager()
     @StateObject private var delegate = NotificationDelegate()
     @ObservedObject var userSettings = UserSettings()
@@ -39,7 +35,7 @@ struct ContentView: View {
                 TabView {
                     NavigationView {
                         List {
-                            ForEach(medications, id: \.self) { (medication: Medication) in
+                            ForEach(medicationManager.savedMedications, id: \.self) { (medication: Medication) in
                                 row(forMedication: medication)
                             }
                             .onDelete(perform: deleteMedication)
@@ -51,7 +47,7 @@ struct ContentView: View {
                                     self.showModalAdd = true
                                 } label: {
                                     Image(systemName: "plus").imageScale(.large).foregroundColor(.white)
-                                }.sheet(isPresented: $showModalAdd) {
+                                }.sheet(isPresented: $showModalAdd, onDismiss: medicationManager.fetchMedications) {
                                     AddMedicationSwiftUIView()
                                 }
                             }
@@ -60,6 +56,7 @@ struct ContentView: View {
                         .onAppear(perform: {
                             notificationManager.reloadAuthorizationStatus()
                             UNUserNotificationCenter.current().delegate = delegate
+                            medicationManager.fetchMedications()
                         })
                         .onChange(of: notificationManager.authorizationStatus) { authorizationStatus in
                             switch authorizationStatus {
@@ -113,8 +110,8 @@ struct ContentView: View {
     private func deleteMedication(offsets: IndexSet) {
         withAnimation {
             for index in offsets {
-                let medication = medications[index]
-                medicationManager.deleteMedication(medication: medication, viewContext: viewContext)
+                let medication = medicationManager.savedMedications[index]
+                medicationManager.deleteMedication(medication: medication)
             }
         }
     }
@@ -122,7 +119,7 @@ struct ContentView: View {
     
     private func updateQuantity(medication: FetchedResults<Medication>.Element) {
         withAnimation {
-            if medicationManager.updateRemainingQuantity(medication: medication, viewContext: viewContext) {
+            if medicationManager.updateRemainingQuantity(medication: medication) {
                 print("updateQuantity sucess")
             } else {
                 self.showTimeIntervalAlert = true
@@ -141,6 +138,7 @@ struct ContentView: View {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
                     withAnimation(.easeInOut(duration: 2)) {
                         medication.isSelected = false
+                        medicationManager.fetchMedications()
                     }
                 }
             }

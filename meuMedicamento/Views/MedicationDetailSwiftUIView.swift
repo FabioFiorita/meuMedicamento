@@ -3,7 +3,6 @@ import CoreData
 import WebKit
 
 struct MedicationDetailSwiftUIView: View {
-    @Environment(\.managedObjectContext) private var viewContext
     @Environment(\.presentationMode) var presentationMode
     @Environment(\.colorScheme) var colorScheme
     @State private var showModal = false
@@ -125,7 +124,7 @@ struct MedicationDetailSwiftUIView: View {
     private func refreshQuantity(_ medication: FetchedResults<Medication>.Element) {
         withAnimation {
             
-            medicationManager.refreshRemainingQuantity(medication: medication, viewContext: viewContext)
+            medicationManager.refreshRemainingQuantity(medication: medication)
         }
     }
     
