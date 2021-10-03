@@ -36,7 +36,9 @@ struct ContentView: View {
                     NavigationView {
                         List {
                             ForEach(medicationManager.savedMedications, id: \.self) { (medication: Medication) in
-                                row(forMedication: medication)
+                                NavigationLink(destination: MedicationDetailSwiftUIView(medication: medication)) {
+                                    row(forMedication: medication)
+                                }
                             }
                             .onDelete(perform: deleteMedication)
                         }
@@ -204,10 +206,6 @@ struct ContentView: View {
                     medicationDate(forMedication: medication)
                 }
             }
-            Spacer()
-            NavigationLink(destination: MedicationDetailSwiftUIView(medication: medication)) {
-                EmptyView()
-            }.frame(width: 0, height: 0)
         }
     }
     

@@ -6,7 +6,6 @@ struct MedicationDetailSwiftUIView: View {
     @Environment(\.presentationMode) var presentationMode
     @Environment(\.colorScheme) var colorScheme
     @State private var showModal = false
-    
     let medication: Medication
     private var sortedHistoric: [Historic] {
         var aux = Array(medication.dates as? Set<Historic> ?? [])
