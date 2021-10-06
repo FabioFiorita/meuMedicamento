@@ -14,6 +14,7 @@ struct ContentView: View {
     
     init(){
         let coloredNavAppearance = UINavigationBarAppearance()
+        coloredNavAppearance.configureWithDefaultBackground()
         //coloredNavAppearance.configureWithOpaqueBackground()
         coloredNavAppearance.backgroundColor = UIColor(Color("main"))
         coloredNavAppearance.titleTextAttributes = [.foregroundColor: UIColor(Color.white)]
@@ -21,8 +22,7 @@ struct ContentView: View {
         UINavigationBar.appearance().standardAppearance = coloredNavAppearance
         UINavigationBar.appearance().scrollEdgeAppearance = coloredNavAppearance
         let appearance = UITabBarAppearance()
-        appearance.backgroundColor = UIColor.systemBackground
-        appearance.configureWithOpaqueBackground()
+        appearance.configureWithDefaultBackground()
         UITabBar.appearance().standardAppearance = appearance
         UITabBar.appearance().scrollEdgeAppearance = appearance
     }
@@ -42,7 +42,7 @@ struct ContentView: View {
                             }
                             .onDelete(perform: deleteMedication)
                         }
-                        .navigationBarTitle("Medicamentos",displayMode: .inline)
+                        .navigationBarTitle("Medicamentos",displayMode: .automatic)
                         .toolbar(content: {
                             ToolbarItem {
                                 Button {
@@ -54,7 +54,7 @@ struct ContentView: View {
                                 }
                             }
                         })
-                        .listStyle(InsetGroupedListStyle())
+                        .listStyle(.insetGrouped)
                         .onAppear(perform: {
                             notificationManager.reloadAuthorizationStatus()
                             UNUserNotificationCenter.current().delegate = delegate

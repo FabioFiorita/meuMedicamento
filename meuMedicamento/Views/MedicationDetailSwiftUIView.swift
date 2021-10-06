@@ -1,6 +1,5 @@
 import SwiftUI
 import CoreData
-import WebKit
 
 struct MedicationDetailSwiftUIView: View {
     @Environment(\.presentationMode) var presentationMode
@@ -16,22 +15,14 @@ struct MedicationDetailSwiftUIView: View {
     @StateObject private var medicationManager = MedicationManager()
     
     var body: some View {
-        NavigationView{
             ZStack {
                 Color(colorScheme == .dark ? .systemBackground : .systemGray6)
                 VStack(alignment: .leading) {
                     VStack {
-                        VStack(alignment: .leading, spacing: 5.0){
-                            medicationInformation(forMedication: medication)
-                        }
-                        .padding()
-                        .background(Color(colorScheme == .dark ? .systemGray6 : .systemBackground))
-                        .cornerRadius(10.0)
-                        
+                        medicationInformation(forMedication: medication)
                         medicationNotes(forMedication: medication)
                         stepperHistory
                     }.padding()
-                    //.background(Color(.systemBackground))
                     List {
                         ForEach(sortedHistoric.prefix(historicCount) , id: \.self){ historic in
                             medicationDateHistory(forHistoric: historic)
@@ -41,10 +32,7 @@ struct MedicationDetailSwiftUIView: View {
                 }
                 
             }
-            
-            .navigationBarTitle("\(medication.name ?? "Medicamento")", displayMode: .inline)
-            
-        }
+        .navigationTitle(("\(medication.name ?? "Medicamento")"))
         .toolbar(content: {
             Button(action: {
                 self.showModal = true
@@ -57,21 +45,26 @@ struct MedicationDetailSwiftUIView: View {
     }
     
     private func medicationInformation(forMedication medication: Medication) -> some View {
-        Group {
-            Text("Medicamentos restantes: \(medication.remainingQuantity)")
-            Text("Quantidade de medicamentos na caixa: \(medication.boxQuantity)")
-            Button(action: {
-                refreshQuantity(medication)
-                self.presentationMode.wrappedValue.dismiss()
-            }) {
-                Text("Renovar Medicamentos")
-                    .frame(minWidth: 0, maxWidth: .infinity, alignment: .center)
-                    .padding()
-                    .background(Color("main"))
-                    .cornerRadius(10.0)
-                    .foregroundColor(.white)
+        VStack(alignment: .leading, spacing: 5.0) {
+            Group {
+                Text("Medicamentos restantes: \(medication.remainingQuantity)")
+                Text("Quantidade de medicamentos na caixa: \(medication.boxQuantity)")
+                Button(action: {
+                    refreshQuantity(medication)
+                    self.presentationMode.wrappedValue.dismiss()
+                }) {
+                    Text("Renovar Medicamentos")
+                        .frame(minWidth: 0, maxWidth: .infinity, alignment: .center)
+                        .padding()
+                        .background(Color("main"))
+                        .cornerRadius(10.0)
+                        .foregroundColor(.white)
+                }
             }
         }
+        .padding()
+        .background(Color(colorScheme == .dark ? .systemGray6 : .systemBackground))
+        .cornerRadius(10.0)
     }
     
     private func medicationNotes(forMedication medication: Medication) -> some View {
