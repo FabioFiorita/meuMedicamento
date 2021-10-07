@@ -1,11 +1,6 @@
 import SwiftUI
 
 struct AddMedicationSwiftUIView: View {
-    enum Field {
-        case name
-        case remainingQuantity
-        case boxQuantity
-    }
     @Environment(\.dismiss) var dismiss
     @State private var name = ""
     @State private var remainingQuantity = ""
@@ -17,7 +12,6 @@ struct AddMedicationSwiftUIView: View {
     @FocusState private var focusedField: Field?
     @State var showAlert = false
     @State private var pickerView = true
-    @ObservedObject var userSettings = UserSettings()
     @StateObject private var medicationManager = MedicationManager()
     @State private var showDatePicker = false
     
@@ -29,14 +23,6 @@ struct AddMedicationSwiftUIView: View {
                     .disableAutocorrection(true)
                     .focused($focusedField, equals: .name)
                     .submitLabel(.next)
-                    .toolbar {
-                        Button {
-                            focusedField = .remainingQuantity
-                        } label: {
-                            Image(systemName: "arrow.down")
-                        }
-
-                    }
                 TextField("Quantidade Restante", text: $remainingQuantity)
                     .focused($focusedField, equals: .remainingQuantity)
                     .keyboardType(.numberPad)
@@ -48,11 +34,11 @@ struct AddMedicationSwiftUIView: View {
                     Group {
                         Text("Data de Início: ") + Text("\(date, formatter: itemFormatter)").foregroundColor(showDatePicker ? .blue : .secondary)
                     }.onTapGesture(perform: {
-                        self.dismissKeyboard()
+                        focusedField = .none
                         showDatePicker.toggle()
                     })
                     if showDatePicker {
-                        DatePicker("", selection: $date, in: Date()...).datePickerStyle(GraphicalDatePickerStyle())
+                        DatePicker("", selection: $date, in: Date()...).datePickerStyle(.graphical)
                     }
                     Picker(selection: $repeatPeriod, label: Text("Repetir")) {
                         ForEach(RepeatPeriod.periods, id: \.self) { periods in
@@ -72,12 +58,43 @@ struct AddMedicationSwiftUIView: View {
                 switch focusedField {
                 case .name:
                     focusedField = .remainingQuantity
-                case .remainingQuantity:
-                    focusedField = .boxQuantity
                 default:
                     break
                 }
             }
+            .toolbar(content: {
+                ToolbarItemGroup(placement: .keyboard) {
+                    Spacer()
+                    Button {
+                        switch focusedField {
+                        case .name:
+                            focusedField = .none
+                        case .remainingQuantity:
+                            focusedField = .name
+                        case .boxQuantity:
+                            focusedField = .remainingQuantity
+                        default:
+                            break
+                        }
+                    } label: {
+                        Image(systemName: "arrow.up")
+                    }
+                    Button {
+                        switch focusedField {
+                        case .name:
+                            focusedField = .remainingQuantity
+                        case .remainingQuantity:
+                            focusedField = .boxQuantity
+                        case .boxQuantity:
+                            focusedField = .none
+                        default:
+                            break
+                        }
+                    } label: {
+                        Image(systemName: "arrow.down")
+                    }
+                }
+            })
             .navigationBarTitle("Novo Medicamento",displayMode: .inline)
             .toolbar(content: {
                 ToolbarItem {
@@ -136,30 +153,11 @@ struct AddMedicationSwiftUIView: View {
             return situation
         }
     }
-    
-    private let itemFormatter: DateFormatter = {
-             let formatter = DateFormatter()
-             formatter.dateStyle = .full
-             formatter.timeStyle = .short
-             formatter.locale = Locale(identifier: "pt-BR")
-             return formatter
-         }()
-} 
-
-
-
-
-
+}
 
 
 struct AddEditMedicationSwiftUIView_Previews: PreviewProvider {
     static var previews: some View {
         AddMedicationSwiftUIView()
-    }
-}
-
-extension View {
-    func dismissKeyboard() {
-        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
     }
 }

@@ -117,14 +117,6 @@ struct MedicationDetailSwiftUIView: View {
     
 }
 
-private let itemFormatter: DateFormatter = {
-    let formatter = DateFormatter()
-    formatter.dateStyle = .long
-    formatter.timeStyle = .short
-    formatter.locale = Locale(identifier: "pt-BR")
-    return formatter
-}()
-
 
 struct MedicationDetailSwiftUIView_Previews: PreviewProvider {
     static let moc = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)

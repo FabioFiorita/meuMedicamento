@@ -295,16 +295,8 @@ struct ContentView: View {
             }
         }
     }
-    
-    private let itemFormatter: DateFormatter = {
-        let formatter = DateFormatter()
-        formatter.dateStyle = .full
-        formatter.timeStyle = .short
-        formatter.locale = Locale(identifier: "pt-BR")
-        return formatter
-    }()
 }
-
+    
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
