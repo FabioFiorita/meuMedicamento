@@ -64,7 +64,7 @@ struct EditMedicationSwiftUIView: View {
             .toolbar(content: {
                 ToolbarItem {
                     Button("Salvar", action: {
-                        if editMedication(medication: medication) {
+                        if editMedication(medication: medication) == .sucess {
                             self.presentationMode.wrappedValue.dismiss()
                             showAlert = false
                         } else {
@@ -110,12 +110,13 @@ struct EditMedicationSwiftUIView: View {
     
     
     
-    private func editMedication(medication: Medication) -> Bool {
+    private func editMedication(medication: Medication) -> medicationResult {
         withAnimation {
             let remainingQuantity = Int32(remainingQuantity) ?? 0
             let boxQuantity = Int32(boxQuantity) ?? 0
-            let sucess = medicationManager.editMedication(name: name, remainingQuantity: remainingQuantity, boxQuantity: boxQuantity, date: date, repeatPeriod: repeatPeriod, notes: notes, notificationType: notificationType, medication: medication)
-            return sucess
+            var situation: medicationResult = .sucess
+            situation = medicationManager.editMedication(name: name, remainingQuantity: remainingQuantity, boxQuantity: boxQuantity, date: date, repeatPeriod: repeatPeriod, notes: notes, notificationType: notificationType, medication: medication)
+            return situation
         }
     }
     private let itemFormatter: DateFormatter = {

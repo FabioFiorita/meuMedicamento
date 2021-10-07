@@ -1,14 +1,20 @@
 import SwiftUI
 
 struct AddMedicationSwiftUIView: View {
+    enum Field {
+        case name
+        case remainingQuantity
+        case boxQuantity
+    }
     @Environment(\.dismiss) var dismiss
     @State private var name = ""
+    @State private var remainingQuantity = ""
     @State private var boxQuantity = ""
+    @State private var notificationType = ""
     @State private var date = Date()
     @State private var repeatPeriod = ""
     @State private var notes = ""
-    @State private var remainingQuantity = ""
-    @State private var notificationType = ""
+    @FocusState private var focusedField: Field?
     @State var showAlert = false
     @State private var pickerView = true
     @ObservedObject var userSettings = UserSettings()
@@ -19,9 +25,24 @@ struct AddMedicationSwiftUIView: View {
     var body: some View {
         NavigationView{
             Form {
-                TextField("Nome do Medicamento", text: $name).disableAutocorrection(true)
-                TextField("Quantidade Restante", text: $remainingQuantity).keyboardType(.numberPad)
-                TextField("Quantidade na Caixa", text: $boxQuantity).keyboardType(.numberPad)
+                TextField("Nome do Medicamento", text: $name)
+                    .disableAutocorrection(true)
+                    .focused($focusedField, equals: .name)
+                    .submitLabel(.next)
+                    .toolbar {
+                        Button {
+                            focusedField = .remainingQuantity
+                        } label: {
+                            Image(systemName: "arrow.down")
+                        }
+
+                    }
+                TextField("Quantidade Restante", text: $remainingQuantity)
+                    .focused($focusedField, equals: .remainingQuantity)
+                    .keyboardType(.numberPad)
+                TextField("Quantidade na Caixa", text: $boxQuantity)
+                    .focused($focusedField, equals: .boxQuantity)
+                    .keyboardType(.numberPad)
                 Section {
                     notificationTypePicker
                     Group {
@@ -47,11 +68,21 @@ struct AddMedicationSwiftUIView: View {
                     TextField("",text: $notes).padding()
                 }
             }
+            .onSubmit {
+                switch focusedField {
+                case .name:
+                    focusedField = .remainingQuantity
+                case .remainingQuantity:
+                    focusedField = .boxQuantity
+                default:
+                    break
+                }
+            }
             .navigationBarTitle("Novo Medicamento",displayMode: .inline)
             .toolbar(content: {
                 ToolbarItem {
                     Button("Salvar", action: {
-                        if addMedication() {
+                        if addMedication() == .sucess {
                             showAlert = false
                             dismiss()
                         } else {
@@ -96,12 +127,13 @@ struct AddMedicationSwiftUIView: View {
         
     }
     
-    private func addMedication() -> Bool {
+    private func addMedication() -> medicationResult {
         withAnimation {
             let remainingQuantity = Int32(remainingQuantity) ?? 0
             let boxQuantity = Int32(boxQuantity) ?? 0
-            let sucess = medicationManager.addMedication(name: name, remainingQuantity: remainingQuantity, boxQuantity: boxQuantity, date: date, repeatPeriod: repeatPeriod, notes: notes, notificationType: notificationType)
-            return sucess
+            var situation: medicationResult = .sucess
+            situation = medicationManager.addMedication(name: name, remainingQuantity: remainingQuantity, boxQuantity: boxQuantity, date: date, repeatPeriod: repeatPeriod, notes: notes, notificationType: notificationType)
+            return situation
         }
     }
     

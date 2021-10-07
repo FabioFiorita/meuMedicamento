@@ -6,11 +6,6 @@ struct MedicationDetailSwiftUIView: View {
     @Environment(\.colorScheme) var colorScheme
     @State private var showModal = false
     let medication: Medication
-    private var sortedHistoric: [Historic] {
-        var aux = Array(medication.dates as? Set<Historic> ?? [])
-        aux = aux.sorted(by: { $0.dates ?? .distantPast > $1.dates ?? .distantPast })
-        return aux
-    }
     @State private var historicCount = 7
     @StateObject private var medicationManager = MedicationManager()
     
@@ -24,7 +19,7 @@ struct MedicationDetailSwiftUIView: View {
                         stepperHistory
                     }.padding()
                     List {
-                        ForEach(sortedHistoric.prefix(historicCount) , id: \.self){ historic in
+                        ForEach(medicationManager.fetchHistoric(forMedication: medication).prefix(historicCount) , id: \.self){ historic in
                             medicationDateHistory(forHistoric: historic)
                         }
                     }

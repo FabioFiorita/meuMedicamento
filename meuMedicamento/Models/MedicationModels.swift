@@ -26,3 +26,11 @@ struct NotificationType{
     "Regularmente"
     ]
 }
+
+enum medicationResult {
+    case sucess
+    case notificationTimeIntervalError
+    case notificationDateMatchingError
+    case viewContextError
+    case delete
+}
