@@ -26,3 +26,26 @@ struct NotificationType{
     "Regularmente"
     ]
 }
+
+enum medicationResult {
+    case sucess
+    case notificationTimeIntervalError
+    case notificationDateMatchingError
+    case viewContextError
+    case delete
+}
+
+enum Field {
+    case name
+    case remainingQuantity
+    case boxQuantity
+}
+
+let itemFormatter: DateFormatter = {
+         let formatter = DateFormatter()
+         formatter.dateStyle = .long
+         formatter.timeStyle = .short
+         formatter.locale = Locale(identifier: "pt-BR")
+         return formatter
+     }()
+
