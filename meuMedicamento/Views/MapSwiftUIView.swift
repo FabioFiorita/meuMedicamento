@@ -32,7 +32,8 @@ struct MapSwiftUIView: View {
                         // get all landmarks
                     placeListVM.searchLandmarks(searchTerm: searchTerm)
                     
-                }).textFieldStyle(RoundedBorderTextFieldStyle())
+                }).textFieldStyle(.roundedBorder)
+                    .submitLabel(.send)
                 
                 LandmarkCategoryView { (category) in
                     placeListVM.searchLandmarks(searchTerm: category)
