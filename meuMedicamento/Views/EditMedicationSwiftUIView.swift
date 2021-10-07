@@ -18,7 +18,7 @@ struct EditMedicationSwiftUIView: View {
     @State private var showDatePicker = false
     
     var body: some View {
-        NavigationView{
+        NavigationView {
             Form {
                 Group {
                     TextField("Nome do Medicamento", text: $name)
@@ -134,6 +134,7 @@ struct EditMedicationSwiftUIView: View {
                 }
             })
         }
+        .accentColor(.white)
     }
     private var notificationTypePicker: some View {
         Group {

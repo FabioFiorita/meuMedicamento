@@ -3,30 +3,24 @@ import CoreData
 
 struct MedicationDetailSwiftUIView: View {
     @Environment(\.presentationMode) var presentationMode
-    @Environment(\.colorScheme) var colorScheme
     @State private var showModal = false
     let medication: Medication
     @State private var historicCount = 7
     @StateObject private var medicationManager = MedicationManager()
     
     var body: some View {
-            ZStack {
-                Color(colorScheme == .dark ? .systemBackground : .systemGray6)
-                VStack(alignment: .leading) {
-                    VStack {
-                        medicationInformation(forMedication: medication)
-                        medicationNotes(forMedication: medication)
-                        stepperHistory
-                    }.padding()
-                    List {
-                        ForEach(medicationManager.fetchHistoric(forMedication: medication).prefix(historicCount) , id: \.self){ historic in
-                            medicationDateHistory(forHistoric: historic)
-                        }
+        VStack(alignment: .leading) {
+            VStack {
+                medicationInformation(forMedication: medication)
+                medicationNotes(forMedication: medication)
+                stepperHistory
+                ScrollView {
+                    ForEach(medicationManager.fetchHistoric(forMedication: medication).prefix(historicCount) , id: \.self){ historic in
+                        medicationDateHistory(forHistoric: historic)
                     }
-                    Spacer()
                 }
-                
-            }
+            }.padding()
+        }
         .navigationTitle(("\(medication.name ?? "Medicamento")"))
         .toolbar(content: {
             Button(action: {
@@ -40,8 +34,8 @@ struct MedicationDetailSwiftUIView: View {
     }
     
     private func medicationInformation(forMedication medication: Medication) -> some View {
-        VStack(alignment: .leading, spacing: 5.0) {
-            Group {
+        GroupBox {
+            VStack(alignment: .leading, spacing: 5.0) {
                 Text("Medicamentos restantes: \(medication.remainingQuantity)")
                 Text("Quantidade de medicamentos na caixa: \(medication.boxQuantity)")
                 Button(action: {
@@ -57,27 +51,24 @@ struct MedicationDetailSwiftUIView: View {
                 }
             }
         }
-        .padding()
-        .background(Color(colorScheme == .dark ? .systemGray6 : .systemBackground))
-        .cornerRadius(10.0)
     }
     
     private func medicationNotes(forMedication medication: Medication) -> some View {
         Group {
             if medication.notes != "" {
-                VStack(alignment: .leading, spacing: 5.0){
-                    Text("Notas").font(.title2)
-                    Text("\(medication.notes ?? "")").frame(minWidth: 0, maxWidth: .infinity, alignment: .topLeading)
-                        .padding()
-                }.padding()
-                .background(Color(colorScheme == .dark ? .systemGray6 : .systemBackground))
-                .cornerRadius(10.0)
+                GroupBox {
+                    VStack(alignment: .leading, spacing: 5.0){
+                        Text("Notas").font(.title2)
+                        Text("\(medication.notes ?? "")").frame(minWidth: 0, maxWidth: .infinity, alignment: .topLeading)
+                            .padding()
+                    }
+                }
             }
         }
     }
     
     private func medicationDateHistory(forHistoric historic: Historic) -> some View {
-        Group {
+        GroupBox {
             HStack {
                 Text("\(historic.dates ?? Date(),formatter: itemFormatter)" )
                 Spacer()
@@ -93,18 +84,16 @@ struct MedicationDetailSwiftUIView: View {
                         Image(systemName: "questionmark").foregroundColor(.red)
                     }
                 }
-                
             }
         }
     }
     
     private var stepperHistory : some View {
+        GroupBox {
             Stepper(value: $historicCount, in: 0...31) {
                 Text("Histórico dos últimos ") + Text("\(historicCount)").bold().foregroundColor(.orange) + Text(" medicamentos")
             }
-            .padding()
-            .background(Color(colorScheme == .dark ? .systemGray6 : .systemBackground))
-            .cornerRadius(10.0)
+        }
         
     }
     

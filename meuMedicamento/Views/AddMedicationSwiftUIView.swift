@@ -17,7 +17,7 @@ struct AddMedicationSwiftUIView: View {
     
     
     var body: some View {
-        NavigationView{
+        NavigationView {
             Form {
                 TextField("Nome do Medicamento", text: $name)
                     .disableAutocorrection(true)
@@ -120,6 +120,7 @@ struct AddMedicationSwiftUIView: View {
                 }
             })
         }
+        .accentColor(.white)
     }
     
     private var notificationTypePicker: some View {
