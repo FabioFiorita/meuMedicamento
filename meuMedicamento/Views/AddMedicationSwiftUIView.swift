@@ -26,9 +26,11 @@ struct AddMedicationSwiftUIView: View {
                 TextField("Quantidade Restante", text: $remainingQuantity)
                     .focused($focusedField, equals: .remainingQuantity)
                     .keyboardType(.numberPad)
+                    .tint(Color("main"))
                 TextField("Quantidade na Caixa", text: $boxQuantity)
                     .focused($focusedField, equals: .boxQuantity)
                     .keyboardType(.numberPad)
+                    .tint(Color("main"))
                 Section {
                     notificationTypePicker
                     Group {
@@ -54,6 +56,7 @@ struct AddMedicationSwiftUIView: View {
                     TextField("",text: $notes).padding()
                 }
             }
+            .accentColor(Color("main"))
             .onSubmit {
                 switch focusedField {
                 case .name:
@@ -62,6 +65,10 @@ struct AddMedicationSwiftUIView: View {
                     break
                 }
             }
+            .toolbar(content: {
+                
+            })
+            .navigationBarTitle("Novo Medicamento",displayMode: .inline)
             .toolbar(content: {
                 ToolbarItemGroup(placement: .keyboard) {
                     Spacer()
@@ -77,7 +84,7 @@ struct AddMedicationSwiftUIView: View {
                             break
                         }
                     } label: {
-                        Image(systemName: "arrow.up")
+                        Image(systemName: "arrow.up").tint(Color("main"))
                     }
                     Button {
                         switch focusedField {
@@ -91,12 +98,9 @@ struct AddMedicationSwiftUIView: View {
                             break
                         }
                     } label: {
-                        Image(systemName: "arrow.down")
+                        Image(systemName: "arrow.down").tint(Color("main"))
                     }
                 }
-            })
-            .navigationBarTitle("Novo Medicamento",displayMode: .inline)
-            .toolbar(content: {
                 ToolbarItem {
                     Button("Salvar", action: {
                         if addMedication() == .sucess {
@@ -120,7 +124,7 @@ struct AddMedicationSwiftUIView: View {
                 }
             })
         }
-        .accentColor(.white)
+        .accentColor(Color.white)
     }
     
     private var notificationTypePicker: some View {
