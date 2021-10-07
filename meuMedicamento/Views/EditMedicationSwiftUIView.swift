@@ -25,6 +25,7 @@ struct EditMedicationSwiftUIView: View {
                         .disableAutocorrection(true)
                         .focused($focusedField, equals: .name)
                         .submitLabel(.next)
+                        .tint(Color("main"))
                     TextField("Quantidade Restante", text: $remainingQuantity)
                         .focused($focusedField, equals: .remainingQuantity)
                         .keyboardType(.numberPad)
@@ -67,6 +68,7 @@ struct EditMedicationSwiftUIView: View {
                     }
                 }
             }
+            .accentColor(Color("main"))
             .onSubmit {
                 switch focusedField {
                 case .name:
@@ -75,6 +77,7 @@ struct EditMedicationSwiftUIView: View {
                     break
                 }
             }
+            .navigationBarTitle("Editar Medicamento",displayMode: .inline)
             .toolbar(content: {
                 ToolbarItemGroup(placement: .keyboard) {
                     Spacer()
@@ -90,7 +93,7 @@ struct EditMedicationSwiftUIView: View {
                             break
                         }
                     } label: {
-                        Image(systemName: "arrow.up")
+                        Image(systemName: "arrow.up").tint(Color("main"))
                     }
                     Button {
                         switch focusedField {
@@ -104,12 +107,9 @@ struct EditMedicationSwiftUIView: View {
                             break
                         }
                     } label: {
-                        Image(systemName: "arrow.down")
+                        Image(systemName: "arrow.down").tint(Color("main"))
                     }
                 }
-            })
-            .navigationBarTitle("Editar Medicamento",displayMode: .inline)
-            .toolbar(content: {
                 ToolbarItem {
                     Button("Salvar", action: {
                         if editMedication(medication: medication) == .sucess {
@@ -134,7 +134,7 @@ struct EditMedicationSwiftUIView: View {
                 }
             })
         }
-        .accentColor(.white)
+        .accentColor(Color.white)
     }
     private var notificationTypePicker: some View {
         Group {
