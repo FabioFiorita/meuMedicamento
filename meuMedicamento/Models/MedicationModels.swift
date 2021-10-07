@@ -32,7 +32,6 @@ enum medicationResult {
     case notificationTimeIntervalError
     case notificationDateMatchingError
     case viewContextError
-    case delete
 }
 
 enum Field {

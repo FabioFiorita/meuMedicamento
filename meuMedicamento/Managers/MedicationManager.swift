@@ -176,7 +176,7 @@ final class MedicationManager: ObservableObject {
             }
             situation = saveData()
         } else {
-            situation = .delete
+            deleteMedication(medication: medication)
         }
         return situation
     }

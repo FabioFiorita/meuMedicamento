@@ -15,7 +15,6 @@
 		C1D9471926C408A500A05884 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C1D9471826C408A500A05884 /* Assets.xcassets */; };
 		C1D9471C26C408A500A05884 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C1D9471B26C408A500A05884 /* Preview Assets.xcassets */; };
 		C1DE8CC126C4093C004E7754 /* meuMedicamento.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C1DE8CBF26C4093C004E7754 /* meuMedicamento.xcdatamodeld */; };
-		C1DE8CDA26C40E7F004E7754 /* Persistance.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1DE8CD326C40E7F004E7754 /* Persistance.swift */; };
 		C1DE8CDB26C40E7F004E7754 /* MedicationModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1DE8CD426C40E7F004E7754 /* MedicationModels.swift */; };
 		C1DE8CDC26C40E7F004E7754 /* PlaceListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1DE8CD526C40E7F004E7754 /* PlaceListViewModel.swift */; };
 		C1DE8CDD26C40E7F004E7754 /* Landmark.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1DE8CD626C40E7F004E7754 /* Landmark.swift */; };
@@ -51,7 +50,6 @@
 		C1D9471B26C408A500A05884 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		C1D9471D26C408A500A05884 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C1DE8CC026C4093C004E7754 /* meuMedicamento.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = meuMedicamento.xcdatamodel; sourceTree = "<group>"; };
-		C1DE8CD326C40E7F004E7754 /* Persistance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Persistance.swift; sourceTree = "<group>"; };
 		C1DE8CD426C40E7F004E7754 /* MedicationModels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MedicationModels.swift; sourceTree = "<group>"; };
 		C1DE8CD526C40E7F004E7754 /* PlaceListViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaceListViewModel.swift; sourceTree = "<group>"; };
 		C1DE8CD626C40E7F004E7754 /* Landmark.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Landmark.swift; sourceTree = "<group>"; };
@@ -162,7 +160,6 @@
 			children = (
 				C1DE8CD626C40E7F004E7754 /* Landmark.swift */,
 				C1DE8CD426C40E7F004E7754 /* MedicationModels.swift */,
-				C1DE8CD326C40E7F004E7754 /* Persistance.swift */,
 				C1DE8CD526C40E7F004E7754 /* PlaceListViewModel.swift */,
 				C1DE8CD726C40E7F004E7754 /* TutorialModel.swift */,
 				C1DE8CD926C40E7F004E7754 /* UserSettings.swift */,
@@ -298,7 +295,6 @@
 				C1DE8CE926C40F06004E7754 /* MKCoordinateRegion+Extensions.swift in Sources */,
 				C1DE8CDC26C40E7F004E7754 /* PlaceListViewModel.swift in Sources */,
 				C1DE8D0726C40F53004E7754 /* GradientView.swift in Sources */,
-				C1DE8CDA26C40E7F004E7754 /* Persistance.swift in Sources */,
 				C1DE8D0526C40F53004E7754 /* TabDetailsView.swift in Sources */,
 				C1DE8CFF26C40F53004E7754 /* RecenterButton.swift in Sources */,
 				C1DE8CE626C40ECA004E7754 /* MedicationManager.swift in Sources */,
@@ -435,7 +431,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = meuMedicamento/meuMedicamento.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 14;
+				CURRENT_PROJECT_VERSION = 15;
 				DEVELOPMENT_ASSET_PATHS = "\"meuMedicamento/Preview Content\"";
 				DEVELOPMENT_TEAM = 9QH8M89WF9;
 				ENABLE_PREVIEWS = YES;
@@ -460,7 +456,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = meuMedicamento/meuMedicamento.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 14;
+				CURRENT_PROJECT_VERSION = 15;
 				DEVELOPMENT_ASSET_PATHS = "\"meuMedicamento/Preview Content\"";
 				DEVELOPMENT_TEAM = 9QH8M89WF9;
 				ENABLE_PREVIEWS = YES;

@@ -184,8 +184,6 @@ struct ContentView: View {
             switch medicationManager.updateRemainingQuantity(medication: medication) {
             case .notificationTimeIntervalError:
                 showTimeIntervalAlert = true
-            case .delete:
-                showDeleteAlert = true
             case .viewContextError:
                 showViewContextAlert = true
             case .sucess:
@@ -229,18 +227,6 @@ struct ContentView: View {
                 Button("OK",role: .destructive) { }
             } message: {
                 Text("Reinicie o aplicativo")
-            }
-            .alert("O medicamento está acabando", isPresented: $showDeleteAlert) {
-                Button(role: .cancel) {
-                    medicationManager.refreshRemainingQuantity(medication: medication)
-                } label: {
-                    Text("Renovar")
-                }
-                Button("Deletar", role: .destructive) {
-                    medicationManager.deleteMedication(medication: medication)
-                }
-            } message: {
-                Text("Deseja renovar a quantidade?")
             }
             
         
