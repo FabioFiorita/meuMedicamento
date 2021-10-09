@@ -55,9 +55,8 @@ final class NotificationManager: ObservableObject {
         notificationContent.title = title
         notificationContent.sound = .default
         notificationContent.body = "Abra o App para tomar o Medicamento!"
-        if #available(iOS 15.0, *) {
-            notificationContent.interruptionLevel = .timeSensitive
-        }
+        notificationContent.interruptionLevel = .timeSensitive
+        
         
         
         let request = UNNotificationRequest(identifier: identifier, content: notificationContent, trigger: trigger)
