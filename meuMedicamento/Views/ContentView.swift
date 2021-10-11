@@ -40,20 +40,7 @@ struct ContentView: View {
                                 Section {
                                     ForEach(searchResults, id: \.self) { medication in
                                         if medicationManager.checkMedicationDate(forMedication: medication) == .today {
-                                            NavigationLink(destination: MedicationDetailSwiftUIView(medication: medication)) {
-                                                row(forMedication: medication)
-                                            }.swipeActions(edge: .trailing ,allowsFullSwipe: false) {
-                                                Button("Apagar", role: .destructive) {
-                                                    medicationManager.deleteMedication(medication: medication)
-                                                }
-                                            }
-                                            .swipeActions(edge: .leading, allowsFullSwipe: true) {
-                                                Button {
-                                                    medicationManager.refreshRemainingQuantity(medication: medication)
-                                                } label: {
-                                                    Text("Renovar Quantidade")
-                                                }.tint(.blue)
-                                            }
+                                            sections(forMedication: medication)
                                         }
                                     }
                                 } header: {
@@ -62,20 +49,7 @@ struct ContentView: View {
                                 Section {
                                     ForEach(searchResults, id: \.self) { medication in
                                         if medicationManager.checkMedicationDate(forMedication: medication) == .next {
-                                            NavigationLink(destination: MedicationDetailSwiftUIView(medication: medication)) {
-                                                row(forMedication: medication)
-                                            }.swipeActions(edge: .trailing ,allowsFullSwipe: false) {
-                                                Button("Apagar", role: .destructive) {
-                                                    medicationManager.deleteMedication(medication: medication)
-                                                }
-                                            }
-                                            .swipeActions(edge: .leading, allowsFullSwipe: true) {
-                                                Button {
-                                                    medicationManager.refreshRemainingQuantity(medication: medication)
-                                                } label: {
-                                                    Text("Renovar Quantidade")
-                                                }.tint(.blue)
-                                            }
+                                            sections(forMedication: medication)
                                         }
                                     }
                                 } header: {
@@ -190,6 +164,23 @@ struct ContentView: View {
             default:
                 break
             }
+        }
+    }
+    
+    private func sections(forMedication medication: Medication) -> some View {
+        NavigationLink(destination: MedicationDetailSwiftUIView(medication: medication)) {
+            row(forMedication: medication)
+        }.swipeActions(edge: .trailing ,allowsFullSwipe: false) {
+            Button("Apagar", role: .destructive) {
+                medicationManager.deleteMedication(medication: medication)
+            }
+        }
+        .swipeActions(edge: .leading, allowsFullSwipe: true) {
+            Button {
+                medicationManager.refreshRemainingQuantity(medication: medication)
+            } label: {
+                Text("Renovar Quantidade")
+            }.tint(.blue)
         }
     }
     
