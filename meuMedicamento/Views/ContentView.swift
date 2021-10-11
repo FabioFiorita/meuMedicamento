@@ -1,6 +1,5 @@
 import SwiftUI
 
-
 struct ContentView: View {
     @State private var showModalAdd = false
     @State private var showModalEdit = false
@@ -40,7 +39,7 @@ struct ContentView: View {
                             List {
                                 Section {
                                     ForEach(searchResults, id: \.self) { medication in
-                                        if Calendar.current.isDateInToday(medication.date ?? Date()) {
+                                        if medicationManager.checkMedicationDate(forMedication: medication) == .today {
                                             NavigationLink(destination: MedicationDetailSwiftUIView(medication: medication)) {
                                                 row(forMedication: medication)
                                             }.swipeActions(edge: .trailing ,allowsFullSwipe: false) {
@@ -62,7 +61,7 @@ struct ContentView: View {
                                 }
                                 Section {
                                     ForEach(searchResults, id: \.self) { medication in
-                                        if !Calendar.current.isDateInToday(medication.date ?? Date()) {
+                                        if medicationManager.checkMedicationDate(forMedication: medication) == .next {
                                             NavigationLink(destination: MedicationDetailSwiftUIView(medication: medication)) {
                                                 row(forMedication: medication)
                                             }.swipeActions(edge: .trailing ,allowsFullSwipe: false) {

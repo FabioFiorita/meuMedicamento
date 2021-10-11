@@ -3,10 +3,16 @@ import CoreData
 import Time
 
 final class MedicationManager: ObservableObject {
+    enum dateSection {
+        case today
+        case next
+    }
     private var notificationManager = NotificationManager()
     private var userSettings = UserSettings()
     let container: NSPersistentContainer
     @Published var savedMedications: [Medication] = []
+    @Published var todayMedications: [Medication] = []
+    @Published var nextMedications: [Medication] = []
     
     init() {
         container = NSPersistentContainer(name: "meuMedicamento")
@@ -33,6 +39,18 @@ final class MedicationManager: ObservableObject {
         var aux = Array(medication.dates as? Set<Historic> ?? [])
         aux = aux.sorted(by: { $0.dates ?? .distantPast > $1.dates ?? .distantPast })
         return aux
+    }
+    
+    func checkMedicationDate(forMedication medication: Medication) -> dateSection {
+        let calendar = Calendar.current
+        let today = Date()
+        let midnight = calendar.startOfDay(for: today)
+        guard let tomorrow = calendar.date(byAdding: .day, value: 1, to: midnight) else {return .next}
+        if medication.date ?? Date() < tomorrow {
+            return .today
+        } else {
+            return .next
+        }
     }
     
     func calculateLateMedications() -> Int {
