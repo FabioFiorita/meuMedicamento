@@ -13,7 +13,7 @@ struct EditMedicationSwiftUIView: View {
     @FocusState private var focusedField: Field?
     @State var showAlert = false
     @State private var pickerView = true
-    @StateObject private var medicationManager = MedicationManager()
+    @EnvironmentObject var medicationManager: MedicationManager
     @State private var showDatePicker = false
     
     var body: some View {
@@ -181,6 +181,6 @@ struct EditMedicationSwiftUIView: View {
 
 struct EditMedicationSwiftUIView_Previews: PreviewProvider {
     static var previews: some View {
-        EditMedicationSwiftUIView(medication: Medication())
+        EditMedicationSwiftUIView(medication: Medication()).environmentObject(MedicationManager())
     }
 }
