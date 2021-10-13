@@ -75,13 +75,13 @@ struct MedicationDetailSwiftUIView: View {
                 Group {
                     switch historic.medicationStatus {
                     case "Sem Atraso":
-                        Image(systemName: "checkmark.circle.fill").foregroundColor(.green)
+                        Image(systemName: "checkmark.circle.fill").foregroundColor(.green).accessibility(label: Text("Sem atraso"))
                     case "Atrasado":
-                        Image(systemName: "clock.fill").foregroundColor(.yellow)
+                        Image(systemName: "clock.fill").foregroundColor(.yellow).accessibility(label: Text("Atrasado"))
                     case "Não tomou":
-                        Image(systemName: "xmark.circle.fill").foregroundColor(.red)
+                        Image(systemName: "xmark.circle.fill").foregroundColor(.red).accessibility(label: Text("Não tomou"))
                     default:
-                        Image(systemName: "questionmark").foregroundColor(.red)
+                        Image(systemName: "questionmark").foregroundColor(.red).accessibility(label: Text("Situação não encontrada"))
                     }
                 }
             }
