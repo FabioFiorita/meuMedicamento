@@ -74,6 +74,9 @@ struct ContentView: View {
                             .onAppear(perform: {
                                 notificationManager.reloadAuthorizationStatus()
                                 UNUserNotificationCenter.current().delegate = delegate
+                                if medicationManager.saveData() == .viewContextError {
+                                    showViewContextAlert = true
+                                }
                                 medicationManager.fetchMedications()
                             })
                             .onChange(of: notificationManager.authorizationStatus) { authorizationStatus in
