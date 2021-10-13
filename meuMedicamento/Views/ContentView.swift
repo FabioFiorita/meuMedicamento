@@ -103,6 +103,7 @@ struct ContentView: View {
                             }, message: {
                                 Text("Abra o App Ajustes e habilite as notificações para monitorar seus medicamentos")
                         })
+                        .environmentObject(medicationManager)
                     }
                     .accentColor(.white)
                     .tabItem {
@@ -168,7 +169,7 @@ struct ContentView: View {
     }
     
     private func sections(forMedication medication: Medication) -> some View {
-        NavigationLink(destination: MedicationDetailSwiftUIView(medication: medication)) {
+        NavigationLink(destination: MedicationDetailSwiftUIView(medication: medication, medicationManager: medicationManager)) {
             row(forMedication: medication)
         }.swipeActions(edge: .trailing ,allowsFullSwipe: false) {
             Button("Apagar", role: .destructive) {

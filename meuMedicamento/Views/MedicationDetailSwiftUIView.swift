@@ -1,12 +1,11 @@
 import SwiftUI
-import CoreData
 
 struct MedicationDetailSwiftUIView: View {
-    @Environment(\.presentationMode) var presentationMode
+    @Environment(\.dismiss) var dismiss
     @State private var showModal = false
-    let medication: Medication
+    @StateObject var medication: Medication
     @State private var historicCount = 7
-    @StateObject private var medicationManager = MedicationManager()
+    @ObservedObject var medicationManager: MedicationManager
     
     var body: some View {
         VStack(alignment: .leading) {
@@ -31,6 +30,7 @@ struct MedicationDetailSwiftUIView: View {
                 EditMedicationSwiftUIView(medication: medication)
             }
         })
+        .environmentObject(medicationManager)
     }
     
     private func medicationInformation(forMedication medication: Medication) -> some View {
@@ -40,7 +40,7 @@ struct MedicationDetailSwiftUIView: View {
                 Text("Quantidade de medicamentos na caixa: \(medication.boxQuantity)")
                 Button(action: {
                     refreshQuantity(medication)
-                    self.presentationMode.wrappedValue.dismiss()
+                    dismiss()
                 }) {
                     Text("Renovar Medicamentos")
                         .frame(minWidth: 0, maxWidth: .infinity, alignment: .center)
@@ -108,13 +108,7 @@ struct MedicationDetailSwiftUIView: View {
 
 
 struct MedicationDetailSwiftUIView_Previews: PreviewProvider {
-    static let moc = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
-    
     static var previews: some View {
-        let medication = Medication(context: moc)
-        
-        return NavigationView {
-            MedicationDetailSwiftUIView(medication: medication)
-        }
+        MedicationDetailSwiftUIView(medication: Medication(), medicationManager: MedicationManager())
     }
 }

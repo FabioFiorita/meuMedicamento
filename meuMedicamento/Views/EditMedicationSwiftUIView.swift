@@ -1,9 +1,8 @@
 import SwiftUI
-import CoreData
 
 struct EditMedicationSwiftUIView: View {
     @Environment(\.dismiss) var dismiss
-    let medication: Medication
+    @StateObject var medication: Medication
     @State private var name = ""
     @State private var remainingQuantity = ""
     @State private var boxQuantity = ""
@@ -14,7 +13,7 @@ struct EditMedicationSwiftUIView: View {
     @FocusState private var focusedField: Field?
     @State var showAlert = false
     @State private var pickerView = true
-    @StateObject private var medicationManager = MedicationManager()
+    @EnvironmentObject var medicationManager: MedicationManager
     @State private var showDatePicker = false
     
     var body: some View {
@@ -181,15 +180,7 @@ struct EditMedicationSwiftUIView: View {
 
 
 struct EditMedicationSwiftUIView_Previews: PreviewProvider {
-    static let moc = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
-    
     static var previews: some View {
-        let medication = Medication(context: moc)
-        
-        return NavigationView {
-            EditMedicationSwiftUIView(medication: medication)
-        }
-        
-        
+        EditMedicationSwiftUIView(medication: Medication()).environmentObject(MedicationManager())
     }
 }

@@ -11,8 +11,6 @@ final class MedicationManager: ObservableObject {
     private var userSettings = UserSettings()
     let container: NSPersistentContainer
     @Published var savedMedications: [Medication] = []
-    @Published var todayMedications: [Medication] = []
-    @Published var nextMedications: [Medication] = []
     
     init() {
         container = NSPersistentContainer(name: "meuMedicamento")
