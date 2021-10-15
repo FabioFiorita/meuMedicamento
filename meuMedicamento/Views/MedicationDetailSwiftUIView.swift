@@ -90,9 +90,13 @@ struct MedicationDetailSwiftUIView: View {
     
     private var stepperHistory : some View {
         GroupBox {
-            Stepper(value: $historicCount, in: 0...31) {
+            HStack {
                 Text("Histórico dos últimos ") + Text("\(historicCount)").bold().foregroundColor(.orange) + Text(" medicamentos")
-            }
+                Spacer()
+                Stepper("Quantidade no Histórico", value: $historicCount, in: 0...31)
+                    .labelsHidden()
+                    .accessibility(identifier: "stepper")
+            }.frame(minWidth: 0, maxWidth: .infinity)
         }
         
     }

@@ -34,8 +34,12 @@ struct SettingsSwiftUIView: View {
                 Toggle(isOn: $limitNotification) {
                     Text("Deseja ser notificado quando estiver acabando seus remédios?")
                 }
-                Stepper(value: $limitMedication, in: 0.0...100.0) {
+                    .accessibility(identifier: "Toggle")
+                HStack {
                     Text("Começar a notificar quando a quantidade chegar em: ") + Text("\(Int(limitMedication))%").foregroundColor(.red).bold() + Text(" do total")
+                    Spacer()
+                    Stepper("Porcentagem do Total", value: $limitMedication, in: 0.0...100.0)
+                        .labelsHidden()
                 }
                 DatePicker("Horario para as notificações:", selection: $limitDate, displayedComponents: .hourAndMinute)
                 Button(action: {
@@ -94,8 +98,6 @@ struct SettingsSwiftUIView: View {
                     Spacer()
                     Image(systemName: "chevron.right")
                         .foregroundColor(Color.secondary)
-                    
-                    
                 }
                 Divider()
                 Button(action: {
