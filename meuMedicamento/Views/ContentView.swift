@@ -169,19 +169,22 @@ struct ContentView: View {
     }
     
     private func sections(forMedication medication: Medication) -> some View {
-        NavigationLink(destination: MedicationDetailSwiftUIView(medication: medication, medicationManager: medicationManager)) {
-            row(forMedication: medication)
-        }.swipeActions(edge: .trailing ,allowsFullSwipe: false) {
-            Button("Apagar", role: .destructive) {
-                medicationManager.deleteMedication(medication: medication)
+        HStack {
+            checkmark(forMedication: medication)
+            NavigationLink(destination: MedicationDetailSwiftUIView(medication: medication, medicationManager: medicationManager)) {
+                row(forMedication: medication)
+            }.swipeActions(edge: .trailing ,allowsFullSwipe: false) {
+                Button("Apagar", role: .destructive) {
+                    medicationManager.deleteMedication(medication: medication)
+                }
             }
+            .swipeActions(edge: .leading, allowsFullSwipe: true) {
+                Button {
+                    medicationManager.refreshRemainingQuantity(medication: medication)
+                } label: {
+                    Text("Renovar Quantidade")
+                }.tint(.blue)
         }
-        .swipeActions(edge: .leading, allowsFullSwipe: true) {
-            Button {
-                medicationManager.refreshRemainingQuantity(medication: medication)
-            } label: {
-                Text("Renovar Quantidade")
-            }.tint(.blue)
         }
     }
     
@@ -229,18 +232,20 @@ struct ContentView: View {
     }
     private func medicationRemainingQuantity(forMedication medication: Medication) -> some View {
         Group {
-            Text("Medicamentos restantes:")
-                .font(.body)
-                .fontWeight(.light)
-            if Double(medication.remainingQuantity) <= Double(medication.boxQuantity) * (userSettings.limitMedication/100.0) {
-                Text("\(medication.remainingQuantity)")
+            HStack {
+                Text("Medicamentos restantes:")
                     .font(.body)
                     .fontWeight(.light)
-                    .foregroundColor(.red)
-            } else {
-                Text("\(medication.remainingQuantity)")
-                    .font(.body)
-                    .fontWeight(.light)
+                if Double(medication.remainingQuantity) <= Double(medication.boxQuantity) * (userSettings.limitMedication/100.0) {
+                    Text("\(medication.remainingQuantity)")
+                        .font(.body)
+                        .fontWeight(.light)
+                        .foregroundColor(.red)
+                } else {
+                    Text("\(medication.remainingQuantity)")
+                        .font(.body)
+                        .fontWeight(.light)
+                }
             }
         }
     }
@@ -261,18 +266,11 @@ struct ContentView: View {
     }
     
     private func row(forMedication medication: Medication) -> some View {
-        HStack {
-            HStack {
-                checkmark(forMedication: medication)
                 VStack(alignment: .leading, spacing: 5) {
                     medicationName(forMedication: medication)
-                    HStack {
-                        medicationRemainingQuantity(forMedication: medication)
-                    }
+                    medicationRemainingQuantity(forMedication: medication)
                     medicationDate(forMedication: medication)
                 }
-            }
-        }
     }
 }
     
