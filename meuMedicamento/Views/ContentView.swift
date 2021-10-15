@@ -173,19 +173,20 @@ struct ContentView: View {
             checkmark(forMedication: medication)
             NavigationLink(destination: MedicationDetailSwiftUIView(medication: medication, medicationManager: medicationManager)) {
                 row(forMedication: medication)
-            }.swipeActions(edge: .trailing ,allowsFullSwipe: false) {
-                Button("Apagar", role: .destructive) {
-                    medicationManager.deleteMedication(medication: medication)
-                }
             }
-            .swipeActions(edge: .leading, allowsFullSwipe: true) {
-                Button {
-                    medicationManager.refreshRemainingQuantity(medication: medication)
-                } label: {
-                    Text("Renovar Quantidade")
-                }.tint(.blue)
         }
+        .swipeActions(edge: .trailing ,allowsFullSwipe: false) {
+            Button("Apagar", role: .destructive) {
+                medicationManager.deleteMedication(medication: medication)
+            }
         }
+        .swipeActions(edge: .leading, allowsFullSwipe: true) {
+            Button {
+                medicationManager.refreshRemainingQuantity(medication: medication)
+            } label: {
+                Text("Renovar Quantidade")
+            }.tint(.blue)
+    }
     }
     
     private func checkmark(forMedication medication: Medication) -> some View {
