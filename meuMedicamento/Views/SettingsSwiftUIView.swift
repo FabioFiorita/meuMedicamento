@@ -41,7 +41,14 @@ struct SettingsSwiftUIView: View {
                     Stepper("Porcentagem do Total", value: $limitMedication, in: 0.0...100.0)
                         .labelsHidden()
                 }
-                DatePicker("Horario para as notificações:", selection: $limitDate, displayedComponents: .hourAndMinute)
+                .accessibilityElement(children: .combine)
+                HStack {
+                    Text("Horario para as notificações:")
+                    Spacer()
+                    DatePicker("Seletor de Horário", selection: $limitDate, displayedComponents: .hourAndMinute)
+                        .labelsHidden()
+                }
+                .accessibilityElement(children: .combine)
                 Button(action: {
                     userSettings.limitNotification = limitNotification
                     userSettings.limitMedication = limitMedication
@@ -98,6 +105,7 @@ struct SettingsSwiftUIView: View {
                     Spacer()
                     Image(systemName: "chevron.right")
                         .foregroundColor(Color.secondary)
+                        .accessibilityElement(children: .ignore)
                 }
                 Divider()
                 Button(action: {
