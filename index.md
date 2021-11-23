@@ -2,9 +2,7 @@
 
 meuMedicamento tem como objetivo ajudar pessoas a controlar seus medicamentos, por meio dele o usuário consegue receber notificações, alertas se o medicamento estiver acabando e é preciso comprar mais e visualizar um mapa com todas as farmácias próximas da sua localização.
 
-O aplicativo foi feito inicialmente para participar da [FETIN - Feira Tecnológica do Inatel](https://www.inatel.br/fetin/) pelos alunos [Fábio Luiz Fiorita Pontes](https://www.instagram.com/fabiofiorita/) - Engenharia de Computação e [Lucas Belino da Silva](https://www.instagram.com/lucas_b80/) - Engenharia de Software.
-
-<img src="https://raw.githubusercontent.com/FabioFiorita/meuMedicamento/gh-pages/images/Logo.jpg" width="350">
+<img src="https://raw.githubusercontent.com/FabioFiorita/meuMedicamento/gh-pages/images/Logo.png" width="350">
 
 ## Como baixar
 <a href="https://apps.apple.com/br/app/meumedicamento/id1580757092"><img src="https://raw.githubusercontent.com/FabioFiorita/meuMedicamento/gh-pages/images/appstore.png" alt="meuMedicamentoAppStore" width="350"></a>
