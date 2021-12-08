@@ -12,7 +12,7 @@ struct ContentView: View {
     @StateObject private var delegate = NotificationDelegate()
     @ObservedObject var userSettings = UserSettings()
     @StateObject private var medicationManager = MedicationManager()
-    @AppStorage("TutorialView") var isWalkthroughViewShowing = true
+    @AppStorage("OnboardingView") var isOnboardingViewShowing = true
     
     init(){
         let coloredNavAppearance = UINavigationBarAppearance()
@@ -31,8 +31,8 @@ struct ContentView: View {
     
     var body: some View {
         Group {
-            if isWalkthroughViewShowing {
-                TutorialSwiftUIView(isWalkthroughViewShowing: $isWalkthroughViewShowing)
+            if isOnboardingViewShowing {
+                OnboardingView(isOnboardingViewShowing: $isOnboardingViewShowing)
             } else {
                 TabView {
                     NavigationView {

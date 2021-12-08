@@ -7,7 +7,7 @@ struct SettingsSwiftUIView: View {
     @ObservedObject var userSettings = UserSettings()
     @State private var showModalTutorial = false
     @Environment(\.openURL) var openURL
-    @State private var isWalkthroughViewShowing = false
+    @State private var isOnboardingViewShowing = false
     @State private var limitNotification = true
     @State private var limitMedication = 20.0
     @State private var limitDate = Date()
@@ -98,14 +98,6 @@ struct SettingsSwiftUIView: View {
                     Spacer()
                     Image(systemName: "chevron.right")
                         .foregroundColor(Color.secondary)
-                }
-                Divider()
-                HStack {
-                    NavigationLink("Tutorial", destination: TutorialSwiftUIView(isWalkthroughViewShowing: $isWalkthroughViewShowing))
-                    Spacer()
-                    Image(systemName: "chevron.right")
-                        .foregroundColor(Color.secondary)
-                        .accessibilityElement(children: .ignore)
                 }
                 Divider()
                 Button(action: {

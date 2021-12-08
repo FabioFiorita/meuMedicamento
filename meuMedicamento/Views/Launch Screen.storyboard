@@ -38,7 +38,7 @@
     <resources>
         <image name="Logo SF" width="1536" height="1536"/>
         <namedColor name="main">
-            <color red="0.071000002324581146" green="0.27099999785423279" blue="0.5690000057220459" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.070588235294117646" green="0.23921568627450979" blue="0.48627450980392156" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
 </document>
