@@ -9,16 +9,18 @@ final class MedicationManager: ObservableObject {
     }
     private var notificationManager = NotificationManager()
     private var userSettings = UserSettings()
-    let container: NSPersistentContainer
+    let container: NSPersistentCloudKitContainer
     @Published var savedMedications: [Medication] = []
     
     init() {
-        container = NSPersistentContainer(name: "meuMedicamento")
+        container = NSPersistentCloudKitContainer(name: "meuMedicamento")
         container.loadPersistentStores { description, error in
             if let error = error {
                 print("ERROR LOADING CORE DATA. \(error)")
             }
         }
+        container.viewContext.automaticallyMergesChangesFromParent = true
+        container.viewContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
         fetchMedications()
     }
     
@@ -58,6 +60,7 @@ final class MedicationManager: ObservableObject {
     
     func saveData() -> medicationResult {
         var sucess: medicationResult = .sucess;
+        if container.viewContext.hasChanges {
         do {
             try container.viewContext.save()
             fetchMedications()
@@ -65,9 +68,9 @@ final class MedicationManager: ObservableObject {
             print("Error saving \(error)")
             sucess = .viewContextError
         }
+        }
         return sucess
     }
-    
     
     func addMedication(name: String, remainingQuantity: Int32, boxQuantity: Int32, date: Date, repeatPeriod: String, notes: String, notificationType: String) -> medicationResult {
         let newMedication = Medication(context: container.viewContext)

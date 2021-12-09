@@ -14,20 +14,6 @@ struct ContentView: View {
     @StateObject private var medicationManager = MedicationManager()
     @AppStorage("OnboardingView") var isOnboardingViewShowing = true
     
-    init(){
-        let coloredNavAppearance = UINavigationBarAppearance()
-        coloredNavAppearance.configureWithDefaultBackground()
-        //coloredNavAppearance.configureWithOpaqueBackground()
-        coloredNavAppearance.backgroundColor = UIColor(Color("main"))
-        coloredNavAppearance.titleTextAttributes = [.foregroundColor: UIColor(Color.white)]
-        coloredNavAppearance.largeTitleTextAttributes = [.foregroundColor: UIColor(Color.white)]
-        UINavigationBar.appearance().standardAppearance = coloredNavAppearance
-        UINavigationBar.appearance().scrollEdgeAppearance = coloredNavAppearance
-        let appearance = UITabBarAppearance()
-        appearance.configureWithDefaultBackground()
-        UITabBar.appearance().standardAppearance = appearance
-        UITabBar.appearance().scrollEdgeAppearance = appearance
-    }
     
     var body: some View {
         Group {
@@ -57,6 +43,9 @@ struct ContentView: View {
                                 }
 
                             }
+                            .refreshable {
+                                medicationManager.fetchMedications()
+                            }
                             .navigationBarTitle("Medicamentos",displayMode: .automatic)
                             .searchable(text: $searchMedication)
                             .listStyle(.insetGrouped)
@@ -65,7 +54,7 @@ struct ContentView: View {
                                     Button {
                                         self.showModalAdd = true
                                     } label: {
-                                        Image(systemName: "plus").imageScale(.large).foregroundColor(.white).accessibility(label: Text("Adicionar novo medicamento"))
+                                        Image(systemName: "plus").imageScale(.large).accessibility(label: Text("Adicionar novo medicamento"))
                                     }.sheet(isPresented: $showModalAdd, onDismiss: medicationManager.fetchMedications) {
                                         AddMedicationSwiftUIView()
                                     }
@@ -105,7 +94,6 @@ struct ContentView: View {
                         })
                         .environmentObject(medicationManager)
                     }
-                    .accentColor(.white)
                     .tabItem {
                         Image(systemName: "pills")
                         Text("Medicamentos")
@@ -121,7 +109,6 @@ struct ContentView: View {
                             Text("Ajustes")
                         }
                 }
-                .accentColor(Color("main"))
             }
         }
     }

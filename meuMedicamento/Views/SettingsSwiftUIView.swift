@@ -27,6 +27,7 @@ struct SettingsSwiftUIView: View {
                     .navigationBarTitle("Ajustes")
                 }
         }
+        .navigationViewStyle(StackNavigationViewStyle())
     }
     private var medicationAlertSettings: some View {
         GroupBox {

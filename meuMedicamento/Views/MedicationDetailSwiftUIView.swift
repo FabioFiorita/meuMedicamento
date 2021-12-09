@@ -25,7 +25,7 @@ struct MedicationDetailSwiftUIView: View {
             Button(action: {
                 self.showModal = true
             }) {
-                Text("Editar").foregroundColor(.white)
+                Text("Editar")
             }.sheet(isPresented: self.$showModal) {
                 EditMedicationSwiftUIView(medication: medication)
             }

@@ -17,7 +17,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Logo SF" translatesAutoresizingMaskIntoConstraints="NO" id="eGV-cC-ZXe">
-                                <rect key="frame" x="14" y="-346" width="362" height="1536"/>
+                                <rect key="frame" x="54.333333333333343" y="-346" width="281.33333333333326" height="1536"/>
                             </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="BmX-5R-CMz"/>
@@ -25,7 +25,7 @@
                         <constraints>
                             <constraint firstItem="eGV-cC-ZXe" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="AtY-Mc-pVL"/>
                             <constraint firstItem="eGV-cC-ZXe" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="FXk-d7-1vh"/>
-                            <constraint firstItem="eGV-cC-ZXe" firstAttribute="width" secondItem="Ze5-6b-2t3" secondAttribute="height" multiplier="3:7" id="jUs-0g-7dd"/>
+                            <constraint firstItem="eGV-cC-ZXe" firstAttribute="width" secondItem="Ze5-6b-2t3" secondAttribute="height" multiplier="3:9" id="jUs-0g-7dd"/>
                         </constraints>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout"/>

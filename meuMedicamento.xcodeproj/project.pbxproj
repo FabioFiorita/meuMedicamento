@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		C143FD5526C473A20041BCED /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C143FD5426C473A20041BCED /* Launch Screen.storyboard */; };
 		C1B6F4A527613810001AA883 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1B6F4A427613810001AA883 /* OnboardingView.swift */; };
+		C1B6F4A727614B15001AA883 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C1B6F4A627614B15001AA883 /* CloudKit.framework */; };
 		C1C675AA26FF99E200A51C4F /* EmailComposer in Frameworks */ = {isa = PBXBuildFile; productRef = C1C675A926FF99E200A51C4F /* EmailComposer */; };
 		C1C675AD26FFB00D00A51C4F /* Time in Frameworks */ = {isa = PBXBuildFile; productRef = C1C675AC26FFB00D00A51C4F /* Time */; };
 		C1D9471526C408A300A05884 /* meuMedicamentoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1D9471426C408A300A05884 /* meuMedicamentoApp.swift */; };
@@ -51,6 +52,7 @@
 		C143FD5426C473A20041BCED /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		C1815D9E26FA11ED00904906 /* meuMedicamento.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = meuMedicamento.entitlements; sourceTree = "<group>"; };
 		C1B6F4A427613810001AA883 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
+		C1B6F4A627614B15001AA883 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		C1D48ECD270F7C030054699F /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
 		C1D9471126C408A300A05884 /* meuMedicamento.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = meuMedicamento.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C1D9471426C408A300A05884 /* meuMedicamentoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = meuMedicamentoApp.swift; sourceTree = "<group>"; };
@@ -82,6 +84,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C1B6F4A727614B15001AA883 /* CloudKit.framework in Frameworks */,
 				C1C675AA26FF99E200A51C4F /* EmailComposer in Frameworks */,
 				C1C675AD26FFB00D00A51C4F /* Time in Frameworks */,
 			);
@@ -93,6 +96,7 @@
 		C1D48ECA270F7C030054699F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				C1B6F4A627614B15001AA883 /* CloudKit.framework */,
 				C1D48ECD270F7C030054699F /* SwiftUI.framework */,
 			);
 			name = Frameworks;
@@ -146,8 +150,8 @@
 				C1DE8CF426C40F53004E7754 /* MapView */,
 				C1D9471626C408A300A05884 /* ContentView.swift */,
 				C1DE8CEA26C40F4B004E7754 /* AddMedicationSwiftUIView.swift */,
-				C1B6F4A427613810001AA883 /* OnboardingView.swift */,
 				C1DE8CEC26C40F4B004E7754 /* EditMedicationSwiftUIView.swift */,
+				C1B6F4A427613810001AA883 /* OnboardingView.swift */,
 				C1DE8CEB26C40F4B004E7754 /* MapSwiftUIView.swift */,
 				C1DE8CEE26C40F4B004E7754 /* MedicationDetailSwiftUIView.swift */,
 				C1DE8CED26C40F4B004E7754 /* SettingsSwiftUIView.swift */,
@@ -424,7 +428,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = meuMedicamento/meuMedicamento.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 22;
+				CURRENT_PROJECT_VERSION = 23;
 				DEVELOPMENT_ASSET_PATHS = "\"meuMedicamento/Preview Content\"";
 				DEVELOPMENT_TEAM = 9QH8M89WF9;
 				ENABLE_PREVIEWS = YES;
@@ -434,11 +438,12 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1.3;
+				MARKETING_VERSION = 2.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.fabiofiorita.meuMedicamento;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -450,7 +455,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = meuMedicamento/meuMedicamento.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 22;
+				CURRENT_PROJECT_VERSION = 23;
 				DEVELOPMENT_ASSET_PATHS = "\"meuMedicamento/Preview Content\"";
 				DEVELOPMENT_TEAM = 9QH8M89WF9;
 				ENABLE_PREVIEWS = YES;
@@ -460,11 +465,12 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1.3;
+				MARKETING_VERSION = 2.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.fabiofiorita.meuMedicamento;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};

@@ -43,7 +43,7 @@ struct MapSwiftUIView: View {
                     Picker("Selecione", selection: $displayType) {
                         Text("Mapa").tag(DisplayType.map)
                         Text("Lista").tag(DisplayType.list)
-                    }.pickerStyle(SegmentedPickerStyle())
+                    }.pickerStyle(.segmented)
                 }.padding()
                 if displayType == .map {
                     
@@ -69,7 +69,7 @@ struct MapSwiftUIView: View {
             }
             .navigationTitle("Mapa")
         }
-        
+        .navigationViewStyle(StackNavigationViewStyle())
     }
 }
 
