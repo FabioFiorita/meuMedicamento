@@ -16,18 +16,21 @@ struct SettingsSwiftUIView: View {
     
     var body: some View {
         NavigationView {
-                ScrollView {
-                    VStack(alignment: .leading, spacing: 50.0) {
-                        medicationAlertSettings
-                        links
-                        policies
-                        Spacer()
+                ZStack {
+                    //Color(UIColor.systemGroupedBackground)
+                    ScrollView {
+                        VStack(alignment: .leading, spacing: 50.0) {
+                            medicationAlertSettings
+                            links
+                            policies
+                            Spacer()
+                        }
+                        .padding()
                     }
-                    .padding()
-                    .navigationBarTitle("Ajustes")
                 }
+                .navigationBarTitle("Ajustes")
         }
-        .navigationViewStyle(StackNavigationViewStyle())
+        .navigationViewStyle(.stack)
     }
     private var medicationAlertSettings: some View {
         GroupBox {
@@ -35,7 +38,7 @@ struct SettingsSwiftUIView: View {
                 Toggle(isOn: $limitNotification) {
                     Text("Deseja ser notificado quando estiver acabando seus remédios?")
                 }
-                    .accessibility(identifier: "Toggle")
+                .accessibility(identifier: "Toggle")
                 HStack {
                     Text("Começar a notificar quando a quantidade chegar em: ") + Text("\(Int(limitMedication))%").foregroundColor(.red).bold() + Text(" do total")
                     Spacer()
@@ -71,8 +74,9 @@ struct SettingsSwiftUIView: View {
                 self.limitNotification = self.userSettings.limitNotification
                 self.limitMedication = self.userSettings.limitMedication
                 self.limitDate = self.userSettings.limitDate
+            }
         }
-        }
+        .groupBoxStyle(PrimaryGroupBoxStyle())
     }
     
     private var links: some View {
@@ -88,11 +92,11 @@ struct SettingsSwiftUIView: View {
                         }
                     } else {
                         guard let writeReviewURL = URL(string: "https://apps.apple.com/app/id1580757092?action=write-review")
-                            else {
-                                fatalError("Expected a valid URL")
+                        else {
+                            fatalError("Expected a valid URL")
                         }
-                            UIApplication.shared.open(writeReviewURL, options: [:], completionHandler: nil)
-                            userSettings.reviewCount += 1
+                        UIApplication.shared.open(writeReviewURL, options: [:], completionHandler: nil)
+                        userSettings.reviewCount += 1
                     }
                 }) {
                     Text("Avalie!")
@@ -123,6 +127,7 @@ struct SettingsSwiftUIView: View {
                 })
             }
         }
+        .groupBoxStyle(PrimaryGroupBoxStyle())
         .foregroundColor(.primary)
     }
     
@@ -148,6 +153,7 @@ struct SettingsSwiftUIView: View {
                 })
             }
         }
+        .groupBoxStyle(PrimaryGroupBoxStyle())
         .foregroundColor(.primary)
     }
 }

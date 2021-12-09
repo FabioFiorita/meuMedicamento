@@ -98,6 +98,11 @@ struct ContentView: View {
                         Image(systemName: "pills")
                         Text("Medicamentos")
                     }.badge(medicationManager.calculateLateMedications())
+                    HistoricSwiftUIView(medicationManager: medicationManager)
+                        .tabItem {
+                            Image(systemName: "calendar")
+                            Text("Histórico")
+                        }
                     MapSwiftUIView()
                         .tabItem {
                             Image(systemName: "map")

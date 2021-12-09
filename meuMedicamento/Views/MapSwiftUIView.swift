@@ -25,51 +25,54 @@ struct MapSwiftUIView: View {
     
     var body: some View {
         NavigationView {
-            VStack {
+            ZStack {
+                Color(UIColor.systemGroupedBackground).ignoresSafeArea()
                 VStack {
-                    TextField("Buscar", text: $searchTerm, onEditingChanged: { _ in
+                    VStack {
+                        TextField("Buscar", text: $searchTerm, onEditingChanged: { _ in
+                            
+                        }, onCommit: {
+                                // get all landmarks
+                            placeListVM.searchLandmarks(searchTerm: searchTerm)
+                            
+                        }).textFieldStyle(.roundedBorder)
+                            .submitLabel(.send)
                         
-                    }, onCommit: {
-                            // get all landmarks
-                        placeListVM.searchLandmarks(searchTerm: searchTerm)
+                        LandmarkCategoryView { (category) in
+                            placeListVM.searchLandmarks(searchTerm: category)
+                        }
                         
-                    }).textFieldStyle(.roundedBorder)
-                        .submitLabel(.send)
-                    
-                    LandmarkCategoryView { (category) in
-                        placeListVM.searchLandmarks(searchTerm: category)
+                        Picker("Selecione", selection: $displayType) {
+                            Text("Mapa").tag(DisplayType.map)
+                            Text("Lista").tag(DisplayType.list)
+                        }.pickerStyle(.segmented)
+                    }.padding()
+                    if displayType == .map {
+                        
+                        Map(coordinateRegion: getRegion(), interactionModes: .all, showsUserLocation: true, userTrackingMode: $userTrackingMode, annotationItems: placeListVM.landmarks) { landmark in
+                            MapMarker(coordinate: landmark.coordinate)
+                        }
+                        .gesture(DragGesture()
+                                    .onChanged({ (value) in
+                                        isDragged = true
+                                    })
+                        )
+                        .overlay(isDragged ? AnyView(RecenterButton {
+                            placeListVM.startUpdatingLocation()
+                            isDragged = false
+                        }.padding()): AnyView(EmptyView()), alignment: .bottom)
+                        
+                        
+                        
+                    } else if displayType == .list {
+                        LandmarkListView(landmarks: placeListVM.landmarks)
                     }
                     
-                    Picker("Selecione", selection: $displayType) {
-                        Text("Mapa").tag(DisplayType.map)
-                        Text("Lista").tag(DisplayType.list)
-                    }.pickerStyle(.segmented)
-                }.padding()
-                if displayType == .map {
-                    
-                    Map(coordinateRegion: getRegion(), interactionModes: .all, showsUserLocation: true, userTrackingMode: $userTrackingMode, annotationItems: placeListVM.landmarks) { landmark in
-                        MapMarker(coordinate: landmark.coordinate)
-                    }
-                    .gesture(DragGesture()
-                                .onChanged({ (value) in
-                                    isDragged = true
-                                })
-                    )
-                    .overlay(isDragged ? AnyView(RecenterButton {
-                        placeListVM.startUpdatingLocation()
-                        isDragged = false
-                    }.padding()): AnyView(EmptyView()), alignment: .bottom)
-                    
-                    
-                    
-                } else if displayType == .list {
-                    LandmarkListView(landmarks: placeListVM.landmarks)
                 }
-                
+                .navigationTitle("Mapa")
             }
-            .navigationTitle("Mapa")
         }
-        .navigationViewStyle(StackNavigationViewStyle())
+        .navigationViewStyle(.stack)
     }
 }
 

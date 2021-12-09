@@ -8,29 +8,32 @@ struct MedicationDetailSwiftUIView: View {
     @ObservedObject var medicationManager: MedicationManager
     
     var body: some View {
-        VStack(alignment: .leading) {
-            VStack {
-                medicationInformation(forMedication: medication)
-                medicationNotes(forMedication: medication)
-                stepperHistory
-                ScrollView {
-                    ForEach(medicationManager.fetchHistoric(forMedication: medication).prefix(historicCount) , id: \.self){ historic in
-                        medicationDateHistory(forHistoric: historic)
+        ZStack {
+            Color(UIColor.systemGroupedBackground).ignoresSafeArea()
+            VStack(alignment: .leading) {
+                VStack {
+                    medicationInformation(forMedication: medication)
+                    medicationNotes(forMedication: medication)
+                    stepperHistory
+                    ScrollView {
+                        ForEach(medicationManager.fetchHistoric(forMedication: medication).prefix(historicCount) , id: \.self){ historic in
+                            medicationDateHistory(forHistoric: historic)
+                        }
                     }
-                }
-            }.padding()
-        }
-        .navigationTitle(("\(medication.name ?? "Medicamento")"))
-        .toolbar(content: {
-            Button(action: {
-                self.showModal = true
-            }) {
-                Text("Editar")
-            }.sheet(isPresented: self.$showModal) {
-                EditMedicationSwiftUIView(medication: medication)
+                }.padding()
             }
-        })
+            .navigationTitle(("\(medication.name ?? "Medicamento")"))
+            .toolbar(content: {
+                Button(action: {
+                    self.showModal = true
+                }) {
+                    Text("Editar")
+                }.sheet(isPresented: self.$showModal) {
+                    EditMedicationSwiftUIView(medication: medication)
+                }
+            })
         .environmentObject(medicationManager)
+        }
     }
     
     private func medicationInformation(forMedication medication: Medication) -> some View {
@@ -51,6 +54,7 @@ struct MedicationDetailSwiftUIView: View {
                 }
             }
         }
+        .groupBoxStyle(PrimaryGroupBoxStyle())
     }
     
     private func medicationNotes(forMedication medication: Medication) -> some View {
@@ -63,6 +67,7 @@ struct MedicationDetailSwiftUIView: View {
                             .padding()
                     }
                 }
+                .groupBoxStyle(PrimaryGroupBoxStyle())
             }
         }
     }
@@ -86,6 +91,7 @@ struct MedicationDetailSwiftUIView: View {
                 }
             }
         }
+        .groupBoxStyle(PrimaryGroupBoxStyle())
     }
     
     private var stepperHistory : some View {
@@ -98,7 +104,7 @@ struct MedicationDetailSwiftUIView: View {
                     .accessibility(identifier: "stepper")
             }.frame(minWidth: 0, maxWidth: .infinity)
         }
-        
+        .groupBoxStyle(PrimaryGroupBoxStyle())
     }
     
     private func refreshQuantity(_ medication: FetchedResults<Medication>.Element) {
