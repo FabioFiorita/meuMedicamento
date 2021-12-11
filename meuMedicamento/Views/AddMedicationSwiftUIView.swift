@@ -111,7 +111,7 @@ struct AddMedicationSwiftUIView: View {
                             dismiss()
                         }
                         
-                    }).foregroundColor(.white)
+                    })
                     .alert(isPresented: $showAlert, content: {
                         let alert = Alert(title: Text("Erro na criação do medicamento"), message: Text("Cadastre novamente"), dismissButton: Alert.Button.default(Text("OK")))
                         return alert
@@ -120,11 +120,11 @@ struct AddMedicationSwiftUIView: View {
                 ToolbarItem(placement: .navigationBarLeading) {
                     Button("Cancelar", action: {
                         dismiss()
-                    }).foregroundColor(.white)
+                    })
                 }
             })
         }
-        .accentColor(Color.white)
+        
     }
     
     private var notificationTypePicker: some View {

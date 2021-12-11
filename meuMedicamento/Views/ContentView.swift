@@ -3,6 +3,7 @@ import SwiftUI
 struct ContentView: View {
     @State private var showModalAdd = false
     @State private var showModalEdit = false
+    @State private var showModalHistory = false
     @State private var showTimeIntervalAlert = false
     @State private var showDeleteAlert = false
     @State private var showViewContextAlert = false
@@ -12,27 +13,13 @@ struct ContentView: View {
     @StateObject private var delegate = NotificationDelegate()
     @ObservedObject var userSettings = UserSettings()
     @StateObject private var medicationManager = MedicationManager()
-    @AppStorage("TutorialView") var isWalkthroughViewShowing = true
+    @AppStorage("OnboardingView") var isOnboardingViewShowing = true
     
-    init(){
-        let coloredNavAppearance = UINavigationBarAppearance()
-        coloredNavAppearance.configureWithDefaultBackground()
-        //coloredNavAppearance.configureWithOpaqueBackground()
-        coloredNavAppearance.backgroundColor = UIColor(Color("main"))
-        coloredNavAppearance.titleTextAttributes = [.foregroundColor: UIColor(Color.white)]
-        coloredNavAppearance.largeTitleTextAttributes = [.foregroundColor: UIColor(Color.white)]
-        UINavigationBar.appearance().standardAppearance = coloredNavAppearance
-        UINavigationBar.appearance().scrollEdgeAppearance = coloredNavAppearance
-        let appearance = UITabBarAppearance()
-        appearance.configureWithDefaultBackground()
-        UITabBar.appearance().standardAppearance = appearance
-        UITabBar.appearance().scrollEdgeAppearance = appearance
-    }
     
     var body: some View {
         Group {
-            if isWalkthroughViewShowing {
-                TutorialSwiftUIView(isWalkthroughViewShowing: $isWalkthroughViewShowing)
+            if isOnboardingViewShowing {
+                OnboardingView(isOnboardingViewShowing: $isOnboardingViewShowing)
             } else {
                 TabView {
                     NavigationView {
@@ -57,6 +44,9 @@ struct ContentView: View {
                                 }
 
                             }
+                            .refreshable {
+                                medicationManager.fetchMedications()
+                            }
                             .navigationBarTitle("Medicamentos",displayMode: .automatic)
                             .searchable(text: $searchMedication)
                             .listStyle(.insetGrouped)
@@ -65,7 +55,7 @@ struct ContentView: View {
                                     Button {
                                         self.showModalAdd = true
                                     } label: {
-                                        Image(systemName: "plus").imageScale(.large).foregroundColor(.white).accessibility(label: Text("Adicionar novo medicamento"))
+                                        Image(systemName: "plus").imageScale(.large).accessibility(label: Text("Adicionar novo medicamento"))
                                     }.sheet(isPresented: $showModalAdd, onDismiss: medicationManager.fetchMedications) {
                                         AddMedicationSwiftUIView()
                                     }
@@ -105,11 +95,15 @@ struct ContentView: View {
                         })
                         .environmentObject(medicationManager)
                     }
-                    .accentColor(.white)
                     .tabItem {
                         Image(systemName: "pills")
                         Text("Medicamentos")
                     }.badge(medicationManager.calculateLateMedications())
+                    HistoricSwiftUIView(medicationManager: medicationManager)
+                        .tabItem {
+                            Image(systemName: "calendar")
+                            Text("Histórico")
+                        }
                     MapSwiftUIView()
                         .tabItem {
                             Image(systemName: "map")
@@ -121,7 +115,6 @@ struct ContentView: View {
                             Text("Ajustes")
                         }
                 }
-                .accentColor(Color("main"))
             }
         }
     }
@@ -174,19 +167,43 @@ struct ContentView: View {
             NavigationLink(destination: MedicationDetailSwiftUIView(medication: medication, medicationManager: medicationManager)) {
                 row(forMedication: medication)
             }
+            .contextMenu(menuItems: {
+                Button {
+                    updateQuantity(medication: medication)
+                } label: {
+                    HStack {
+                        Image(systemName: "checkmark")
+                        Text("Tomar Medicamento")
+                    }.accessibilityElement(children: .combine)
+                }
+                Button {
+                    medicationManager.refreshRemainingQuantity(medication: medication)
+                } label: {
+                    HStack {
+                        Image(systemName: "clock.arrow.circlepath")
+                        Text("Renovar Quantidade")
+                    }.accessibilityElement(children: .combine)
+                }
+                Button {
+                    showModalHistory = true
+                } label: {
+                    HStack {
+                        Image(systemName: "calendar")
+                        Text("Ver Histórico")
+                    }.accessibilityElement(children: .combine)
+                }
+            })
+            .sheet(isPresented: $showModalHistory, onDismiss: {
+                medicationManager.fetchMedications()
+            }, content: {
+                MedicationHistoricSwiftUIView(medicationManager: medicationManager, medication: medication)
+            })
         }
         .swipeActions(edge: .trailing ,allowsFullSwipe: false) {
             Button("Apagar", role: .destructive) {
                 medicationManager.deleteMedication(medication: medication)
             }
         }
-        .swipeActions(edge: .leading, allowsFullSwipe: true) {
-            Button {
-                medicationManager.refreshRemainingQuantity(medication: medication)
-            } label: {
-                Text("Renovar Quantidade")
-            }.tint(.blue)
-    }
     }
     
     private func checkmark(forMedication medication: Medication) -> some View {

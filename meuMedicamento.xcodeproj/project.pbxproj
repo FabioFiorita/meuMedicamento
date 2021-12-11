@@ -7,7 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C12F9CDA2761900200B75831 /* HistoricSwiftUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C12F9CD92761900200B75831 /* HistoricSwiftUIView.swift */; };
 		C143FD5526C473A20041BCED /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C143FD5426C473A20041BCED /* Launch Screen.storyboard */; };
+		C167A82A27627FCF0033B87F /* GroupBoxExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C167A82927627FCF0033B87F /* GroupBoxExtension.swift */; };
+		C167A82C2762836A0033B87F /* MedicationHistoricSwiftUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C167A82B2762836A0033B87F /* MedicationHistoricSwiftUIView.swift */; };
+		C1B6F4A527613810001AA883 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1B6F4A427613810001AA883 /* OnboardingView.swift */; };
+		C1B6F4A727614B15001AA883 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C1B6F4A627614B15001AA883 /* CloudKit.framework */; };
 		C1C675AA26FF99E200A51C4F /* EmailComposer in Frameworks */ = {isa = PBXBuildFile; productRef = C1C675A926FF99E200A51C4F /* EmailComposer */; };
 		C1C675AD26FFB00D00A51C4F /* Time in Frameworks */ = {isa = PBXBuildFile; productRef = C1C675AC26FFB00D00A51C4F /* Time */; };
 		C1D9471526C408A300A05884 /* meuMedicamentoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1D9471426C408A300A05884 /* meuMedicamentoApp.swift */; };
@@ -18,7 +23,6 @@
 		C1DE8CDB26C40E7F004E7754 /* MedicationModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1DE8CD426C40E7F004E7754 /* MedicationModels.swift */; };
 		C1DE8CDC26C40E7F004E7754 /* PlaceListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1DE8CD526C40E7F004E7754 /* PlaceListViewModel.swift */; };
 		C1DE8CDD26C40E7F004E7754 /* Landmark.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1DE8CD626C40E7F004E7754 /* Landmark.swift */; };
-		C1DE8CDE26C40E7F004E7754 /* TutorialModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1DE8CD726C40E7F004E7754 /* TutorialModel.swift */; };
 		C1DE8CE026C40E7F004E7754 /* UserSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1DE8CD926C40E7F004E7754 /* UserSettings.swift */; };
 		C1DE8CE426C40ECA004E7754 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1DE8CE126C40ECA004E7754 /* LocationManager.swift */; };
 		C1DE8CE526C40ECA004E7754 /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1DE8CE226C40ECA004E7754 /* NotificationManager.swift */; };
@@ -32,12 +36,6 @@
 		C1DE8CFF26C40F53004E7754 /* RecenterButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1DE8CF526C40F53004E7754 /* RecenterButton.swift */; };
 		C1DE8D0026C40F53004E7754 /* LandmarkListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1DE8CF626C40F53004E7754 /* LandmarkListView.swift */; };
 		C1DE8D0126C40F53004E7754 /* LandmarkCategoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1DE8CF726C40F53004E7754 /* LandmarkCategoryView.swift */; };
-		C1DE8D0226C40F53004E7754 /* StartButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1DE8CF926C40F53004E7754 /* StartButtonView.swift */; };
-		C1DE8D0326C40F53004E7754 /* PageTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1DE8CFA26C40F53004E7754 /* PageTabView.swift */; };
-		C1DE8D0426C40F53004E7754 /* TutorialSwiftUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1DE8CFB26C40F53004E7754 /* TutorialSwiftUIView.swift */; };
-		C1DE8D0526C40F53004E7754 /* TabDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1DE8CFC26C40F53004E7754 /* TabDetailsView.swift */; };
-		C1DE8D0626C40F53004E7754 /* ButtonsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1DE8CFD26C40F53004E7754 /* ButtonsView.swift */; };
-		C1DE8D0726C40F53004E7754 /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1DE8CFE26C40F53004E7754 /* GradientView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -54,8 +52,13 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		C12F9CD92761900200B75831 /* HistoricSwiftUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoricSwiftUIView.swift; sourceTree = "<group>"; };
 		C143FD5426C473A20041BCED /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
+		C167A82927627FCF0033B87F /* GroupBoxExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupBoxExtension.swift; sourceTree = "<group>"; };
+		C167A82B2762836A0033B87F /* MedicationHistoricSwiftUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicationHistoricSwiftUIView.swift; sourceTree = "<group>"; };
 		C1815D9E26FA11ED00904906 /* meuMedicamento.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = meuMedicamento.entitlements; sourceTree = "<group>"; };
+		C1B6F4A427613810001AA883 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
+		C1B6F4A627614B15001AA883 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		C1D48ECD270F7C030054699F /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
 		C1D9471126C408A300A05884 /* meuMedicamento.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = meuMedicamento.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C1D9471426C408A300A05884 /* meuMedicamentoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = meuMedicamentoApp.swift; sourceTree = "<group>"; };
@@ -67,7 +70,6 @@
 		C1DE8CD426C40E7F004E7754 /* MedicationModels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MedicationModels.swift; sourceTree = "<group>"; };
 		C1DE8CD526C40E7F004E7754 /* PlaceListViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaceListViewModel.swift; sourceTree = "<group>"; };
 		C1DE8CD626C40E7F004E7754 /* Landmark.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Landmark.swift; sourceTree = "<group>"; };
-		C1DE8CD726C40E7F004E7754 /* TutorialModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TutorialModel.swift; sourceTree = "<group>"; };
 		C1DE8CD926C40E7F004E7754 /* UserSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserSettings.swift; sourceTree = "<group>"; };
 		C1DE8CE126C40ECA004E7754 /* LocationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		C1DE8CE226C40ECA004E7754 /* NotificationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
@@ -81,12 +83,6 @@
 		C1DE8CF526C40F53004E7754 /* RecenterButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecenterButton.swift; sourceTree = "<group>"; };
 		C1DE8CF626C40F53004E7754 /* LandmarkListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LandmarkListView.swift; sourceTree = "<group>"; };
 		C1DE8CF726C40F53004E7754 /* LandmarkCategoryView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LandmarkCategoryView.swift; sourceTree = "<group>"; };
-		C1DE8CF926C40F53004E7754 /* StartButtonView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StartButtonView.swift; sourceTree = "<group>"; };
-		C1DE8CFA26C40F53004E7754 /* PageTabView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageTabView.swift; sourceTree = "<group>"; };
-		C1DE8CFB26C40F53004E7754 /* TutorialSwiftUIView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TutorialSwiftUIView.swift; sourceTree = "<group>"; };
-		C1DE8CFC26C40F53004E7754 /* TabDetailsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabDetailsView.swift; sourceTree = "<group>"; };
-		C1DE8CFD26C40F53004E7754 /* ButtonsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonsView.swift; sourceTree = "<group>"; };
-		C1DE8CFE26C40F53004E7754 /* GradientView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,6 +90,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C1B6F4A727614B15001AA883 /* CloudKit.framework in Frameworks */,
 				C1C675AA26FF99E200A51C4F /* EmailComposer in Frameworks */,
 				C1C675AD26FFB00D00A51C4F /* Time in Frameworks */,
 			);
@@ -105,6 +102,7 @@
 		C1D48ECA270F7C030054699F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				C1B6F4A627614B15001AA883 /* CloudKit.framework */,
 				C1D48ECD270F7C030054699F /* SwiftUI.framework */,
 			);
 			name = Frameworks;
@@ -156,13 +154,14 @@
 			isa = PBXGroup;
 			children = (
 				C1DE8CF426C40F53004E7754 /* MapView */,
-				C1DE8CF826C40F53004E7754 /* TutorialView */,
 				C1D9471626C408A300A05884 /* ContentView.swift */,
+				C12F9CD92761900200B75831 /* HistoricSwiftUIView.swift */,
+				C167A82B2762836A0033B87F /* MedicationHistoricSwiftUIView.swift */,
+				C1DE8CEE26C40F4B004E7754 /* MedicationDetailSwiftUIView.swift */,
 				C1DE8CEA26C40F4B004E7754 /* AddMedicationSwiftUIView.swift */,
 				C1DE8CEC26C40F4B004E7754 /* EditMedicationSwiftUIView.swift */,
-				C1DE8CEB26C40F4B004E7754 /* MapSwiftUIView.swift */,
-				C1DE8CEE26C40F4B004E7754 /* MedicationDetailSwiftUIView.swift */,
 				C1DE8CED26C40F4B004E7754 /* SettingsSwiftUIView.swift */,
+				C1B6F4A427613810001AA883 /* OnboardingView.swift */,
 				C143FD5426C473A20041BCED /* Launch Screen.storyboard */,
 			);
 			path = Views;
@@ -184,7 +183,6 @@
 				C1DE8CD626C40E7F004E7754 /* Landmark.swift */,
 				C1DE8CD426C40E7F004E7754 /* MedicationModels.swift */,
 				C1DE8CD526C40E7F004E7754 /* PlaceListViewModel.swift */,
-				C1DE8CD726C40E7F004E7754 /* TutorialModel.swift */,
 				C1DE8CD926C40E7F004E7754 /* UserSettings.swift */,
 			);
 			path = Models;
@@ -194,6 +192,7 @@
 			isa = PBXGroup;
 			children = (
 				C1DE8CE826C40F06004E7754 /* MKCoordinateRegion+Extensions.swift */,
+				C167A82927627FCF0033B87F /* GroupBoxExtension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -201,24 +200,12 @@
 		C1DE8CF426C40F53004E7754 /* MapView */ = {
 			isa = PBXGroup;
 			children = (
+				C1DE8CEB26C40F4B004E7754 /* MapSwiftUIView.swift */,
 				C1DE8CF526C40F53004E7754 /* RecenterButton.swift */,
 				C1DE8CF626C40F53004E7754 /* LandmarkListView.swift */,
 				C1DE8CF726C40F53004E7754 /* LandmarkCategoryView.swift */,
 			);
 			path = MapView;
-			sourceTree = "<group>";
-		};
-		C1DE8CF826C40F53004E7754 /* TutorialView */ = {
-			isa = PBXGroup;
-			children = (
-				C1DE8CF926C40F53004E7754 /* StartButtonView.swift */,
-				C1DE8CFA26C40F53004E7754 /* PageTabView.swift */,
-				C1DE8CFB26C40F53004E7754 /* TutorialSwiftUIView.swift */,
-				C1DE8CFC26C40F53004E7754 /* TabDetailsView.swift */,
-				C1DE8CFD26C40F53004E7754 /* ButtonsView.swift */,
-				C1DE8CFE26C40F53004E7754 /* GradientView.swift */,
-			);
-			path = TutorialView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -301,25 +288,22 @@
 			buildActionMask = 2147483647;
 			files = (
 				C1DE8CDD26C40E7F004E7754 /* Landmark.swift in Sources */,
+				C12F9CDA2761900200B75831 /* HistoricSwiftUIView.swift in Sources */,
 				C1DE8CEF26C40F4B004E7754 /* AddMedicationSwiftUIView.swift in Sources */,
 				C1DE8CDB26C40E7F004E7754 /* MedicationModels.swift in Sources */,
 				C1DE8CF026C40F4B004E7754 /* MapSwiftUIView.swift in Sources */,
 				C1D9471726C408A300A05884 /* ContentView.swift in Sources */,
 				C1DE8CE426C40ECA004E7754 /* LocationManager.swift in Sources */,
 				C1DE8D0126C40F53004E7754 /* LandmarkCategoryView.swift in Sources */,
-				C1DE8D0426C40F53004E7754 /* TutorialSwiftUIView.swift in Sources */,
-				C1DE8D0226C40F53004E7754 /* StartButtonView.swift in Sources */,
 				C1DE8CE026C40E7F004E7754 /* UserSettings.swift in Sources */,
 				C1DE8CF226C40F4B004E7754 /* SettingsSwiftUIView.swift in Sources */,
 				C1DE8CF326C40F4B004E7754 /* MedicationDetailSwiftUIView.swift in Sources */,
-				C1DE8D0326C40F53004E7754 /* PageTabView.swift in Sources */,
-				C1DE8CDE26C40E7F004E7754 /* TutorialModel.swift in Sources */,
+				C167A82C2762836A0033B87F /* MedicationHistoricSwiftUIView.swift in Sources */,
+				C1B6F4A527613810001AA883 /* OnboardingView.swift in Sources */,
 				C1DE8CE526C40ECA004E7754 /* NotificationManager.swift in Sources */,
-				C1DE8D0626C40F53004E7754 /* ButtonsView.swift in Sources */,
 				C1DE8CE926C40F06004E7754 /* MKCoordinateRegion+Extensions.swift in Sources */,
 				C1DE8CDC26C40E7F004E7754 /* PlaceListViewModel.swift in Sources */,
-				C1DE8D0726C40F53004E7754 /* GradientView.swift in Sources */,
-				C1DE8D0526C40F53004E7754 /* TabDetailsView.swift in Sources */,
+				C167A82A27627FCF0033B87F /* GroupBoxExtension.swift in Sources */,
 				C1DE8CFF26C40F53004E7754 /* RecenterButton.swift in Sources */,
 				C1DE8CE626C40ECA004E7754 /* MedicationManager.swift in Sources */,
 				C1DE8CC126C4093C004E7754 /* meuMedicamento.xcdatamodeld in Sources */,
@@ -456,7 +440,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = meuMedicamento/meuMedicamento.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 22;
+				CURRENT_PROJECT_VERSION = 24;
 				DEVELOPMENT_ASSET_PATHS = "\"meuMedicamento/Preview Content\"";
 				DEVELOPMENT_TEAM = 9QH8M89WF9;
 				ENABLE_PREVIEWS = YES;
@@ -466,11 +450,12 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1.3;
+				MARKETING_VERSION = 2.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.fabiofiorita.meuMedicamento;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -482,7 +467,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = meuMedicamento/meuMedicamento.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 22;
+				CURRENT_PROJECT_VERSION = 24;
 				DEVELOPMENT_ASSET_PATHS = "\"meuMedicamento/Preview Content\"";
 				DEVELOPMENT_TEAM = 9QH8M89WF9;
 				ENABLE_PREVIEWS = YES;
@@ -492,11 +477,12 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1.3;
+				MARKETING_VERSION = 2.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.fabiofiorita.meuMedicamento;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};

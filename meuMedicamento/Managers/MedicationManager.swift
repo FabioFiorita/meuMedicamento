@@ -7,18 +7,37 @@ final class MedicationManager: ObservableObject {
         case today
         case next
     }
+    
+    enum historicStatus {
+        case inTime
+        case late
+        case missed
+    }
+    
+    enum historicType {
+        case all
+        case all7Days
+        case all30Days
+        case medication
+        case medication7Days
+        case medication30Days
+    }
+    
     private var notificationManager = NotificationManager()
     private var userSettings = UserSettings()
-    let container: NSPersistentContainer
+    let container: NSPersistentCloudKitContainer
     @Published var savedMedications: [Medication] = []
+    @Published var savedHistoric: [Historic] = []
     
     init() {
-        container = NSPersistentContainer(name: "meuMedicamento")
+        container = NSPersistentCloudKitContainer(name: "meuMedicamento")
         container.loadPersistentStores { description, error in
             if let error = error {
                 print("ERROR LOADING CORE DATA. \(error)")
             }
         }
+        container.viewContext.automaticallyMergesChangesFromParent = true
+        container.viewContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
         fetchMedications()
     }
     
@@ -30,6 +49,110 @@ final class MedicationManager: ObservableObject {
             savedMedications = try container.viewContext.fetch(request)
         } catch {
             print("Error fetching \(error)")
+        }
+    }
+    
+    
+    func fetchHistoric (forStatus status: historicStatus, forType type: historicType, medication: Medication? = nil) -> Int {
+        let request = NSFetchRequest<Historic>(entityName: "Historic")
+        do {
+            savedHistoric = try container.viewContext.fetch(request)
+        } catch {
+            print("Error fetching \(error)")
+        }
+        let sevenDays = 7.days.inSeconds.value * -1
+        let thirtyDays = 30.days.inSeconds.value  * -1
+        switch status {
+        case .inTime:
+            switch type {
+            case .all:
+                let inTime = savedHistoric.filter({$0.medicationStatus == "Sem Atraso"}).count
+                return inTime
+            case .all7Days:
+                let inTime = savedHistoric.filter({$0.medicationStatus == "Sem Atraso" && $0.dates?.timeIntervalSinceNow ?? 0 >= sevenDays}).count
+                return inTime
+            case .all30Days:
+                let inTime = savedHistoric.filter({$0.medicationStatus == "Sem Atraso" && $0.dates?.timeIntervalSinceNow ?? 0 >= thirtyDays}).count
+                return inTime
+            case .medication:
+                guard let medication = medication else {
+                    return 0
+                }
+                let inTime = savedHistoric.filter({$0.medicationStatus == "Sem Atraso" && $0.medication == medication}).count
+                return inTime
+            case .medication7Days:
+                guard let medication = medication else {
+                    return 0
+                }
+                let inTime = savedHistoric.filter({$0.medicationStatus == "Sem Atraso" && $0.dates?.timeIntervalSinceNow ?? 0 >= sevenDays && $0.medication == medication}).count
+                return inTime
+            case .medication30Days:
+                guard let medication = medication else {
+                    return 0
+                }
+                let inTime = savedHistoric.filter({$0.medicationStatus == "Sem Atraso" && $0.dates?.timeIntervalSinceNow ?? 0 >= thirtyDays && $0.medication == medication}).count
+                return inTime
+            }
+        case .late:
+            switch type {
+            case .all:
+                let late = savedHistoric.filter({$0.medicationStatus == "Atrasado"}).count
+                return late
+            case .all7Days:
+                let late = savedHistoric.filter({$0.medicationStatus == "Atrasado" && $0.dates?.timeIntervalSinceNow ?? 0 >= sevenDays}).count
+                return late
+            case .all30Days:
+                let late = savedHistoric.filter({$0.medicationStatus == "Atrasado" && $0.dates?.timeIntervalSinceNow ?? 0 >= thirtyDays}).count
+                return late
+            case .medication:
+                guard let medication = medication else {
+                    return 0
+                }
+                let late = savedHistoric.filter({$0.medicationStatus == "Atrasado" && $0.medication == medication}).count
+                return late
+            case .medication7Days:
+                guard let medication = medication else {
+                    return 0
+                }
+                let late = savedHistoric.filter({$0.medicationStatus == "Atrasado" && $0.dates?.timeIntervalSinceNow ?? 0 >= sevenDays && $0.medication == medication}).count
+                return late
+            case .medication30Days:
+                guard let medication = medication else {
+                    return 0
+                }
+                let late = savedHistoric.filter({$0.medicationStatus == "Atrasado" && $0.dates?.timeIntervalSinceNow ?? 0 >= thirtyDays && $0.medication == medication}).count
+                return late
+            }
+        case .missed:
+            switch type {
+            case .all:
+                let missed = savedHistoric.filter({$0.medicationStatus == "Não tomou"}).count
+                return missed
+            case .all7Days:
+                let missed = savedHistoric.filter({$0.medicationStatus == "Não tomou" && $0.dates?.timeIntervalSinceNow ?? 0 >= sevenDays}).count
+                return missed
+            case .all30Days:
+                let missed = savedHistoric.filter({$0.medicationStatus == "Não tomou" && $0.dates?.timeIntervalSinceNow ?? 0 >= thirtyDays}).count
+                return missed
+            case .medication:
+                guard let medication = medication else {
+                    return 0
+                }
+                let missed = savedHistoric.filter({$0.medicationStatus == "Não tomou" && $0.medication == medication}).count
+                return missed
+            case .medication7Days:
+                guard let medication = medication else {
+                    return 0
+                }
+                let missed = savedHistoric.filter({$0.medicationStatus == "Não tomou" && $0.dates?.timeIntervalSinceNow ?? 0 >= sevenDays && $0.medication == medication}).count
+                return missed
+            case .medication30Days:
+                guard let medication = medication else {
+                    return 0
+                }
+                let missed = savedHistoric.filter({$0.medicationStatus == "Não tomou" && $0.dates?.timeIntervalSinceNow ?? 0 >= thirtyDays && $0.medication == medication}).count
+                return missed
+            }
         }
     }
     
@@ -58,6 +181,7 @@ final class MedicationManager: ObservableObject {
     
     func saveData() -> medicationResult {
         var sucess: medicationResult = .sucess;
+        if container.viewContext.hasChanges {
         do {
             try container.viewContext.save()
             fetchMedications()
@@ -65,9 +189,9 @@ final class MedicationManager: ObservableObject {
             print("Error saving \(error)")
             sucess = .viewContextError
         }
+        }
         return sucess
     }
-    
     
     func addMedication(name: String, remainingQuantity: Int32, boxQuantity: Int32, date: Date, repeatPeriod: String, notes: String, notificationType: String) -> medicationResult {
         let newMedication = Medication(context: container.viewContext)
@@ -195,6 +319,17 @@ final class MedicationManager: ObservableObject {
             deleteMedication(medication: medication)
         }
         return situation
+    }
+    
+    func nextDates(forMedication medication: Medication) -> [Date] {
+        guard let date = medication.date else {
+            return []
+        }
+        let date1 = Date(timeInterval: medication.repeatSeconds, since: date)
+        let date2 = Date(timeInterval: medication.repeatSeconds, since: date1)
+        let date3 = Date(timeInterval: medication.repeatSeconds, since: date2)
+        let dates = [date1,date2,date3]
+        return dates
     }
     
     func rescheduleNotification(forMedication medication: Medication, forHistoric historic: Historic) {
