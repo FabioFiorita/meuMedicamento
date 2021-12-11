@@ -3,6 +3,7 @@ import SwiftUI
 struct ContentView: View {
     @State private var showModalAdd = false
     @State private var showModalEdit = false
+    @State private var showModalHistory = false
     @State private var showTimeIntervalAlert = false
     @State private var showDeleteAlert = false
     @State private var showViewContextAlert = false
@@ -166,19 +167,43 @@ struct ContentView: View {
             NavigationLink(destination: MedicationDetailSwiftUIView(medication: medication, medicationManager: medicationManager)) {
                 row(forMedication: medication)
             }
+            .contextMenu(menuItems: {
+                Button {
+                    updateQuantity(medication: medication)
+                } label: {
+                    HStack {
+                        Image(systemName: "checkmark")
+                        Text("Tomar Medicamento")
+                    }.accessibilityElement(children: .combine)
+                }
+                Button {
+                    medicationManager.refreshRemainingQuantity(medication: medication)
+                } label: {
+                    HStack {
+                        Image(systemName: "clock.arrow.circlepath")
+                        Text("Renovar Quantidade")
+                    }.accessibilityElement(children: .combine)
+                }
+                Button {
+                    showModalHistory = true
+                } label: {
+                    HStack {
+                        Image(systemName: "calendar")
+                        Text("Ver Histórico")
+                    }.accessibilityElement(children: .combine)
+                }
+            })
+            .sheet(isPresented: $showModalHistory, onDismiss: {
+                medicationManager.fetchMedications()
+            }, content: {
+                MedicationHistoricSwiftUIView(medicationManager: medicationManager, medication: medication)
+            })
         }
         .swipeActions(edge: .trailing ,allowsFullSwipe: false) {
             Button("Apagar", role: .destructive) {
                 medicationManager.deleteMedication(medication: medication)
             }
         }
-        .swipeActions(edge: .leading, allowsFullSwipe: true) {
-            Button {
-                medicationManager.refreshRemainingQuantity(medication: medication)
-            } label: {
-                Text("Renovar Quantidade")
-            }.tint(.blue)
-    }
     }
     
     private func checkmark(forMedication medication: Medication) -> some View {
