@@ -6,21 +6,21 @@ struct MedicationDetailSwiftUIView: View {
     @StateObject var medication: Medication
     @State private var historicCount = 7
     @ObservedObject var medicationManager: MedicationManager
+    @State private var dates: [Date] = []
     
     var body: some View {
         ZStack {
             Color(UIColor.systemGroupedBackground).ignoresSafeArea()
             VStack(alignment: .leading) {
                 VStack {
+                    medicationNextDates(forMedication: medication)
                     medicationInformation(forMedication: medication)
                     medicationNotes(forMedication: medication)
-                    stepperHistory
-                    ScrollView {
-                        ForEach(medicationManager.fetchHistoric(forMedication: medication).prefix(historicCount) , id: \.self){ historic in
-                            medicationDateHistory(forHistoric: historic)
-                        }
-                    }
+                    Spacer()
                 }.padding()
+            }
+            .onAppear {
+                dates = medicationManager.nextDates(forMedication: medication)
             }
             .navigationTitle(("\(medication.name ?? "Medicamento")"))
             .toolbar(content: {
@@ -38,11 +38,20 @@ struct MedicationDetailSwiftUIView: View {
     
     private func medicationInformation(forMedication medication: Medication) -> some View {
         GroupBox {
-            VStack(alignment: .leading, spacing: 5.0) {
-                Text("Medicamentos restantes: \(medication.remainingQuantity)")
-                Text("Quantidade de medicamentos na caixa: \(medication.boxQuantity)")
+            VStack(alignment: .leading, spacing: 10.0) {
+                HStack {
+                    Image(systemName: "clock.arrow.circlepath")
+                        .foregroundColor(Color("main"))
+                        .font(.title)
+                    Text("Quantidade")
+                        .foregroundColor(Color("main"))
+                        .font(.title3)
+                        .bold()
+                }.accessibilityElement(children: .combine)
+                Text("Quantidade restantes: \(medication.remainingQuantity)")
+                Text("Quantidade na caixa: \(medication.boxQuantity)")
                 Button(action: {
-                    refreshQuantity(medication)
+                    medicationManager.refreshRemainingQuantity(medication: medication)
                     dismiss()
                 }) {
                     Text("Renovar Medicamentos")
@@ -59,59 +68,45 @@ struct MedicationDetailSwiftUIView: View {
     
     private func medicationNotes(forMedication medication: Medication) -> some View {
         Group {
-            if medication.notes != "" {
                 GroupBox {
-                    VStack(alignment: .leading, spacing: 5.0){
-                        Text("Notas").font(.title2)
+                    VStack(alignment: .leading, spacing: 10.0){
+                        HStack {
+                            Image(systemName: "note.text")
+                                .foregroundColor(Color("main"))
+                                .font(.title)
+                            Text("Notas")
+                                .foregroundColor(Color("main"))
+                                .font(.title3)
+                                .bold()
+                        }.accessibilityElement(children: .combine)
                         Text("\(medication.notes ?? "")").frame(minWidth: 0, maxWidth: .infinity, alignment: .topLeading)
                             .padding()
                     }
                 }
                 .groupBoxStyle(PrimaryGroupBoxStyle())
-            }
         }
     }
     
-    private func medicationDateHistory(forHistoric historic: Historic) -> some View {
+    private func medicationNextDates(forMedication medication: Medication) -> some View {
         GroupBox {
-            HStack {
-                Text("\(historic.dates ?? Date(),formatter: itemFormatter)" )
-                Spacer()
-                Group {
-                    switch historic.medicationStatus {
-                    case "Sem Atraso":
-                        Image(systemName: "checkmark.circle.fill").foregroundColor(.green).accessibility(label: Text("Sem atraso"))
-                    case "Atrasado":
-                        Image(systemName: "clock.fill").foregroundColor(.yellow).accessibility(label: Text("Atrasado"))
-                    case "Não tomou":
-                        Image(systemName: "xmark.circle.fill").foregroundColor(.red).accessibility(label: Text("Não tomou"))
-                    default:
-                        Image(systemName: "questionmark").foregroundColor(.red).accessibility(label: Text("Situação não encontrada"))
+            VStack(alignment: .leading, spacing: 10) {
+                HStack {
+                    Image(systemName: "calendar.circle.fill")
+                        .foregroundColor(Color("main"))
+                        .font(.title)
+                    Text("Próximos Medicamentos")
+                        .foregroundColor(Color("main"))
+                        .font(.title3)
+                        .bold()
+                    Spacer()
+                }.accessibilityElement(children: .combine)
+                ForEach(dates, id: \.self){ date in
+                        Text("\(date, formatter: itemFormatter)")
                     }
-                }
             }
+            .frame(minWidth: 0, maxWidth: .infinity)
         }
         .groupBoxStyle(PrimaryGroupBoxStyle())
-    }
-    
-    private var stepperHistory : some View {
-        GroupBox {
-            HStack {
-                Text("Histórico dos últimos ") + Text("\(historicCount)").bold().foregroundColor(.orange) + Text(" medicamentos")
-                Spacer()
-                Stepper("Quantidade no Histórico", value: $historicCount, in: 0...31)
-                    .labelsHidden()
-                    .accessibility(identifier: "stepper")
-            }.frame(minWidth: 0, maxWidth: .infinity)
-        }
-        .groupBoxStyle(PrimaryGroupBoxStyle())
-    }
-    
-    private func refreshQuantity(_ medication: FetchedResults<Medication>.Element) {
-        withAnimation {
-            
-            medicationManager.refreshRemainingQuantity(medication: medication)
-        }
     }
     
 }

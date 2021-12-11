@@ -321,6 +321,17 @@ final class MedicationManager: ObservableObject {
         return situation
     }
     
+    func nextDates(forMedication medication: Medication) -> [Date] {
+        guard let date = medication.date else {
+            return []
+        }
+        let date1 = Date(timeInterval: medication.repeatSeconds, since: date)
+        let date2 = Date(timeInterval: medication.repeatSeconds, since: date1)
+        let date3 = Date(timeInterval: medication.repeatSeconds, since: date2)
+        let dates = [date1,date2,date3]
+        return dates
+    }
+    
     func rescheduleNotification(forMedication medication: Medication, forHistoric historic: Historic) {
         medicationStatus(forMedication: medication, forHistoric: historic)
         if medication.notificationType == "Regularmente" {
