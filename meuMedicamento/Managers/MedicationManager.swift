@@ -69,10 +69,10 @@ final class MedicationManager: ObservableObject {
                 let inTime = savedHistoric.filter({$0.medicationStatus == "Sem Atraso"}).count
                 return inTime
             case .all7Days:
-                let inTime = savedHistoric.filter({$0.medicationStatus == "Sem Atraso" && $0.dates?.timeIntervalSinceNow ?? 0 <= sevenDays}).count
+                let inTime = savedHistoric.filter({$0.medicationStatus == "Sem Atraso" && $0.dates?.timeIntervalSinceNow ?? 0 >= sevenDays}).count
                 return inTime
             case .all30Days:
-                let inTime = savedHistoric.filter({$0.medicationStatus == "Sem Atraso" && $0.dates?.timeIntervalSinceNow ?? 0 <= thirtyDays}).count
+                let inTime = savedHistoric.filter({$0.medicationStatus == "Sem Atraso" && $0.dates?.timeIntervalSinceNow ?? 0 >= thirtyDays}).count
                 return inTime
             case .medication:
                 guard let medication = medication else {
@@ -84,13 +84,13 @@ final class MedicationManager: ObservableObject {
                 guard let medication = medication else {
                     return 0
                 }
-                let inTime = savedHistoric.filter({$0.medicationStatus == "Sem Atraso" && $0.dates?.timeIntervalSinceNow ?? 0 <= sevenDays && $0.medication == medication}).count
+                let inTime = savedHistoric.filter({$0.medicationStatus == "Sem Atraso" && $0.dates?.timeIntervalSinceNow ?? 0 >= sevenDays && $0.medication == medication}).count
                 return inTime
             case .medication30Days:
                 guard let medication = medication else {
                     return 0
                 }
-                let inTime = savedHistoric.filter({$0.medicationStatus == "Sem Atraso" && $0.dates?.timeIntervalSinceNow ?? 0 <= thirtyDays && $0.medication == medication}).count
+                let inTime = savedHistoric.filter({$0.medicationStatus == "Sem Atraso" && $0.dates?.timeIntervalSinceNow ?? 0 >= thirtyDays && $0.medication == medication}).count
                 return inTime
             }
         case .late:
@@ -99,10 +99,10 @@ final class MedicationManager: ObservableObject {
                 let late = savedHistoric.filter({$0.medicationStatus == "Atrasado"}).count
                 return late
             case .all7Days:
-                let late = savedHistoric.filter({$0.medicationStatus == "Atrasado" && $0.dates?.timeIntervalSinceNow ?? 0 <= sevenDays}).count
+                let late = savedHistoric.filter({$0.medicationStatus == "Atrasado" && $0.dates?.timeIntervalSinceNow ?? 0 >= sevenDays}).count
                 return late
             case .all30Days:
-                let late = savedHistoric.filter({$0.medicationStatus == "Atrasado" && $0.dates?.timeIntervalSinceNow ?? 0 <= thirtyDays}).count
+                let late = savedHistoric.filter({$0.medicationStatus == "Atrasado" && $0.dates?.timeIntervalSinceNow ?? 0 >= thirtyDays}).count
                 return late
             case .medication:
                 guard let medication = medication else {
@@ -114,13 +114,13 @@ final class MedicationManager: ObservableObject {
                 guard let medication = medication else {
                     return 0
                 }
-                let late = savedHistoric.filter({$0.medicationStatus == "Atrasado" && $0.dates?.timeIntervalSinceNow ?? 0 <= sevenDays && $0.medication == medication}).count
+                let late = savedHistoric.filter({$0.medicationStatus == "Atrasado" && $0.dates?.timeIntervalSinceNow ?? 0 >= sevenDays && $0.medication == medication}).count
                 return late
             case .medication30Days:
                 guard let medication = medication else {
                     return 0
                 }
-                let late = savedHistoric.filter({$0.medicationStatus == "Atrasado" && $0.dates?.timeIntervalSinceNow ?? 0 <= thirtyDays && $0.medication == medication}).count
+                let late = savedHistoric.filter({$0.medicationStatus == "Atrasado" && $0.dates?.timeIntervalSinceNow ?? 0 >= thirtyDays && $0.medication == medication}).count
                 return late
             }
         case .missed:
@@ -129,10 +129,10 @@ final class MedicationManager: ObservableObject {
                 let missed = savedHistoric.filter({$0.medicationStatus == "Não tomou"}).count
                 return missed
             case .all7Days:
-                let missed = savedHistoric.filter({$0.medicationStatus == "Não tomou" && $0.dates?.timeIntervalSinceNow ?? 0 <= sevenDays}).count
+                let missed = savedHistoric.filter({$0.medicationStatus == "Não tomou" && $0.dates?.timeIntervalSinceNow ?? 0 >= sevenDays}).count
                 return missed
             case .all30Days:
-                let missed = savedHistoric.filter({$0.medicationStatus == "Não tomou" && $0.dates?.timeIntervalSinceNow ?? 0 <= thirtyDays}).count
+                let missed = savedHistoric.filter({$0.medicationStatus == "Não tomou" && $0.dates?.timeIntervalSinceNow ?? 0 >= thirtyDays}).count
                 return missed
             case .medication:
                 guard let medication = medication else {
@@ -144,13 +144,13 @@ final class MedicationManager: ObservableObject {
                 guard let medication = medication else {
                     return 0
                 }
-                let missed = savedHistoric.filter({$0.medicationStatus == "Não tomou" && $0.dates?.timeIntervalSinceNow ?? 0 <= sevenDays && $0.medication == medication}).count
+                let missed = savedHistoric.filter({$0.medicationStatus == "Não tomou" && $0.dates?.timeIntervalSinceNow ?? 0 >= sevenDays && $0.medication == medication}).count
                 return missed
             case .medication30Days:
                 guard let medication = medication else {
                     return 0
                 }
-                let missed = savedHistoric.filter({$0.medicationStatus == "Não tomou" && $0.dates?.timeIntervalSinceNow ?? 0 <= thirtyDays && $0.medication == medication}).count
+                let missed = savedHistoric.filter({$0.medicationStatus == "Não tomou" && $0.dates?.timeIntervalSinceNow ?? 0 >= thirtyDays && $0.medication == medication}).count
                 return missed
             }
         }

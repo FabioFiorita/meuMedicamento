@@ -160,7 +160,6 @@
 				C1DE8CEE26C40F4B004E7754 /* MedicationDetailSwiftUIView.swift */,
 				C1DE8CEA26C40F4B004E7754 /* AddMedicationSwiftUIView.swift */,
 				C1DE8CEC26C40F4B004E7754 /* EditMedicationSwiftUIView.swift */,
-				C1DE8CEB26C40F4B004E7754 /* MapSwiftUIView.swift */,
 				C1DE8CED26C40F4B004E7754 /* SettingsSwiftUIView.swift */,
 				C1B6F4A427613810001AA883 /* OnboardingView.swift */,
 				C143FD5426C473A20041BCED /* Launch Screen.storyboard */,
@@ -201,6 +200,7 @@
 		C1DE8CF426C40F53004E7754 /* MapView */ = {
 			isa = PBXGroup;
 			children = (
+				C1DE8CEB26C40F4B004E7754 /* MapSwiftUIView.swift */,
 				C1DE8CF526C40F53004E7754 /* RecenterButton.swift */,
 				C1DE8CF626C40F53004E7754 /* LandmarkListView.swift */,
 				C1DE8CF726C40F53004E7754 /* LandmarkCategoryView.swift */,

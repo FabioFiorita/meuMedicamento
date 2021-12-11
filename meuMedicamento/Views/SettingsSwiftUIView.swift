@@ -17,16 +17,19 @@ struct SettingsSwiftUIView: View {
     var body: some View {
         NavigationView {
                 ZStack {
-                    //Color(UIColor.systemGroupedBackground)
-                    ScrollView {
-                        VStack(alignment: .leading, spacing: 50.0) {
-                            medicationAlertSettings
-                            links
-                            policies
-                            Spacer()
+                    Color(UIColor.systemGroupedBackground)
+                        .ignoresSafeArea()
+                    VStack(alignment: .leading, spacing: 50.0) {
+                        medicationAlertSettings
+                        ScrollView {
+                            VStack(alignment: .leading, spacing: 50.0) {
+                                links
+                                policies
+                                Spacer()
+                            }
                         }
-                        .padding()
                     }
+                    .padding()
                 }
                 .navigationBarTitle("Ajustes")
         }

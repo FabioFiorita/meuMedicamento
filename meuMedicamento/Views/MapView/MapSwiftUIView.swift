@@ -30,14 +30,13 @@ struct MapSwiftUIView: View {
                 VStack {
                     VStack {
                         TextField("Buscar", text: $searchTerm, onEditingChanged: { _ in
-                            
                         }, onCommit: {
                                 // get all landmarks
                             placeListVM.searchLandmarks(searchTerm: searchTerm)
                             
-                        }).textFieldStyle(.roundedBorder)
+                        })
+                            .textFieldStyle(.roundedBorder)
                             .submitLabel(.send)
-                        
                         LandmarkCategoryView { (category) in
                             placeListVM.searchLandmarks(searchTerm: category)
                         }

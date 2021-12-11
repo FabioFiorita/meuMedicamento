@@ -27,8 +27,10 @@ struct HistoricSwiftUIView: View {
                     VStack {
                         GroupBox {
                             VStack {
-                                Text("Total").font(.title3)
-                                HStack(alignment: .center, spacing: 80) {
+                                Text("Total")
+                                    .font(.largeTitle)
+                                    .bold()
+                                HStack(alignment: .center) {
                                     historicGroupBox()
                                 }
                                 .frame(minWidth: 0, maxWidth: .infinity)
@@ -94,6 +96,8 @@ struct HistoricSwiftUIView: View {
     private func historicGroupBox() -> some View {
         Group {
             VStack(alignment: .center, spacing: 10) {
+                Text("No Horário")
+                    .font(.title3)
                 Image(systemName: "checkmark.circle.fill")
                     .foregroundColor(.green)
                     .accessibility(label: Text("Sem atraso"))
@@ -102,6 +106,8 @@ struct HistoricSwiftUIView: View {
                     .font(.largeTitle)
             }
             VStack(alignment: .center, spacing: 10) {
+                Text("Atrasado")
+                    .font(.title3)
                 Image(systemName: "clock.fill")
                     .foregroundColor(.yellow)
                     .accessibility(label: Text("Atrasado"))
@@ -110,6 +116,8 @@ struct HistoricSwiftUIView: View {
                     .font(.largeTitle)
             }
             VStack(alignment: .center, spacing: 10) {
+                Text("Não tomou")
+                    .font(.title3)
                 Image(systemName: "xmark.circle.fill")
                     .foregroundColor(.red)
                     .accessibility(label: Text("Não tomou"))
