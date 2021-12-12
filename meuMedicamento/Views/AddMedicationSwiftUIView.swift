@@ -53,7 +53,7 @@ struct AddMedicationSwiftUIView: View {
                 }
                 Section{
                     Text("Notas")
-                    TextField("",text: $notes).padding()
+                    TextEditor(text: $notes)
                 }
             }
             .accentColor(Color("main"))

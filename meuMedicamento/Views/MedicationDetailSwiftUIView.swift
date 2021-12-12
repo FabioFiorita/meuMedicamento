@@ -11,28 +11,29 @@ struct MedicationDetailSwiftUIView: View {
     var body: some View {
         ZStack {
             Color(UIColor.systemGroupedBackground).ignoresSafeArea()
-            VStack(alignment: .leading) {
-                VStack {
-                    medicationNextDates(forMedication: medication)
-                    medicationInformation(forMedication: medication)
-                    medicationNotes(forMedication: medication)
-                    Spacer()
-                }.padding()
-            }
-            .onAppear {
-                dates = medicationManager.nextDates(forMedication: medication)
-            }
-            .navigationTitle(("\(medication.name ?? "Medicamento")"))
-            .toolbar(content: {
-                Button(action: {
-                    self.showModal = true
-                }) {
-                    Text("Editar")
-                }.sheet(isPresented: self.$showModal) {
-                    EditMedicationSwiftUIView(medication: medication)
+            ScrollView {
+                VStack(alignment: .leading) {
+                        medicationNextDates(forMedication: medication)
+                        medicationInformation(forMedication: medication)
+                        medicationNotes(forMedication: medication)
+                        Spacer()
+                    }
+                .padding()
+                .onAppear {
+                    dates = medicationManager.nextDates(forMedication: medication)
                 }
-            })
-        .environmentObject(medicationManager)
+                .navigationTitle(("\(medication.name ?? "Medicamento")"))
+                .toolbar(content: {
+                    Button(action: {
+                        self.showModal = true
+                    }) {
+                        Text("Editar")
+                    }.sheet(isPresented: self.$showModal) {
+                        EditMedicationSwiftUIView(medication: medication)
+                    }
+                })
+            .environmentObject(medicationManager)
+            }
         }
     }
     
@@ -40,16 +41,22 @@ struct MedicationDetailSwiftUIView: View {
         GroupBox {
             VStack(alignment: .leading, spacing: 10.0) {
                 HStack {
-                    Image(systemName: "clock.arrow.circlepath")
+                    Image(systemName: "doc.text")
                         .foregroundColor(Color("main"))
                         .font(.title)
-                    Text("Quantidade")
+                    Text("Detalhes")
                         .foregroundColor(Color("main"))
                         .font(.title3)
                         .bold()
                 }.accessibilityElement(children: .combine)
                 Text("Quantidade restantes: \(medication.remainingQuantity)")
                 Text("Quantidade na caixa: \(medication.boxQuantity)")
+                Text("Modo de Injestão: \(medication.notificationType ?? "modo inderteminado")")
+                Group {
+                    if medication.repeatPeriod != "Nunca" {
+                        Text("Repetição: A Cada \(medication.repeatPeriod ?? "repetição inderteminado")")
+                    }
+                }
                 Button(action: {
                     medicationManager.refreshRemainingQuantity(medication: medication)
                     dismiss()
@@ -91,7 +98,7 @@ struct MedicationDetailSwiftUIView: View {
         GroupBox {
             VStack(alignment: .leading, spacing: 10) {
                 HStack {
-                    Image(systemName: "calendar.circle.fill")
+                    Image(systemName: "calendar")
                         .foregroundColor(Color("main"))
                         .font(.title)
                     Text("Próximos Medicamentos")

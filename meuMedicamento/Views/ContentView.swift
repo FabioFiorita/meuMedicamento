@@ -15,6 +15,12 @@ struct ContentView: View {
     @StateObject private var medicationManager = MedicationManager()
     @AppStorage("OnboardingView") var isOnboardingViewShowing = true
     
+    init() {
+        let appearance = UITabBarAppearance()
+        appearance.configureWithDefaultBackground()
+        UITabBar.appearance().standardAppearance = appearance
+        UITabBar.appearance().scrollEdgeAppearance = appearance
+    }
     
     var body: some View {
         Group {
@@ -190,6 +196,14 @@ struct ContentView: View {
                     HStack {
                         Image(systemName: "calendar")
                         Text("Ver Histórico")
+                    }.accessibilityElement(children: .combine)
+                }
+                Button(role: .destructive) {
+                    medicationManager.deleteMedication(medication: medication)
+                } label: {
+                    HStack {
+                        Image(systemName: "trash")
+                        Text("Deletar Medicamento")
                     }.accessibilityElement(children: .combine)
                 }
             })

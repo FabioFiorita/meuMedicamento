@@ -53,7 +53,7 @@ struct EditMedicationSwiftUIView: View {
                     }
                     Section{
                         Text("Notas")
-                        TextField("",text: $notes).padding()
+                        TextEditor(text: $notes)
                     }
                 }
                 .onAppear {

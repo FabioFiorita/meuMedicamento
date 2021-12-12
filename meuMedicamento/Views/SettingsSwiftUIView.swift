@@ -19,16 +19,14 @@ struct SettingsSwiftUIView: View {
                 ZStack {
                     Color(UIColor.systemGroupedBackground)
                         .ignoresSafeArea()
-                    VStack(alignment: .leading, spacing: 50.0) {
-                        medicationAlertSettings
                         ScrollView {
                             VStack(alignment: .leading, spacing: 50.0) {
+                                medicationAlertSettings
                                 links
                                 policies
                                 Spacer()
                             }
                         }
-                    }
                     .padding()
                 }
                 .navigationBarTitle("Ajustes")
