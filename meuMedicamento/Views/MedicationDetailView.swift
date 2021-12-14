@@ -3,7 +3,7 @@ import SwiftUI
 struct MedicationDetailView: View {
     @Environment(\.dismiss) var dismiss
     @State private var showModal = false
-    @StateObject var medication: Medication
+    @ObservedObject var medication: Medication
     @State private var historicCount = 7
     @ObservedObject var medicationManager: MedicationManager
     @State private var dates: [Date] = []

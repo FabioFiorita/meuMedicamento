@@ -9,10 +9,7 @@ import SwiftUI
 
 struct MedicationHistoricView: View {
     @ObservedObject var medicationManager: MedicationManager
-    @StateObject var medication: Medication
-    @State private var inTime = 0
-    @State private var late = 0
-    @State private var missed = 0
+    @ObservedObject var medication: Medication
     @State private var inTime7 = 0
     @State private var late7 = 0
     @State private var missed7 = 0
@@ -30,7 +27,7 @@ struct MedicationHistoricView: View {
                             VStack(alignment: .center, spacing: 5) {
                                 Text("Últimos 7 dias")
                                 HStack {
-                                    historicGroupBox7Days()
+                                    historicGroupBox(inTime: inTime7, late: late7, missed: missed7)
                                 }
                             }
                             .frame(minWidth: 0, maxWidth: .infinity)
@@ -40,7 +37,7 @@ struct MedicationHistoricView: View {
                             VStack(alignment: .center, spacing: 5) {
                                 Text("Últimos 30 dias")
                                 HStack {
-                                    historicGroupBox30Days()
+                                    historicGroupBox(inTime: inTime30, late: late30, missed: missed30)
                                 }
                             }
                             .frame(minWidth: 0, maxWidth: .infinity)
@@ -57,9 +54,6 @@ struct MedicationHistoricView: View {
                 }
                 .padding()
                 .onAppear {
-                    inTime = medicationManager.fetchHistoric(forStatus: .inTime, forType: .medication, medication: medication)
-                    late = medicationManager.fetchHistoric(forStatus: .late, forType: .medication, medication: medication)
-                    missed = medicationManager.fetchHistoric(forStatus: .missed, forType: .medication, medication: medication)
                     inTime7 = medicationManager.fetchHistoric(forStatus: .inTime, forType: .medication7Days, medication: medication)
                     late7 = medicationManager.fetchHistoric(forStatus: .late, forType: .medication7Days, medication: medication)
                     missed7 = medicationManager.fetchHistoric(forStatus: .missed, forType: .medication7Days, medication: medication)
@@ -71,7 +65,7 @@ struct MedicationHistoricView: View {
         }
         .navigationTitle(("\(medication.name ?? "Medicamento")"))
     }
-    private func historicGroupBox() -> some View {
+    private func historicGroupBox(inTime: Int, late: Int, missed: Int) -> some View {
         Group {
             VStack(alignment: .center, spacing: 10) {
                 Image(systemName: "checkmark.circle.fill")
@@ -96,62 +90,6 @@ struct MedicationHistoricView: View {
                 .font(.largeTitle)
                 Text("\(missed)")
                     .font(.largeTitle)
-            }
-        }
-    }
-    private func historicGroupBox7Days() -> some View {
-        Group {
-            VStack(alignment: .center, spacing: 10) {
-                Image(systemName: "checkmark.circle.fill")
-                    .foregroundColor(.green)
-                    .accessibility(label: Text("Sem atraso"))
-                    .font(.title)
-                Text("\(inTime7)")
-                    .font(.title)
-            }
-            VStack(alignment: .center, spacing: 10) {
-                Image(systemName: "clock.fill")
-                    .foregroundColor(.yellow)
-                    .accessibility(label: Text("Atrasado"))
-                .font(.title)
-                Text("\(late7)")
-                    .font(.title)
-            }
-            VStack(alignment: .center, spacing: 10) {
-                Image(systemName: "xmark.circle.fill")
-                    .foregroundColor(.red)
-                    .accessibility(label: Text("Não tomou"))
-                .font(.title)
-                Text("\(missed7)")
-                    .font(.title)
-            }
-        }
-    }
-    private func historicGroupBox30Days() -> some View {
-        Group {
-            VStack(alignment: .center, spacing: 10) {
-                Image(systemName: "checkmark.circle.fill")
-                    .foregroundColor(.green)
-                    .accessibility(label: Text("Sem atraso"))
-                    .font(.title)
-                Text("\(inTime30)")
-                    .font(.title)
-            }
-            VStack(alignment: .center, spacing: 10) {
-                Image(systemName: "clock.fill")
-                    .foregroundColor(.yellow)
-                    .accessibility(label: Text("Atrasado"))
-                .font(.title)
-                Text("\(late30)")
-                    .font(.title)
-            }
-            VStack(alignment: .center, spacing: 10) {
-                Image(systemName: "xmark.circle.fill")
-                    .foregroundColor(.red)
-                    .accessibility(label: Text("Não tomou"))
-                .font(.title)
-                Text("\(missed30)")
-                    .font(.title)
             }
         }
     }

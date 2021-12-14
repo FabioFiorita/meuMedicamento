@@ -31,7 +31,7 @@ struct HistoricView: View {
                                     .font(.largeTitle)
                                     .bold()
                                 HStack(alignment: .center) {
-                                    historicGroupBox()
+                                    historicGroupBox(inTime: inTime, late: late, missed: missed, isTotal: true)
                                 }
                                 .frame(minWidth: 0, maxWidth: .infinity)
                             }
@@ -42,7 +42,7 @@ struct HistoricView: View {
                                 VStack(alignment: .center, spacing: 5) {
                                     Text("Últimos 7 dias")
                                     HStack {
-                                        historicGroupBox7Days()
+                                        historicGroupBox(inTime: inTime7, late: late7, missed: missed7, isTotal: false)
                                     }
                                 }
                                 .frame(minWidth: 0, maxWidth: .infinity)
@@ -52,7 +52,7 @@ struct HistoricView: View {
                                 VStack(alignment: .center, spacing: 5) {
                                     Text("Últimos 30 dias")
                                     HStack {
-                                        historicGroupBox30Days()
+                                        historicGroupBox(inTime: inTime30, late: late30, missed: missed30, isTotal: false)
                                     }
                                 }
                                 .frame(minWidth: 0, maxWidth: .infinity)
@@ -61,31 +61,31 @@ struct HistoricView: View {
                         }
                     }
                     .padding()
-                        List {
-                            ForEach(medicationManager.savedMedications, id: \.self) { medication in
-                                    HStack {
-                                        NavigationLink(medication.name ?? "Medicamento") {
-                                            MedicationHistoricView(medicationManager: medicationManager, medication: medication)
-                                        }
+                    List {
+                        ForEach(medicationManager.savedMedications, id: \.self) { medication in
+                            HStack {
+                                NavigationLink(medication.name ?? "Medicamento") {
+                                    MedicationHistoricView(medicationManager: medicationManager, medication: medication)
                                 }
                             }
-                            .listStyle(.insetGrouped)
                         }
-                        Spacer()
+                        .listStyle(.insetGrouped)
                     }
-                    .onAppear {
-                        inTime = medicationManager.fetchHistoric(forStatus: .inTime, forType: .all)
-                        late = medicationManager.fetchHistoric(forStatus: .late, forType: .all)
-                        missed = medicationManager.fetchHistoric(forStatus: .missed, forType: .all)
-                        inTime7 = medicationManager.fetchHistoric(forStatus: .inTime, forType: .all7Days)
-                        late7 = medicationManager.fetchHistoric(forStatus: .late, forType: .all7Days)
-                        missed7 = medicationManager.fetchHistoric(forStatus: .missed, forType: .all7Days)
-                        inTime30 = medicationManager.fetchHistoric(forStatus: .inTime, forType: .all30Days)
-                        late30 = medicationManager.fetchHistoric(forStatus: .late, forType: .all30Days)
-                        missed30 = medicationManager.fetchHistoric(forStatus: .missed, forType: .all30Days)
-                        medicationManager.fetchMedications()
-                        
-                    }
+                    Spacer()
+                }
+                .onAppear {
+                    inTime = medicationManager.fetchHistoric(forStatus: .inTime, forType: .all)
+                    late = medicationManager.fetchHistoric(forStatus: .late, forType: .all)
+                    missed = medicationManager.fetchHistoric(forStatus: .missed, forType: .all)
+                    inTime7 = medicationManager.fetchHistoric(forStatus: .inTime, forType: .all7Days)
+                    late7 = medicationManager.fetchHistoric(forStatus: .late, forType: .all7Days)
+                    missed7 = medicationManager.fetchHistoric(forStatus: .missed, forType: .all7Days)
+                    inTime30 = medicationManager.fetchHistoric(forStatus: .inTime, forType: .all30Days)
+                    late30 = medicationManager.fetchHistoric(forStatus: .late, forType: .all30Days)
+                    missed30 = medicationManager.fetchHistoric(forStatus: .missed, forType: .all30Days)
+                    medicationManager.fetchMedications()
+                    
+                }
                 
             }
             .navigationBarTitle("Histórico",displayMode: .automatic)
@@ -93,11 +93,13 @@ struct HistoricView: View {
         .navigationViewStyle(.stack)
     }
     
-    private func historicGroupBox() -> some View {
+    private func historicGroupBox(inTime: Int, late: Int, missed: Int, isTotal: Bool) -> some View {
         Group {
             VStack(alignment: .center, spacing: 10) {
-                Text("No Horário")
-                    .font(.title3)
+                if isTotal {
+                    Text("No Horário")
+                        .font(.title3)
+                }
                 Image(systemName: "checkmark.circle.fill")
                     .foregroundColor(.green)
                     .accessibility(label: Text("Sem atraso"))
@@ -106,84 +108,32 @@ struct HistoricView: View {
                     .font(.largeTitle)
             }
             VStack(alignment: .center, spacing: 10) {
-                Text("Atrasado")
-                    .font(.title3)
+                if isTotal {
+                    Text("Atrasado")
+                        .font(.title3)
+                }
                 Image(systemName: "clock.fill")
                     .foregroundColor(.yellow)
                     .accessibility(label: Text("Atrasado"))
-                .font(.largeTitle)
+                    .font(.largeTitle)
                 Text("\(late)")
                     .font(.largeTitle)
             }
             VStack(alignment: .center, spacing: 10) {
-                Text("Não tomou")
-                    .font(.title3)
+                if isTotal {
+                    Text("Não tomou")
+                        .font(.title3)
+                }
                 Image(systemName: "xmark.circle.fill")
                     .foregroundColor(.red)
                     .accessibility(label: Text("Não tomou"))
-                .font(.largeTitle)
+                    .font(.largeTitle)
                 Text("\(missed)")
                     .font(.largeTitle)
             }
         }
     }
-    private func historicGroupBox7Days() -> some View {
-        Group {
-            VStack(alignment: .center, spacing: 10) {
-                Image(systemName: "checkmark.circle.fill")
-                    .foregroundColor(.green)
-                    .accessibility(label: Text("Sem atraso"))
-                    .font(.title)
-                Text("\(inTime7)")
-                    .font(.title)
-            }
-            VStack(alignment: .center, spacing: 10) {
-                Image(systemName: "clock.fill")
-                    .foregroundColor(.yellow)
-                    .accessibility(label: Text("Atrasado"))
-                .font(.title)
-                Text("\(late7)")
-                    .font(.title)
-            }
-            VStack(alignment: .center, spacing: 10) {
-                Image(systemName: "xmark.circle.fill")
-                    .foregroundColor(.red)
-                    .accessibility(label: Text("Não tomou"))
-                .font(.title)
-                Text("\(missed7)")
-                    .font(.title)
-            }
-        }
-    }
-    private func historicGroupBox30Days() -> some View {
-        Group {
-            VStack(alignment: .center, spacing: 10) {
-                Image(systemName: "checkmark.circle.fill")
-                    .foregroundColor(.green)
-                    .accessibility(label: Text("Sem atraso"))
-                    .font(.title)
-                Text("\(inTime30)")
-                    .font(.title)
-            }
-            VStack(alignment: .center, spacing: 10) {
-                Image(systemName: "clock.fill")
-                    .foregroundColor(.yellow)
-                    .accessibility(label: Text("Atrasado"))
-                .font(.title)
-                Text("\(late30)")
-                    .font(.title)
-            }
-            VStack(alignment: .center, spacing: 10) {
-                Image(systemName: "xmark.circle.fill")
-                    .foregroundColor(.red)
-                    .accessibility(label: Text("Não tomou"))
-                .font(.title)
-                Text("\(missed30)")
-                    .font(.title)
-            }
-        }
-    }
-
+    
 }
 
 struct HistoricSwiftUIView_Previews: PreviewProvider {
