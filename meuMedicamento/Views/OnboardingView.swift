@@ -20,6 +20,7 @@ struct OnboardingView: View {
                         .resizable()
                         .aspectRatio(contentMode: .fit)
                         .frame(width: 150)
+                        .accessibilityHidden(true)
                     Text("Bem Vindo ao meuMedicamento.")
                         .foregroundColor(.white)
                         .font(.title)
@@ -30,6 +31,7 @@ struct OnboardingView: View {
                                 .aspectRatio(contentMode: .fit)
                                 .frame(width: 50)
                                 .foregroundColor(.white)
+                                .accessibilityHidden(true)
                             VStack(alignment: .leading, spacing: 5.0) {
                                 Text("Organize seus medicamentos")
                                     .bold()
@@ -45,8 +47,9 @@ struct OnboardingView: View {
                                 .aspectRatio(contentMode: .fit)
                                 .frame(width: 50)
                                 .foregroundColor(.white)
+                                .accessibilityHidden(true)
                             VStack(alignment: .leading, spacing: 5.0) {
-                                Text("Controle suas injestões")
+                                Text("Controle suas ingestões")
                                     .bold()
                                     .font(.title3)
                                     .foregroundColor(.white)
@@ -60,6 +63,7 @@ struct OnboardingView: View {
                                 .aspectRatio(contentMode: .fit)
                                 .frame(width: 50)
                                 .foregroundColor(.white)
+                                .accessibilityHidden(true)
                             VStack(alignment: .leading, spacing: 5.0) {
                                 Text("Mapa Integrado")
                                     .bold()
@@ -87,7 +91,8 @@ struct OnboardingView: View {
                     }
 
                     Spacer()
-                }.padding()
+                }
+                .padding()
             }
         }
 }

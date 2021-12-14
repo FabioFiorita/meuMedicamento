@@ -2,9 +2,9 @@ import SwiftUI
 import StoreKit
 import EmailComposer
 
-struct SettingsSwiftUIView: View {
+struct SettingsView: View {
     
-    @ObservedObject var userSettings = UserSettings()
+    @ObservedObject var userSettings: UserSettings
     @State private var showModalTutorial = false
     @Environment(\.openURL) var openURL
     @State private var isOnboardingViewShowing = false
@@ -19,16 +19,14 @@ struct SettingsSwiftUIView: View {
                 ZStack {
                     Color(UIColor.systemGroupedBackground)
                         .ignoresSafeArea()
-                    VStack(alignment: .leading, spacing: 50.0) {
-                        medicationAlertSettings
                         ScrollView {
                             VStack(alignment: .leading, spacing: 50.0) {
+                                medicationAlertSettings
                                 links
                                 policies
                                 Spacer()
                             }
                         }
-                    }
                     .padding()
                 }
                 .navigationBarTitle("Ajustes")
@@ -48,7 +46,20 @@ struct SettingsSwiftUIView: View {
                     Stepper("Porcentagem do Total", value: $limitMedication, in: 0.0...100.0)
                         .labelsHidden()
                 }
-                .accessibilityElement(children: .combine)
+                .accessibilityElement(children: .ignore)
+                .accessibilityLabel("Começar a notificar quando a quantidade chegar % do total")
+                .accessibilityValue(String(limitMedication))
+                .accessibilityAdjustableAction { value in
+                    switch value {
+                    case .increment:
+                        limitMedication += 1
+                    case .decrement:
+                        limitMedication -= 1
+                    default:
+                        print("Não utilizado")
+                    }
+                }
+                
                 HStack {
                     Text("Horario para as notificações:")
                     Spacer()
@@ -106,6 +117,7 @@ struct SettingsSwiftUIView: View {
                     Spacer()
                     Image(systemName: "chevron.right")
                         .foregroundColor(Color.secondary)
+                        .accessibilityHidden(true)
                 }
                 Divider()
                 Button(action: {
@@ -115,6 +127,7 @@ struct SettingsSwiftUIView: View {
                     Spacer()
                     Image(systemName: "chevron.right")
                         .foregroundColor(Color.secondary)
+                        .accessibilityHidden(true)
                 }
                 Divider()
                 Button(action: {
@@ -124,6 +137,7 @@ struct SettingsSwiftUIView: View {
                     Spacer()
                     Image(systemName: "chevron.right")
                         .foregroundColor(Color.secondary)
+                        .accessibilityHidden(true)
                 }
                 .emailComposer(isPresented: $showEmailComposer, emailData: EmailData(recipients: ["fabiolfp@gmail.com"]), result:  { result in
                     print("Email sucess")
@@ -144,6 +158,7 @@ struct SettingsSwiftUIView: View {
                     Spacer()
                     Image(systemName: "chevron.right")
                         .foregroundColor(Color.secondary)
+                        .accessibilityHidden(true)
                 }
                 Divider()
                 Button(action: {
@@ -153,6 +168,7 @@ struct SettingsSwiftUIView: View {
                     Spacer()
                     Image(systemName: "chevron.right")
                         .foregroundColor(Color.secondary)
+                        .accessibilityHidden(true)
                 })
             }
         }
@@ -164,6 +180,6 @@ struct SettingsSwiftUIView: View {
 
 struct SettingsSwiftUIView_Previews: PreviewProvider {
     static var previews: some View {
-        SettingsSwiftUIView()
+        SettingsView(userSettings: UserSettings())
     }
 }

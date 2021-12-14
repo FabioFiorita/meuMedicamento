@@ -18,7 +18,6 @@ final class MedicationManager: ObservableObject {
         case all
         case all7Days
         case all30Days
-        case medication
         case medication7Days
         case medication30Days
     }
@@ -74,12 +73,6 @@ final class MedicationManager: ObservableObject {
             case .all30Days:
                 let inTime = savedHistoric.filter({$0.medicationStatus == "Sem Atraso" && $0.dates?.timeIntervalSinceNow ?? 0 >= thirtyDays}).count
                 return inTime
-            case .medication:
-                guard let medication = medication else {
-                    return 0
-                }
-                let inTime = savedHistoric.filter({$0.medicationStatus == "Sem Atraso" && $0.medication == medication}).count
-                return inTime
             case .medication7Days:
                 guard let medication = medication else {
                     return 0
@@ -104,12 +97,6 @@ final class MedicationManager: ObservableObject {
             case .all30Days:
                 let late = savedHistoric.filter({$0.medicationStatus == "Atrasado" && $0.dates?.timeIntervalSinceNow ?? 0 >= thirtyDays}).count
                 return late
-            case .medication:
-                guard let medication = medication else {
-                    return 0
-                }
-                let late = savedHistoric.filter({$0.medicationStatus == "Atrasado" && $0.medication == medication}).count
-                return late
             case .medication7Days:
                 guard let medication = medication else {
                     return 0
@@ -133,12 +120,6 @@ final class MedicationManager: ObservableObject {
                 return missed
             case .all30Days:
                 let missed = savedHistoric.filter({$0.medicationStatus == "Não tomou" && $0.dates?.timeIntervalSinceNow ?? 0 >= thirtyDays}).count
-                return missed
-            case .medication:
-                guard let medication = medication else {
-                    return 0
-                }
-                let missed = savedHistoric.filter({$0.medicationStatus == "Não tomou" && $0.medication == medication}).count
                 return missed
             case .medication7Days:
                 guard let medication = medication else {
@@ -322,13 +303,13 @@ final class MedicationManager: ObservableObject {
     }
     
     func nextDates(forMedication medication: Medication) -> [Date] {
-        guard let date = medication.date else {
+        guard let date1 = medication.date else {
             return []
         }
-        let date1 = Date(timeInterval: medication.repeatSeconds, since: date)
         let date2 = Date(timeInterval: medication.repeatSeconds, since: date1)
         let date3 = Date(timeInterval: medication.repeatSeconds, since: date2)
-        let dates = [date1,date2,date3]
+        let date4 = Date(timeInterval: medication.repeatSeconds, since: date3)
+        let dates = [date1,date2,date3, date4]
         return dates
     }
     
@@ -411,15 +392,4 @@ final class MedicationManager: ObservableObject {
         }
         return seconds
     }
-}
-
-
-public extension NSManagedObject {
-
-    convenience init(context: NSManagedObjectContext) {
-        let name = String(describing: type(of: self))
-        let entity = NSEntityDescription.entity(forEntityName: name, in: context)!
-        self.init(entity: entity, insertInto: context)
-    }
-
 }

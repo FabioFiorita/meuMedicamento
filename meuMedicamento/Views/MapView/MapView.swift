@@ -6,7 +6,7 @@ enum DisplayType {
     case list
 }
 
-struct MapSwiftUIView: View {
+struct MapView: View {
     @StateObject private var placeListVM = PlaceListViewModel()
     @State private var userTrackingMode: MapUserTrackingMode = .follow
     @State private var searchTerm: String = ""
@@ -77,6 +77,6 @@ struct MapSwiftUIView: View {
 
 struct MapSwiftUIView_Previews: PreviewProvider {
     static var previews: some View {
-        MapSwiftUIView()
+        MapView()
     }
 }
