@@ -29,7 +29,7 @@ struct MedicationDetailView: View {
                     }) {
                         Text("Editar")
                     }.sheet(isPresented: self.$showModal) {
-                        EditMedicationSwiftUIView(medication: medication)
+                        EditMedicationView(medication: medication)
                     }
                     .keyboardShortcut("e")
                 })
@@ -52,10 +52,10 @@ struct MedicationDetailView: View {
                 }.accessibilityElement(children: .combine)
                 Text("Quantidade restantes: \(medication.remainingQuantity)")
                 Text("Quantidade na caixa: \(medication.boxQuantity)")
-                Text("Modo de Ingestão: \(medication.notificationType ?? "modo inderteminado")")
+                Text("Modo de Ingestão: \(medication.notificationType ?? "")")
                 Group {
                     if medication.repeatPeriod != "Nunca" {
-                        Text("Repetição: A Cada \(medication.repeatPeriod ?? "repetição inderteminado")")
+                        Text("Repetição: A Cada \(medication.repeatPeriod ?? "")")
                     }
                 }
                 Button(action: {

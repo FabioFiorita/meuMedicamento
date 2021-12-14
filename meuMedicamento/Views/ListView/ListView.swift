@@ -45,7 +45,7 @@ struct ListView: View {
                     } label: {
                         Image(systemName: "plus").imageScale(.large).accessibility(label: Text("Adicionar novo medicamento"))
                     }.sheet(isPresented: $showModalAdd, onDismiss: medicationManager.fetchMedications) {
-                        AddMedicationSwiftUIView()
+                        AddMedicationView()
                     }
                     .keyboardShortcut("n")
                 }

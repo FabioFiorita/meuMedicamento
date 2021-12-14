@@ -2,7 +2,7 @@ import SwiftUI
 import StoreKit
 import EmailComposer
 
-struct SettingsSwiftUIView: View {
+struct SettingsView: View {
     
     @ObservedObject var userSettings: UserSettings
     @State private var showModalTutorial = false
@@ -162,6 +162,6 @@ struct SettingsSwiftUIView: View {
 
 struct SettingsSwiftUIView_Previews: PreviewProvider {
     static var previews: some View {
-        SettingsSwiftUIView(userSettings: UserSettings())
+        SettingsView(userSettings: UserSettings())
     }
 }

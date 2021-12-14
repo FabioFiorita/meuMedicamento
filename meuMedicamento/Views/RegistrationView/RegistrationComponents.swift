@@ -16,9 +16,7 @@ struct RegistrationComponents: View {
     @Binding var date: Date
     @Binding var repeatPeriod: String
     @Binding var notes: String
-    @Binding var pickerView: Bool
     @FocusState private var focusedField: Field?
-    @State var showAlert = false
     @State private var showDatePicker = false
     
     var body: some View {
@@ -50,9 +48,6 @@ struct RegistrationComponents: View {
                     ForEach(RepeatPeriod.periods, id: \.self) { periods in
                         Text(periods).tag(periods)
                     }
-                }
-                .onAppear {
-                    pickerView = false
                 }
             }
             Section{
@@ -112,11 +107,6 @@ struct RegistrationComponents: View {
                 }
             }
             .pickerStyle(.segmented)
-            .onAppear {
-                if pickerView {
-                    notificationType = "Após Conclusão"
-                }
-            }
             if notificationType == "Regularmente" {
                 Text("O próximo medicamento será agendando seguindo a data definida")
             } else {
@@ -125,5 +115,6 @@ struct RegistrationComponents: View {
         }
         
     }
+
 }
 

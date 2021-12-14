@@ -97,7 +97,7 @@ struct CellView: View {
             Text("Configure a data de início novamente")
         }
         .sheet(isPresented: $showModalEdit, onDismiss: medicationManager.fetchMedications, content: {
-            EditMedicationSwiftUIView(medication: medication)
+            EditMedicationView(medication: medication)
         })
         .alert("Erro na hora de cadastrar o medicamento", isPresented: $showViewContextAlert) {
             Button("OK",role: .destructive) { }

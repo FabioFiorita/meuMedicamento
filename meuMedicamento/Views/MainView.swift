@@ -40,7 +40,7 @@ struct MainView: View {
                             Label("Mapa", systemImage: "map")
                         }
                     
-                    SettingsSwiftUIView(userSettings: userSettings)
+                    SettingsView(userSettings: userSettings)
                         .tabItem {
                             Label("Ajustes", systemImage: "gear")
                         }
