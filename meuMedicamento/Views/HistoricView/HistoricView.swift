@@ -31,10 +31,11 @@ struct HistoricView: View {
                                     .font(.largeTitle)
                                     .bold()
                                 HStack(alignment: .center) {
-                                    historicGroupBox(inTime: inTime, late: late, missed: missed, isTotal: true)
+                                    HistoricComponents(inTime: $inTime, late: $late, missed: $missed, isTotal: true)
                                 }
                                 .frame(minWidth: 0, maxWidth: .infinity)
                             }
+                            .accessibilityElement(children: .combine)
                         }
                         .groupBoxStyle(PrimaryGroupBoxStyle())
                         HStack {
@@ -42,20 +43,22 @@ struct HistoricView: View {
                                 VStack(alignment: .center, spacing: 5) {
                                     Text("Últimos 7 dias")
                                     HStack {
-                                        historicGroupBox(inTime: inTime7, late: late7, missed: missed7, isTotal: false)
+                                        HistoricComponents(inTime: $inTime7, late: $late7, missed: $missed7, isTotal: false)
                                     }
                                 }
                                 .frame(minWidth: 0, maxWidth: .infinity)
+                                .accessibilityElement(children: .combine)
                             }
                             .groupBoxStyle(PrimaryGroupBoxStyle())
                             GroupBox {
                                 VStack(alignment: .center, spacing: 5) {
                                     Text("Últimos 30 dias")
                                     HStack {
-                                        historicGroupBox(inTime: inTime30, late: late30, missed: missed30, isTotal: false)
+                                        HistoricComponents(inTime: $inTime30, late: $late30, missed: $missed30, isTotal: false)
                                     }
                                 }
                                 .frame(minWidth: 0, maxWidth: .infinity)
+                                .accessibilityElement(children: .combine)
                             }
                             .groupBoxStyle(PrimaryGroupBoxStyle())
                         }
@@ -69,7 +72,7 @@ struct HistoricView: View {
                                 }
                             }
                         }
-                        .listStyle(.insetGrouped)
+                        .listStyle(.automatic)
                     }
                     Spacer()
                 }
@@ -91,47 +94,6 @@ struct HistoricView: View {
             .navigationBarTitle("Histórico",displayMode: .automatic)
         }
         .navigationViewStyle(.stack)
-    }
-    
-    private func historicGroupBox(inTime: Int, late: Int, missed: Int, isTotal: Bool) -> some View {
-        Group {
-            VStack(alignment: .center, spacing: 10) {
-                if isTotal {
-                    Text("No Horário")
-                        .font(.title3)
-                }
-                Image(systemName: "checkmark.circle.fill")
-                    .foregroundColor(.green)
-                    .accessibility(label: Text("Sem atraso"))
-                    .font(.largeTitle)
-                Text("\(inTime)")
-                    .font(.largeTitle)
-            }
-            VStack(alignment: .center, spacing: 10) {
-                if isTotal {
-                    Text("Atrasado")
-                        .font(.title3)
-                }
-                Image(systemName: "clock.fill")
-                    .foregroundColor(.yellow)
-                    .accessibility(label: Text("Atrasado"))
-                    .font(.largeTitle)
-                Text("\(late)")
-                    .font(.largeTitle)
-            }
-            VStack(alignment: .center, spacing: 10) {
-                if isTotal {
-                    Text("Não tomou")
-                        .font(.title3)
-                }
-                Image(systemName: "xmark.circle.fill")
-                    .foregroundColor(.red)
-                    .accessibility(label: Text("Não tomou"))
-                    .font(.largeTitle)
-                Text("\(missed)")
-                    .font(.largeTitle)
-            }
-        }
     }
     
 }

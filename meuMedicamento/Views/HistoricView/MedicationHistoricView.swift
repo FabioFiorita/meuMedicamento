@@ -27,7 +27,7 @@ struct MedicationHistoricView: View {
                             VStack(alignment: .center, spacing: 5) {
                                 Text("Últimos 7 dias")
                                 HStack {
-                                    historicGroupBox(inTime: inTime7, late: late7, missed: missed7)
+                                    HistoricComponents(inTime: $inTime7, late: $late7, missed: $missed7, isTotal: false)
                                 }
                             }
                             .frame(minWidth: 0, maxWidth: .infinity)
@@ -37,7 +37,7 @@ struct MedicationHistoricView: View {
                             VStack(alignment: .center, spacing: 5) {
                                 Text("Últimos 30 dias")
                                 HStack {
-                                    historicGroupBox(inTime: inTime30, late: late30, missed: missed30)
+                                    HistoricComponents(inTime: $inTime30, late: $late30, missed: $missed30, isTotal: false)
                                 }
                             }
                             .frame(minWidth: 0, maxWidth: .infinity)
@@ -65,34 +65,6 @@ struct MedicationHistoricView: View {
         }
         .navigationTitle(("\(medication.name ?? "Medicamento")"))
     }
-    private func historicGroupBox(inTime: Int, late: Int, missed: Int) -> some View {
-        Group {
-            VStack(alignment: .center, spacing: 10) {
-                Image(systemName: "checkmark.circle.fill")
-                    .foregroundColor(.green)
-                    .accessibility(label: Text("Sem atraso"))
-                    .font(.largeTitle)
-                Text("\(inTime)")
-                    .font(.largeTitle)
-            }
-            VStack(alignment: .center, spacing: 10) {
-                Image(systemName: "clock.fill")
-                    .foregroundColor(.yellow)
-                    .accessibility(label: Text("Atrasado"))
-                .font(.largeTitle)
-                Text("\(late)")
-                    .font(.largeTitle)
-            }
-            VStack(alignment: .center, spacing: 10) {
-                Image(systemName: "xmark.circle.fill")
-                    .foregroundColor(.red)
-                    .accessibility(label: Text("Não tomou"))
-                .font(.largeTitle)
-                Text("\(missed)")
-                    .font(.largeTitle)
-            }
-        }
-    }
     
     private func medicationDateHistory(forHistoric historic: Historic) -> some View {
         GroupBox {
@@ -112,6 +84,8 @@ struct MedicationHistoricView: View {
                     }
                 }
             }
+            .accessibilityElement(children: .ignore)
+            
         }
         .groupBoxStyle(PrimaryGroupBoxStyle())
     }
@@ -122,9 +96,10 @@ struct MedicationHistoricView: View {
                 Text("Histórico dos últimos ") + Text("\(historicCount)").bold().foregroundColor(.orange) + Text(" medicamentos")
                 Spacer()
                 Stepper("Quantidade no Histórico", value: $historicCount, in: 0...31)
-                    .labelsHidden()
-                    .accessibility(identifier: "stepper")
-            }.frame(minWidth: 0, maxWidth: .infinity)
+            }
+            .frame(minWidth: 0, maxWidth: .infinity)
+            .accessibilityElement(children: .ignore)
+            .accessibilityLabel("Histórico dos últimos: \(historicCount)")
         }
         .groupBoxStyle(PrimaryGroupBoxStyle())
     }

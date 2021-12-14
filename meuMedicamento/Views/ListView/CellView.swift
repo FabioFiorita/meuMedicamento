@@ -82,7 +82,11 @@ struct CellView: View {
             }
             medicationManager.fetchMedications()
         } label: {
-            Image(systemName: "checkmark.circle").font(.system(size: 35, weight: .regular)).accessibility(label: Text("Tomar Medicamento"))
+            Image(systemName: "checkmark.circle")
+                .font(.system(size: 35, weight: .regular))
+                .accessibility(label: Text("Tomar Medicamento"))
+                .accessibilityAddTraits(.isButton)
+                .accessibilityRemoveTraits(.isImage)
                 .foregroundColor(medication.isSelected ? Color.green : Color.primary)
         }
         .buttonStyle(.plain)

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C11F99392768D519002B177C /* HistoricComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = C11F99382768D519002B177C /* HistoricComponents.swift */; };
 		C12F9CDA2761900200B75831 /* HistoricView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C12F9CD92761900200B75831 /* HistoricView.swift */; };
 		C143FD5526C473A20041BCED /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C143FD5426C473A20041BCED /* Launch Screen.storyboard */; };
 		C167A82A27627FCF0033B87F /* GroupBoxExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C167A82927627FCF0033B87F /* GroupBoxExtension.swift */; };
@@ -56,6 +57,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		C11F99382768D519002B177C /* HistoricComponents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoricComponents.swift; sourceTree = "<group>"; };
 		C12F9CD92761900200B75831 /* HistoricView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoricView.swift; sourceTree = "<group>"; };
 		C143FD5426C473A20041BCED /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		C167A82927627FCF0033B87F /* GroupBoxExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupBoxExtension.swift; sourceTree = "<group>"; };
@@ -173,6 +175,7 @@
 			children = (
 				C12F9CD92761900200B75831 /* HistoricView.swift */,
 				C167A82B2762836A0033B87F /* MedicationHistoricView.swift */,
+				C11F99382768D519002B177C /* HistoricComponents.swift */,
 			);
 			path = HistoricView;
 			sourceTree = "<group>";
@@ -329,6 +332,7 @@
 				C1DE8CEF26C40F4B004E7754 /* AddMedicationView.swift in Sources */,
 				C1DE8CDB26C40E7F004E7754 /* MedicationModels.swift in Sources */,
 				C1DC73BF27680D6900C1A072 /* CellComponents.swift in Sources */,
+				C11F99392768D519002B177C /* HistoricComponents.swift in Sources */,
 				C1DE8CF026C40F4B004E7754 /* MapView.swift in Sources */,
 				C1D9471726C408A300A05884 /* ListView.swift in Sources */,
 				C1DE8CE426C40ECA004E7754 /* LocationManager.swift in Sources */,
