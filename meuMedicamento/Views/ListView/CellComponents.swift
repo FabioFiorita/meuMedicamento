@@ -18,6 +18,7 @@ struct CellComponents: View {
             medicationRemainingQuantity(forMedication: medication)
             medicationDate(forMedication: medication)
         }
+        .accessibilityElement(children: .combine)
     }
     
     private func medicationName(forMedication medication: Medication) -> some View {

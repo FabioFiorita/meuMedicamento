@@ -43,7 +43,7 @@ struct ListView: View {
                     Button {
                         self.showModalAdd = true
                     } label: {
-                        Image(systemName: "plus").imageScale(.large).accessibility(label: Text("Adicionar novo medicamento"))
+                        Label("Adicionar novo medicamento", systemImage: "plus")
                     }.sheet(isPresented: $showModalAdd, onDismiss: medicationManager.fetchMedications) {
                         AddMedicationView()
                     }

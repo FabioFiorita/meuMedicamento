@@ -12,7 +12,7 @@ struct MedicationDetailView: View {
         ZStack {
             Color(UIColor.systemGroupedBackground).ignoresSafeArea()
             ScrollView {
-                VStack(alignment: .leading) {
+                VStack {
                         medicationNextDates(forMedication: medication)
                         medicationInformation(forMedication: medication)
                         medicationNotes(forMedication: medication)
@@ -41,15 +41,10 @@ struct MedicationDetailView: View {
     private func medicationInformation(forMedication medication: Medication) -> some View {
         GroupBox {
             VStack(alignment: .leading, spacing: 10.0) {
-                HStack {
-                    Image(systemName: "doc.text")
-                        .foregroundColor(Color("main"))
-                        .font(.title)
-                    Text("Detalhes")
+                    Label("Detalhes", systemImage: "doc.text")
                         .foregroundColor(Color("main"))
                         .font(.title3)
-                        .bold()
-                }.accessibilityElement(children: .combine)
+                        .accessibilityHidden(true)
                 Text("Quantidade restantes: \(medication.remainingQuantity)")
                 Text("Quantidade na caixa: \(medication.boxQuantity)")
                 Text("Modo de Ingestão: \(medication.notificationType ?? "")")
@@ -70,6 +65,7 @@ struct MedicationDetailView: View {
                         .foregroundColor(.white)
                 }
             }
+            .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
         }
         .groupBoxStyle(PrimaryGroupBoxStyle())
     }
@@ -78,18 +74,14 @@ struct MedicationDetailView: View {
         Group {
                 GroupBox {
                     VStack(alignment: .leading, spacing: 10.0){
-                        HStack {
-                            Image(systemName: "note.text")
-                                .foregroundColor(Color("main"))
-                                .font(.title)
-                            Text("Notas")
+                            Label("Notas", systemImage: "note.text")
                                 .foregroundColor(Color("main"))
                                 .font(.title3)
-                                .bold()
-                        }.accessibilityElement(children: .combine)
-                        Text("\(medication.notes ?? "")").frame(minWidth: 0, maxWidth: .infinity, alignment: .topLeading)
+                                .accessibilityHidden(true)
+                        Text("\(medication.notes ?? "")")
                             .padding()
                     }
+                    .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
                 }
                 .groupBoxStyle(PrimaryGroupBoxStyle())
         }
@@ -97,22 +89,16 @@ struct MedicationDetailView: View {
     
     private func medicationNextDates(forMedication medication: Medication) -> some View {
         GroupBox {
-            VStack(alignment: .leading, spacing: 10) {
-                HStack {
-                    Image(systemName: "calendar")
-                        .foregroundColor(Color("main"))
-                        .font(.title)
-                    Text("Próximos Medicamentos")
+            VStack(alignment: .leading, spacing: 10.0) {
+                    Label("Próximos Medicamentos", systemImage: "calendar")
                         .foregroundColor(Color("main"))
                         .font(.title3)
-                        .bold()
-                    Spacer()
-                }.accessibilityElement(children: .combine)
+                        .accessibilityHidden(true)
                 ForEach(dates, id: \.self){ date in
                         Text("\(date, formatter: itemFormatter)")
                     }
             }
-            .frame(minWidth: 0, maxWidth: .infinity)
+            .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
         }
         .groupBoxStyle(PrimaryGroupBoxStyle())
     }

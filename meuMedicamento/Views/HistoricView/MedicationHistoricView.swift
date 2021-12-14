@@ -85,6 +85,7 @@ struct MedicationHistoricView: View {
                 }
             }
             .accessibilityElement(children: .ignore)
+            .accessibilityLabel("\(historic.dates ?? Date(), formatter: itemFormatter) \(historic.medicationStatus ?? "Status Inderteminado")")
             
         }
         .groupBoxStyle(PrimaryGroupBoxStyle())
@@ -95,11 +96,22 @@ struct MedicationHistoricView: View {
             HStack {
                 Text("Histórico dos últimos ") + Text("\(historicCount)").bold().foregroundColor(.orange) + Text(" medicamentos")
                 Spacer()
-                Stepper("Quantidade no Histórico", value: $historicCount, in: 0...31)
+                Stepper("Quantidade no Histórico", value: $historicCount, in: 0...31).labelsHidden()
             }
             .frame(minWidth: 0, maxWidth: .infinity)
-            .accessibilityElement(children: .ignore)
-            .accessibilityLabel("Histórico dos últimos: \(historicCount)")
+            .accessibilityElement()
+            .accessibilityLabel("Histórico dos últimos medicamentos")
+            .accessibilityValue(String(historicCount))
+            .accessibilityAdjustableAction { value in
+                switch value {
+                case .increment:
+                    historicCount += 1
+                case .decrement:
+                    historicCount -= 1
+                default:
+                    print("Não utilizado")
+                }
+            }
         }
         .groupBoxStyle(PrimaryGroupBoxStyle())
     }

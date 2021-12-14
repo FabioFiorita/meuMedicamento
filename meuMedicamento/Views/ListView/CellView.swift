@@ -25,34 +25,22 @@ struct CellView: View {
                 Button {
                     updateQuantity(medication: medication)
                 } label: {
-                    HStack {
-                        Image(systemName: "checkmark")
-                        Text("Tomar Medicamento")
-                    }.accessibilityElement(children: .combine)
+                        Label("Tomar Medicamento", systemImage: "checkmark")
                 }
                 Button {
                     medicationManager.refreshRemainingQuantity(medication: medication)
                 } label: {
-                    HStack {
-                        Image(systemName: "clock.arrow.circlepath")
-                        Text("Renovar Quantidade")
-                    }.accessibilityElement(children: .combine)
+                        Label("Renovar Quantidade", systemImage: "clock.arrow.circlepath")
                 }
                 Button {
                     showModalHistory = true
                 } label: {
-                    HStack {
-                        Image(systemName: "calendar")
-                        Text("Ver Histórico")
-                    }.accessibilityElement(children: .combine)
+                        Label("Ver Histórico", systemImage: "calendar")
                 }
                 Button(role: .destructive) {
                     medicationManager.deleteMedication(medication: medication)
                 } label: {
-                    HStack {
-                        Image(systemName: "trash")
-                        Text("Deletar Medicamento")
-                    }.accessibilityElement(children: .combine)
+                        Label("Deletar Medicamento", systemImage: "trash")
                 }
             })
             .sheet(isPresented: $showModalHistory, onDismiss: {
@@ -83,7 +71,8 @@ struct CellView: View {
             medicationManager.fetchMedications()
         } label: {
             Image(systemName: "checkmark.circle")
-                .font(.system(size: 35, weight: .regular))
+                .font(.largeTitle)
+                .imageScale(.large)
                 .accessibility(label: Text("Tomar Medicamento"))
                 .accessibilityAddTraits(.isButton)
                 .accessibilityRemoveTraits(.isImage)

@@ -46,7 +46,20 @@ struct SettingsView: View {
                     Stepper("Porcentagem do Total", value: $limitMedication, in: 0.0...100.0)
                         .labelsHidden()
                 }
-                .accessibilityElement(children: .combine)
+                .accessibilityElement(children: .ignore)
+                .accessibilityLabel("Começar a notificar quando a quantidade chegar % do total")
+                .accessibilityValue(String(limitMedication))
+                .accessibilityAdjustableAction { value in
+                    switch value {
+                    case .increment:
+                        limitMedication += 1
+                    case .decrement:
+                        limitMedication -= 1
+                    default:
+                        print("Não utilizado")
+                    }
+                }
+                
                 HStack {
                     Text("Horario para as notificações:")
                     Spacer()
@@ -104,6 +117,7 @@ struct SettingsView: View {
                     Spacer()
                     Image(systemName: "chevron.right")
                         .foregroundColor(Color.secondary)
+                        .accessibilityHidden(true)
                 }
                 Divider()
                 Button(action: {
@@ -113,6 +127,7 @@ struct SettingsView: View {
                     Spacer()
                     Image(systemName: "chevron.right")
                         .foregroundColor(Color.secondary)
+                        .accessibilityHidden(true)
                 }
                 Divider()
                 Button(action: {
@@ -122,6 +137,7 @@ struct SettingsView: View {
                     Spacer()
                     Image(systemName: "chevron.right")
                         .foregroundColor(Color.secondary)
+                        .accessibilityHidden(true)
                 }
                 .emailComposer(isPresented: $showEmailComposer, emailData: EmailData(recipients: ["fabiolfp@gmail.com"]), result:  { result in
                     print("Email sucess")
@@ -142,6 +158,7 @@ struct SettingsView: View {
                     Spacer()
                     Image(systemName: "chevron.right")
                         .foregroundColor(Color.secondary)
+                        .accessibilityHidden(true)
                 }
                 Divider()
                 Button(action: {
@@ -151,6 +168,7 @@ struct SettingsView: View {
                     Spacer()
                     Image(systemName: "chevron.right")
                         .foregroundColor(Color.secondary)
+                        .accessibilityHidden(true)
                 })
             }
         }

@@ -79,7 +79,8 @@ struct RegistrationComponents: View {
                         break
                     }
                 } label: {
-                    Image(systemName: "arrow.up").tint(Color("main"))
+                    Label("Campo anterior", systemImage: "arrow.up")
+                        .tint(Color("main"))
                 }
                 Button {
                     switch focusedField {
@@ -93,7 +94,8 @@ struct RegistrationComponents: View {
                         break
                     }
                 } label: {
-                    Image(systemName: "arrow.down").tint(Color("main"))
+                    Label("Próximo Campo", systemImage: "arrow.down")
+                        .tint(Color("main"))
                 }
             }
         })

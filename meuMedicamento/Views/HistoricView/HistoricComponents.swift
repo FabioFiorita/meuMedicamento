@@ -19,13 +19,15 @@ struct HistoricComponents: View {
                 if isTotal {
                     Text("No Horário")
                         .font(.title3)
+                        .accessibilityHidden(true)
                 }
                 Image(systemName: "checkmark.circle.fill")
                     .foregroundColor(.green)
                     .accessibility(label: Text("Sem atraso"))
-                    .font(.largeTitle)
+                    .font(.title)
+                    .imageScale(.large)
                 Text("\(inTime)")
-                    .font(.largeTitle)
+                    .font(.title)
             }
             .accessibilityElement(children: .ignore)
             .accessibilityLabel("Sem Atraso: \(inTime)")
@@ -39,9 +41,10 @@ struct HistoricComponents: View {
                 Image(systemName: "clock.fill")
                     .foregroundColor(.yellow)
                     .accessibility(label: Text("Atrasado"))
-                    .font(.largeTitle)
+                    .font(.title)
+                    .imageScale(.large)
                 Text("\(late)")
-                    .font(.largeTitle)
+                    .font(.title)
             }
             .accessibilityElement(children: .ignore)
             .accessibilityLabel("Atrasado: \(late)")
@@ -55,9 +58,10 @@ struct HistoricComponents: View {
                 Image(systemName: "xmark.circle.fill")
                     .foregroundColor(.red)
                     .accessibility(label: Text("Não tomou"))
-                    .font(.largeTitle)
+                    .font(.title)
+                    .imageScale(.large)
                 Text("\(missed)")
-                    .font(.largeTitle)
+                    .font(.title)
             }
             .accessibilityElement(children: .ignore)
             .accessibilityLabel("Não tomou: \(missed)")
