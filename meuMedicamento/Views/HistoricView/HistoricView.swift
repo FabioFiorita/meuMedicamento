@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct HistoricSwiftUIView: View {
+struct HistoricView: View {
     @ObservedObject var medicationManager: MedicationManager
     @State private var inTime = 0
     @State private var late = 0
@@ -65,7 +65,7 @@ struct HistoricSwiftUIView: View {
                             ForEach(medicationManager.savedMedications, id: \.self) { medication in
                                     HStack {
                                         NavigationLink(medication.name ?? "Medicamento") {
-                                            MedicationHistoricSwiftUIView(medicationManager: medicationManager, medication: medication)
+                                            MedicationHistoricView(medicationManager: medicationManager, medication: medication)
                                         }
                                 }
                             }
@@ -188,6 +188,6 @@ struct HistoricSwiftUIView: View {
 
 struct HistoricSwiftUIView_Previews: PreviewProvider {
     static var previews: some View {
-        HistoricSwiftUIView(medicationManager: MedicationManager())
+        HistoricView(medicationManager: MedicationManager())
     }
 }

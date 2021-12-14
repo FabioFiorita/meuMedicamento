@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct MedicationDetailSwiftUIView: View {
+struct MedicationDetailView: View {
     @Environment(\.dismiss) var dismiss
     @State private var showModal = false
     @StateObject var medication: Medication
@@ -31,6 +31,7 @@ struct MedicationDetailSwiftUIView: View {
                     }.sheet(isPresented: self.$showModal) {
                         EditMedicationSwiftUIView(medication: medication)
                     }
+                    .keyboardShortcut("e")
                 })
             .environmentObject(medicationManager)
             }
@@ -51,7 +52,7 @@ struct MedicationDetailSwiftUIView: View {
                 }.accessibilityElement(children: .combine)
                 Text("Quantidade restantes: \(medication.remainingQuantity)")
                 Text("Quantidade na caixa: \(medication.boxQuantity)")
-                Text("Modo de Injestão: \(medication.notificationType ?? "modo inderteminado")")
+                Text("Modo de Ingestão: \(medication.notificationType ?? "modo inderteminado")")
                 Group {
                     if medication.repeatPeriod != "Nunca" {
                         Text("Repetição: A Cada \(medication.repeatPeriod ?? "repetição inderteminado")")
@@ -121,6 +122,6 @@ struct MedicationDetailSwiftUIView: View {
 
 struct MedicationDetailSwiftUIView_Previews: PreviewProvider {
     static var previews: some View {
-        MedicationDetailSwiftUIView(medication: Medication(), medicationManager: MedicationManager())
+        MedicationDetailView(medication: Medication(), medicationManager: MedicationManager())
     }
 }

@@ -4,7 +4,7 @@ import EmailComposer
 
 struct SettingsSwiftUIView: View {
     
-    @ObservedObject var userSettings = UserSettings()
+    @ObservedObject var userSettings: UserSettings
     @State private var showModalTutorial = false
     @Environment(\.openURL) var openURL
     @State private var isOnboardingViewShowing = false
@@ -162,6 +162,6 @@ struct SettingsSwiftUIView: View {
 
 struct SettingsSwiftUIView_Previews: PreviewProvider {
     static var previews: some View {
-        SettingsSwiftUIView()
+        SettingsSwiftUIView(userSettings: UserSettings())
     }
 }

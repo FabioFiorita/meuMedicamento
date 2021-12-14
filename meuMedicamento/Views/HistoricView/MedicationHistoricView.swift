@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct MedicationHistoricSwiftUIView: View {
+struct MedicationHistoricView: View {
     @ObservedObject var medicationManager: MedicationManager
     @StateObject var medication: Medication
     @State private var inTime = 0
@@ -194,6 +194,6 @@ struct MedicationHistoricSwiftUIView: View {
 
 struct MedicationHistoricSwiftUIView_Previews: PreviewProvider {
     static var previews: some View {
-        MedicationHistoricSwiftUIView(medicationManager: MedicationManager(), medication: Medication())
+        MedicationHistoricView(medicationManager: MedicationManager(), medication: Medication())
     }
 }

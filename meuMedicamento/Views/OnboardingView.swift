@@ -46,7 +46,7 @@ struct OnboardingView: View {
                                 .frame(width: 50)
                                 .foregroundColor(.white)
                             VStack(alignment: .leading, spacing: 5.0) {
-                                Text("Controle suas injestões")
+                                Text("Controle suas ingestões")
                                     .bold()
                                     .font(.title3)
                                     .foregroundColor(.white)
