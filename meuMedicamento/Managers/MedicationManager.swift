@@ -35,6 +35,8 @@ final class MedicationManager: ObservableObject {
                 print("ERROR LOADING CORE DATA. \(error)")
             }
         }
+        //let options = NSPersistentCloudKitContainerSchemaInitializationOptions()
+        //try? container.initializeCloudKitSchema(options: options)
         container.viewContext.automaticallyMergesChangesFromParent = true
         container.viewContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
         fetchMedications()
