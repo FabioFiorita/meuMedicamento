@@ -45,7 +45,7 @@ struct CellComponents: View {
     }
     private func medicationDate(forMedication medication: Medication) -> some View {
         Group {
-            if medication.date?.timeIntervalSinceNow ?? Date().timeIntervalSinceNow < 0 {
+            if medication.date?.timeIntervalSinceNow ?? 1.0 <= 0.0 {
                 Text("Proximo: ") +
                 Text("\(medication.date ?? Date() ,formatter: itemFormatter)")
                     .font(.body)

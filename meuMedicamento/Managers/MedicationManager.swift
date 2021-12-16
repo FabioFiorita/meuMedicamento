@@ -53,14 +53,28 @@ final class MedicationManager: ObservableObject {
         }
     }
     
-    
-    func fetchHistoric (forStatus status: historicStatus, forType type: historicType, medication: Medication? = nil) -> Int {
+    func fetchHistories() {
         let request = NSFetchRequest<Historic>(entityName: "Historic")
         do {
             savedHistoric = try container.viewContext.fetch(request)
         } catch {
             print("Error fetching \(error)")
         }
+    }
+    
+    func deleteHistories() {
+        let histories = savedHistoric
+        for historic in histories {
+            if historic.medication == nil {
+                container.viewContext.delete(historic)
+            }
+        }
+        _ = saveData()
+    }
+    
+    
+    func fetchHistoric (forStatus status: historicStatus, forType type: historicType, medication: Medication? = nil) -> Int {
+        fetchHistories()
         let sevenDays = 7.days.inSeconds.value * -1
         let thirtyDays = 30.days.inSeconds.value  * -1
         switch status {

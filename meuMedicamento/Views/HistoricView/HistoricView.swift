@@ -77,6 +77,9 @@ struct HistoricView: View {
                     Spacer()
                 }
                 .onAppear {
+                    medicationManager.deleteHistories()
+                    medicationManager.fetchHistories()
+                    medicationManager.fetchMedications()
                     inTime = medicationManager.fetchHistoric(forStatus: .inTime, forType: .all)
                     late = medicationManager.fetchHistoric(forStatus: .late, forType: .all)
                     missed = medicationManager.fetchHistoric(forStatus: .missed, forType: .all)
@@ -86,8 +89,6 @@ struct HistoricView: View {
                     inTime30 = medicationManager.fetchHistoric(forStatus: .inTime, forType: .all30Days)
                     late30 = medicationManager.fetchHistoric(forStatus: .late, forType: .all30Days)
                     missed30 = medicationManager.fetchHistoric(forStatus: .missed, forType: .all30Days)
-                    medicationManager.fetchMedications()
-                    
                 }
                 
             }
