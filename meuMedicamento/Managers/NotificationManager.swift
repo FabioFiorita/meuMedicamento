@@ -2,7 +2,6 @@ import Foundation
 import UserNotifications
 
 final class NotificationManager: ObservableObject {
-    @Published private(set) var notifications: [UNNotificationRequest] = []
     @Published private(set) var authorizationStatus: UNAuthorizationStatus?
     
     func reloadAuthorizationStatus() {
@@ -21,12 +20,9 @@ final class NotificationManager: ObservableObject {
         }
     }
     
-    func reloadLocalNotifications() {
-        UNUserNotificationCenter.current().getPendingNotificationRequests { notifications in
-            DispatchQueue.main.async {
-                self.notifications = notifications
-            }
-        }
+    func removeLocalNotifications() {
+        UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
+        print("Notificações deletadas")
     }
     
     func createLocalNotificationByDateMatching(identifier: String, title: String, hour: Int, minute: Int, completion: @escaping (Error?) -> Void) {
@@ -56,8 +52,6 @@ final class NotificationManager: ObservableObject {
         notificationContent.sound = .default
         notificationContent.body = "Abra o App para tomar o Medicamento!"
         notificationContent.interruptionLevel = .timeSensitive
-        
-        
         
         let request = UNNotificationRequest(identifier: identifier, content: notificationContent, trigger: trigger)
         UNUserNotificationCenter.current().add(request, withCompletionHandler: completion)

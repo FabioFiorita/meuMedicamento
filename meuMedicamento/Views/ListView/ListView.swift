@@ -51,16 +51,17 @@ struct ListView: View {
                 }
             })
             .onAppear(perform: {
+                medicationManager.fetchMedications()
                 notificationManager.reloadAuthorizationStatus()
                 UNUserNotificationCenter.current().delegate = delegate
-                medicationManager.fetchMedications()
+                medicationManager.reloadNotifications()
             })
             .onChange(of: notificationManager.authorizationStatus) { authorizationStatus in
                 switch authorizationStatus {
                 case .notDetermined:
                     notificationManager.requestAuthorization()
                 case .authorized:
-                    notificationManager.reloadLocalNotifications()
+                    break
                 case .denied:
                     self.authorizationDenied = true
                 default:
