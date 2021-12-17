@@ -30,11 +30,9 @@ struct HistoricView: View {
                                 Text("Total")
                                     .font(.largeTitle)
                                     .bold()
-                                HStack(alignment: .center) {
                                     HistoricComponents(inTime: $inTime, late: $late, missed: $missed, isTotal: true)
-                                }
-                                .frame(minWidth: 0, maxWidth: .infinity)
                             }
+                            .frame(maxWidth: .infinity)
                             .accessibilityElement(children: .combine)
                         }
                         .groupBoxStyle(PrimaryGroupBoxStyle())
@@ -42,22 +40,18 @@ struct HistoricView: View {
                             GroupBox {
                                 VStack(alignment: .center, spacing: 5) {
                                     Text("Últimos 7 dias")
-                                    HStack {
                                         HistoricComponents(inTime: $inTime7, late: $late7, missed: $missed7, isTotal: false)
-                                    }
                                 }
-                                .frame(minWidth: 0, maxWidth: .infinity)
+                                .frame(maxWidth: .infinity)
                                 .accessibilityElement(children: .combine)
                             }
                             .groupBoxStyle(PrimaryGroupBoxStyle())
                             GroupBox {
                                 VStack(alignment: .center, spacing: 5) {
                                     Text("Últimos 30 dias")
-                                    HStack {
                                         HistoricComponents(inTime: $inTime30, late: $late30, missed: $missed30, isTotal: false)
-                                    }
                                 }
-                                .frame(minWidth: 0, maxWidth: .infinity)
+                                .frame(maxWidth: .infinity)
                                 .accessibilityElement(children: .combine)
                             }
                             .groupBoxStyle(PrimaryGroupBoxStyle())
@@ -77,6 +71,9 @@ struct HistoricView: View {
                     Spacer()
                 }
                 .onAppear {
+                    medicationManager.deleteHistories()
+                    medicationManager.fetchHistories()
+                    medicationManager.fetchMedications()
                     inTime = medicationManager.fetchHistoric(forStatus: .inTime, forType: .all)
                     late = medicationManager.fetchHistoric(forStatus: .late, forType: .all)
                     missed = medicationManager.fetchHistoric(forStatus: .missed, forType: .all)
@@ -86,8 +83,6 @@ struct HistoricView: View {
                     inTime30 = medicationManager.fetchHistoric(forStatus: .inTime, forType: .all30Days)
                     late30 = medicationManager.fetchHistoric(forStatus: .late, forType: .all30Days)
                     missed30 = medicationManager.fetchHistoric(forStatus: .missed, forType: .all30Days)
-                    medicationManager.fetchMedications()
-                    
                 }
                 
             }

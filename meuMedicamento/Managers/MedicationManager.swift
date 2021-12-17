@@ -35,6 +35,8 @@ final class MedicationManager: ObservableObject {
                 print("ERROR LOADING CORE DATA. \(error)")
             }
         }
+        //let options = NSPersistentCloudKitContainerSchemaInitializationOptions()
+        //try? container.initializeCloudKitSchema(options: options)
         container.viewContext.automaticallyMergesChangesFromParent = true
         container.viewContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
         fetchMedications()
@@ -51,14 +53,28 @@ final class MedicationManager: ObservableObject {
         }
     }
     
-    
-    func fetchHistoric (forStatus status: historicStatus, forType type: historicType, medication: Medication? = nil) -> Int {
+    func fetchHistories() {
         let request = NSFetchRequest<Historic>(entityName: "Historic")
         do {
             savedHistoric = try container.viewContext.fetch(request)
         } catch {
             print("Error fetching \(error)")
         }
+    }
+    
+    func deleteHistories() {
+        let histories = savedHistoric
+        for historic in histories {
+            if historic.medication == nil {
+                container.viewContext.delete(historic)
+            }
+        }
+        _ = saveData()
+    }
+    
+    
+    func fetchHistoric (forStatus status: historicStatus, forType type: historicType, medication: Medication? = nil) -> Int {
+        fetchHistories()
         let sevenDays = 7.days.inSeconds.value * -1
         let thirtyDays = 30.days.inSeconds.value  * -1
         switch status {
@@ -163,13 +179,13 @@ final class MedicationManager: ObservableObject {
     func saveData() -> medicationResult {
         var sucess: medicationResult = .sucess;
         if container.viewContext.hasChanges {
-        do {
-            try container.viewContext.save()
-            fetchMedications()
-        } catch let error {
-            print("Error saving \(error)")
-            sucess = .viewContextError
-        }
+            do {
+                try container.viewContext.save()
+                fetchMedications()
+            } catch let error {
+                print("Error saving \(error)")
+                sucess = .viewContextError
+            }
         }
         return sucess
     }
@@ -267,129 +283,153 @@ final class MedicationManager: ObservableObject {
     func updateRemainingQuantity(medication: Medication) -> medicationResult {
         var situation: medicationResult = .sucess
         if medication.remainingQuantity > 1 {
-            if Double(medication.remainingQuantity) <= Double(medication.boxQuantity) * (userSettings.limitMedication/100.0) {
-                if userSettings.limitNotification {
-                    print("USERDEFAULTS-----------")
-                    print(userSettings.limitNotification)
-                    print(userSettings.limitMedication)
-                    print("---------------------------")
-                    let identifier = (medication.id ?? UUID().uuidString) + "-Repiting"
-                    let dateMatching = Calendar.current.dateComponents([.hour,.minute], from: userSettings.limitDate)
-                    let hour = dateMatching.hour
-                    let minute = dateMatching.minute
-                    notificationManager.deleteLocalNotifications(identifiers: [identifier])
-                    notificationManager.createLocalNotificationByDateMatching(identifier: identifier, title: "Comprar \(medication.name ?? "Medicamento")", hour: hour ?? 12, minute: minute ?? 00) { error in
-                        if error == nil {
-                            situation = .sucess
-                            print("Notificação criada com id: \(identifier)")
-                        } else {
-                            situation = .notificationDateMatchingError
-                        }
+        situation = scheduleQuantityNotification(forMedication: medication)
+        medication.remainingQuantity -= 1
+        let historic = Historic(context: container.viewContext)
+        historic.dates = Date()
+        historic.medication = medication
+        if !(medication.repeatPeriod == "Nunca") {
+            rescheduleNotification(forMedication: medication, forHistoric: historic)
+        }
+        situation = saveData()
+    } else {
+        deleteMedication(medication: medication)
+    }
+    return situation
+}
+
+func scheduleQuantityNotification(forMedication medication: Medication) -> medicationResult {
+    var situation: medicationResult = .sucess
+    if medication.remainingQuantity > 1 {
+        if Double(medication.remainingQuantity) <= Double(medication.boxQuantity) * (userSettings.limitMedication/100.0) {
+            if userSettings.limitNotification {
+                print("USERDEFAULTS-----------")
+                print(userSettings.limitNotification)
+                print(userSettings.limitMedication)
+                print("---------------------------")
+                let identifier = (medication.id ?? UUID().uuidString) + "-Repiting"
+                let dateMatching = Calendar.current.dateComponents([.hour,.minute], from: userSettings.limitDate)
+                let hour = dateMatching.hour
+                let minute = dateMatching.minute
+                notificationManager.deleteLocalNotifications(identifiers: [identifier])
+                notificationManager.createLocalNotificationByDateMatching(identifier: identifier, title: "Comprar \(medication.name ?? "Medicamento")", hour: hour ?? 12, minute: minute ?? 00) { error in
+                    if error == nil {
+                        situation = .sucess
+                        print("Notificação criada com id: \(identifier)")
+                    } else {
+                        situation = .notificationDateMatchingError
                     }
                 }
             }
-            medication.remainingQuantity -= 1
-            let historic = Historic(context: container.viewContext)
-            historic.dates = Date()
-            historic.medication = medication
-            if !(medication.repeatPeriod == "Nunca") {
-                rescheduleNotification(forMedication: medication, forHistoric: historic)
-            }
-            situation = saveData()
-        } else {
-            deleteMedication(medication: medication)
         }
-        return situation
     }
-    
-    func nextDates(forMedication medication: Medication) -> [Date] {
-        guard let date1 = medication.date else {
-            return []
-        }
-        let date2 = Date(timeInterval: medication.repeatSeconds, since: date1)
-        let date3 = Date(timeInterval: medication.repeatSeconds, since: date2)
-        let date4 = Date(timeInterval: medication.repeatSeconds, since: date3)
-        let dates = [date1,date2,date3, date4]
-        return dates
+    return situation
+}
+
+func nextDates(forMedication medication: Medication) -> [Date] {
+    guard let date1 = medication.date else {
+        return []
     }
-    
-    func rescheduleNotification(forMedication medication: Medication, forHistoric historic: Historic) {
-        medicationStatus(forMedication: medication, forHistoric: historic)
-        if medication.notificationType == "Regularmente" {
-            medication.date = Date(timeInterval: medication.repeatSeconds, since: medication.date ?? Date())
-        } else {
-            medication.date = Date(timeIntervalSinceNow: medication.repeatSeconds)
+    let date2 = Date(timeInterval: medication.repeatSeconds, since: date1)
+    let date3 = Date(timeInterval: medication.repeatSeconds, since: date2)
+    let date4 = Date(timeInterval: medication.repeatSeconds, since: date3)
+    let dates = [date1,date2,date3, date4]
+    return dates
+}
+
+func rescheduleNotification(forMedication medication: Medication, forHistoric historic: Historic) {
+    medicationStatus(forMedication: medication, forHistoric: historic)
+    if medication.notificationType == "Regularmente" {
+        medication.date = Date(timeInterval: medication.repeatSeconds, since: medication.date ?? Date())
+    } else {
+        medication.date = Date(timeIntervalSinceNow: medication.repeatSeconds)
+    }
+    guard let timeInterval = medication.date?.timeIntervalSinceNow else {return}
+    guard let identifier = medication.id else {return}
+    if timeInterval > 0 {
+        notificationManager.deleteLocalNotifications(identifiers: [identifier])
+        notificationManager.createLocalNotificationByTimeInterval(identifier: identifier, title: "Tomar \(medication.name ?? "Medicamento")", timeInterval: timeInterval) { error in
+            if error == nil {}
         }
-        guard let timeInterval = medication.date?.timeIntervalSinceNow else {return}
-        guard let identifier = medication.id else {return}
-        if timeInterval > 0 {
-            notificationManager.deleteLocalNotifications(identifiers: [identifier])
+    } else {
+        rescheduleNotification(forMedication: medication, forHistoric: historic)
+        historic.medicationStatus = "Não tomou"
+    }
+}
+
+func reloadNotifications() {
+    notificationManager.removeLocalNotifications()
+    for medication in savedMedications {
+        guard let date = medication.date else {return}
+        if date.timeIntervalSinceNow > 0.0 {
+            let timeInterval = date.timeIntervalSinceNow
+            guard let identifier = medication.id else {return}
+            print("Reagendando notificação para \(medication.name ?? "Medicamento")")
             notificationManager.createLocalNotificationByTimeInterval(identifier: identifier, title: "Tomar \(medication.name ?? "Medicamento")", timeInterval: timeInterval) { error in
                 if error == nil {}
             }
-        } else {
-            rescheduleNotification(forMedication: medication, forHistoric: historic)
-            historic.medicationStatus = "Não tomou"
         }
+        _ = scheduleQuantityNotification(forMedication: medication)
     }
-    
-    func medicationStatus(forMedication medication: Medication, forHistoric historic: Historic) {
-        var timeIntervalComparation = 0.0
-        if let timeIntervalDate = medication.date?.timeIntervalSince(historic.dates ?? Date()) {
-            timeIntervalComparation = timeIntervalDate
-        }
-        if timeIntervalComparation < -900.0 {
-            historic.medicationStatus = "Atrasado"
-        } else {
-            historic.medicationStatus = "Sem Atraso"
-        }
+}
+
+func medicationStatus(forMedication medication: Medication, forHistoric historic: Historic) {
+    var timeIntervalComparation = 0.0
+    if let timeIntervalDate = medication.date?.timeIntervalSince(historic.dates ?? Date()) {
+        timeIntervalComparation = timeIntervalDate
     }
-    
-    func refreshRemainingQuantity(medication: Medication) {
-        medication.remainingQuantity += medication.boxQuantity
-        let sucess = saveData()
-        print(sucess)
-        guard let id = medication.id else {return}
-        let identifier = id + "-Repiting"
-        notificationManager.deleteLocalNotifications(identifiers: [identifier])
+    if timeIntervalComparation < -900.0 {
+        historic.medicationStatus = "Atrasado"
+    } else {
+        historic.medicationStatus = "Sem Atraso"
     }
-    
-    func convertToSeconds(_ time: String) -> Double {
-        var seconds = 3.0
-        switch time {
-        case "Nunca":
-            seconds = 0.0
-        case "1 hora":
-            seconds = 1.hours.inSeconds.value
-        case "2 horas":
-            seconds = 2.hours.inSeconds.value
-        case "4 horas":
-            seconds = 4.hours.inSeconds.value
-        case "6 horas":
-            seconds = 6.hours.inSeconds.value
-        case "8 horas":
-            seconds = 8.hours.inSeconds.value
-        case "12 horas":
-            seconds = 12.hours.inSeconds.value
-        case "1 dia":
-            seconds = 1.days.inSeconds.value
-        case "2 dias":
-            seconds = 2.days.inSeconds.value
-        case "5 dias":
-            seconds = 5.days.inSeconds.value
-        case "1 semana":
-            seconds = 7.days.inSeconds.value
-        case "2 semanas":
-            seconds = 14.days.inSeconds.value
-        case "1 mês":
-            seconds = 30.days.inSeconds.value
-        case "3 meses":
-            seconds = 90.days.inSeconds.value
-        case "6 meses":
-            seconds = 180.days.inSeconds.value
-        default:
-            break
-        }
-        return seconds
+}
+
+func refreshRemainingQuantity(medication: Medication) {
+    medication.remainingQuantity += medication.boxQuantity
+    let sucess = saveData()
+    print(sucess)
+    guard let id = medication.id else {return}
+    let identifier = id + "-Repiting"
+    notificationManager.deleteLocalNotifications(identifiers: [identifier])
+}
+
+func convertToSeconds(_ time: String) -> Double {
+    var seconds = 3.0
+    switch time {
+    case "Nunca":
+        seconds = 0.0
+    case "1 hora":
+        seconds = 1.hours.inSeconds.value
+    case "2 horas":
+        seconds = 2.hours.inSeconds.value
+    case "4 horas":
+        seconds = 4.hours.inSeconds.value
+    case "6 horas":
+        seconds = 6.hours.inSeconds.value
+    case "8 horas":
+        seconds = 8.hours.inSeconds.value
+    case "12 horas":
+        seconds = 12.hours.inSeconds.value
+    case "1 dia":
+        seconds = 1.days.inSeconds.value
+    case "2 dias":
+        seconds = 2.days.inSeconds.value
+    case "5 dias":
+        seconds = 5.days.inSeconds.value
+    case "1 semana":
+        seconds = 7.days.inSeconds.value
+    case "2 semanas":
+        seconds = 14.days.inSeconds.value
+    case "1 mês":
+        seconds = 30.days.inSeconds.value
+    case "3 meses":
+        seconds = 90.days.inSeconds.value
+    case "6 meses":
+        seconds = 180.days.inSeconds.value
+    default:
+        break
     }
+    return seconds
+}
 }

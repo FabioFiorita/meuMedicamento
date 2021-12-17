@@ -26,21 +26,17 @@ struct MedicationHistoricView: View {
                         GroupBox {
                             VStack(alignment: .center, spacing: 5) {
                                 Text("Últimos 7 dias")
-                                HStack {
                                     HistoricComponents(inTime: $inTime7, late: $late7, missed: $missed7, isTotal: false)
-                                }
                             }
-                            .frame(minWidth: 0, maxWidth: .infinity)
+                            .frame(maxWidth: .infinity)
                         }
                         .groupBoxStyle(PrimaryGroupBoxStyle())
                         GroupBox {
                             VStack(alignment: .center, spacing: 5) {
                                 Text("Últimos 30 dias")
-                                HStack {
                                     HistoricComponents(inTime: $inTime30, late: $late30, missed: $missed30, isTotal: false)
-                                }
                             }
-                            .frame(minWidth: 0, maxWidth: .infinity)
+                            .frame(maxWidth: .infinity)
                         }
                         .groupBoxStyle(PrimaryGroupBoxStyle())
                     }
