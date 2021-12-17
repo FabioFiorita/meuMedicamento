@@ -14,57 +14,59 @@ struct HistoricComponents: View {
     @State var isTotal: Bool
     
     var body: some View {
-        Group {
+        HStack {
+            Spacer()
             VStack(alignment: .center, spacing: 10) {
                 if isTotal {
                     Text("No Horário")
-                        .font(.title3)
+                        //.font(.title3)
                         .accessibilityHidden(true)
                 }
                 Image(systemName: "checkmark.circle.fill")
                     .foregroundColor(.green)
                     .accessibility(label: Text("Sem atraso"))
                     .font(.title)
-                    .imageScale(.large)
+                    //.imageScale(.large)
                 Text("\(inTime)")
                     .font(.title)
             }
             .accessibilityElement(children: .ignore)
             .accessibilityLabel("Sem Atraso: \(inTime)")
-            
+            Spacer()
             VStack(alignment: .center, spacing: 10) {
                 if isTotal {
                     Text("Atrasado")
-                        .font(.title3)
+                        //.font(.title3)
                         .accessibilityHidden(true)
                 }
                 Image(systemName: "clock.fill")
                     .foregroundColor(.yellow)
                     .accessibility(label: Text("Atrasado"))
                     .font(.title)
-                    .imageScale(.large)
+                    //.imageScale(.large)
                 Text("\(late)")
                     .font(.title)
             }
             .accessibilityElement(children: .ignore)
             .accessibilityLabel("Atrasado: \(late)")
-            
+            Spacer()
             VStack(alignment: .center, spacing: 10) {
                 if isTotal {
                     Text("Não tomou")
-                        .font(.title3)
+                        //.font(.title3)
                         .accessibilityHidden(true)
                 }
                 Image(systemName: "xmark.circle.fill")
                     .foregroundColor(.red)
                     .accessibility(label: Text("Não tomou"))
                     .font(.title)
-                    .imageScale(.large)
+                    //.imageScale(.large)
                 Text("\(missed)")
                     .font(.title)
             }
             .accessibilityElement(children: .ignore)
             .accessibilityLabel("Não tomou: \(missed)")
+            Spacer()
         }
     }
 }
