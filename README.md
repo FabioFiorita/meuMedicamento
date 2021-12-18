@@ -10,7 +10,7 @@ meuMedicamento tem como objetivo ajudar pessoas a controlar seus medicamentos, p
 
 ## Interface
 
-<img src="https://raw.githubusercontent.com/FabioFiorita/meuMedicamento/gh-pages/images/list.jpg" width="350"> <img src="https://raw.githubusercontent.com/FabioFiorita/meuMedicamento/gh-pages/images/detail.jpg" width="350"> <img src="https://raw.githubusercontent.com/FabioFiorita/meuMedicamento/gh-pages/images/map.jpg" width="350"> <img src="https://raw.githubusercontent.com/FabioFiorita/meuMedicamento/gh-pages/images/settings.jpg" width="350"> <img src="https://raw.githubusercontent.com/FabioFiorita/meuMedicamento/gh-pages/images/darkmode.jpg" width="350">
+<img src="https://raw.githubusercontent.com/FabioFiorita/meuMedicamento/gh-pages/images/list.jpg" width="350"> <img src="https://raw.githubusercontent.com/FabioFiorita/meuMedicamento/gh-pages/images/detail.jpg" width="350"> <img src="https://raw.githubusercontent.com/FabioFiorita/meuMedicamento/gh-pages/images/historic.jpg" width="350"> <img src="https://raw.githubusercontent.com/FabioFiorita/meuMedicamento/gh-pages/images/medHistoric.jpg" width="350"> <img src="https://raw.githubusercontent.com/FabioFiorita/meuMedicamento/gh-pages/images/map.jpg" width="350"> <img src="https://raw.githubusercontent.com/FabioFiorita/meuMedicamento/gh-pages/images/settings.jpg" width="350"> <img src="https://raw.githubusercontent.com/FabioFiorita/meuMedicamento/gh-pages/images/darkmode.jpg" width="350">
 
 ## Funcionalidades existentes
 
@@ -27,6 +27,7 @@ meuMedicamento tem como objetivo ajudar pessoas a controlar seus medicamentos, p
 
 ### Contato: fabiolfp@gmail.com
 
-### [Política de Privacidade](https://fabiofiorita.github.io/meuMedicamento/privacyPolicy.html)
+### [Política de Privacidade](privacyPolicy.md)
 
-### [Termos de Uso](https://fabiofiorita.github.io/meuMedicamento/Terms&Conditions.html)
+### [Termos de Uso](Terms&Conditions.md)
+
