@@ -11,19 +11,6 @@
         }
       },
       "idiom" : "universal"
-    },
-    {
-      "appearances" : [
-        {
-          "appearance" : "luminosity",
-          "value" : "dark"
-        }
-      ],
-      "color" : {
-        "platform" : "universal",
-        "reference" : "systemBlueColor"
-      },
-      "idiom" : "universal"
     }
   ],
   "info" : {

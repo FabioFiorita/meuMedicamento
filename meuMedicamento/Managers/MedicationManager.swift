@@ -9,7 +9,7 @@ final class MedicationManager: ObservableObject {
     }
     
     enum historicStatus {
-        case inTime
+        case onTime
         case late
         case missed
     }
@@ -78,29 +78,29 @@ final class MedicationManager: ObservableObject {
         let sevenDays = 7.days.inSeconds.value * -1
         let thirtyDays = 30.days.inSeconds.value  * -1
         switch status {
-        case .inTime:
+        case .onTime:
             switch type {
             case .all:
-                let inTime = savedHistoric.filter({$0.medicationStatus == "Sem Atraso"}).count
-                return inTime
+                let onTime = savedHistoric.filter({$0.medicationStatus == "Sem Atraso"}).count
+                return onTime
             case .all7Days:
-                let inTime = savedHistoric.filter({$0.medicationStatus == "Sem Atraso" && $0.dates?.timeIntervalSinceNow ?? 0 >= sevenDays}).count
-                return inTime
+                let onTime = savedHistoric.filter({$0.medicationStatus == "Sem Atraso" && $0.dates?.timeIntervalSinceNow ?? 0 >= sevenDays}).count
+                return onTime
             case .all30Days:
-                let inTime = savedHistoric.filter({$0.medicationStatus == "Sem Atraso" && $0.dates?.timeIntervalSinceNow ?? 0 >= thirtyDays}).count
-                return inTime
+                let onTime = savedHistoric.filter({$0.medicationStatus == "Sem Atraso" && $0.dates?.timeIntervalSinceNow ?? 0 >= thirtyDays}).count
+                return onTime
             case .medication7Days:
                 guard let medication = medication else {
                     return 0
                 }
-                let inTime = savedHistoric.filter({$0.medicationStatus == "Sem Atraso" && $0.dates?.timeIntervalSinceNow ?? 0 >= sevenDays && $0.medication == medication}).count
-                return inTime
+                let onTime = savedHistoric.filter({$0.medicationStatus == "Sem Atraso" && $0.dates?.timeIntervalSinceNow ?? 0 >= sevenDays && $0.medication == medication}).count
+                return onTime
             case .medication30Days:
                 guard let medication = medication else {
                     return 0
                 }
-                let inTime = savedHistoric.filter({$0.medicationStatus == "Sem Atraso" && $0.dates?.timeIntervalSinceNow ?? 0 >= thirtyDays && $0.medication == medication}).count
-                return inTime
+                let onTime = savedHistoric.filter({$0.medicationStatus == "Sem Atraso" && $0.dates?.timeIntervalSinceNow ?? 0 >= thirtyDays && $0.medication == medication}).count
+                return onTime
             }
         case .late:
             switch type {
@@ -330,10 +330,15 @@ func nextDates(forMedication medication: Medication) -> [Date] {
     guard let date1 = medication.date else {
         return []
     }
-    let date2 = Date(timeInterval: medication.repeatSeconds, since: date1)
-    let date3 = Date(timeInterval: medication.repeatSeconds, since: date2)
-    let date4 = Date(timeInterval: medication.repeatSeconds, since: date3)
-    let dates = [date1,date2,date3, date4]
+    var dates = [date1]
+    if medication.repeatPeriod != "Nunca" {
+        let date2 = Date(timeInterval: medication.repeatSeconds, since: date1)
+        let date3 = Date(timeInterval: medication.repeatSeconds, since: date2)
+        let date4 = Date(timeInterval: medication.repeatSeconds, since: date3)
+        dates.append(date2)
+        dates.append(date3)
+        dates.append(date4)
+    }
     return dates
 }
 

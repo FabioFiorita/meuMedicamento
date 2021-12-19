@@ -28,11 +28,11 @@ struct RegistrationComponents: View {
             TextField("Quantidade Restante", text: $remainingQuantity)
                 .focused($focusedField, equals: .remainingQuantity)
                 .keyboardType(.numberPad)
-                .tint(Color("main"))
+                .tint(Color("AccentColor"))
             TextField("Quantidade na Caixa", text: $boxQuantity)
                 .focused($focusedField, equals: .boxQuantity)
                 .keyboardType(.numberPad)
-                .tint(Color("main"))
+                .tint(Color("AccentColor"))
             Section {
                 notificationTypePicker
                 Group {
@@ -55,7 +55,7 @@ struct RegistrationComponents: View {
                 TextEditor(text: $notes)
             }
         }
-        .accentColor(Color("main"))
+        .accentColor(Color("AccentColor"))
         .onSubmit {
             switch focusedField {
             case .name:
@@ -80,7 +80,7 @@ struct RegistrationComponents: View {
                     }
                 } label: {
                     Label("Campo anterior", systemImage: "arrow.up")
-                        .tint(Color("main"))
+                        .tint(Color("AccentColor"))
                 }
                 Button {
                     switch focusedField {
@@ -95,7 +95,7 @@ struct RegistrationComponents: View {
                     }
                 } label: {
                     Label("Próximo Campo", systemImage: "arrow.down")
-                        .tint(Color("main"))
+                        .tint(Color("AccentColor"))
                 }
             }
         })

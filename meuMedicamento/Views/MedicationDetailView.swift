@@ -42,10 +42,9 @@ struct MedicationDetailView: View {
         GroupBox {
             VStack(alignment: .leading, spacing: 10.0) {
                     Label("Detalhes", systemImage: "doc.text")
-                        .foregroundColor(Color("main"))
+                        .foregroundColor(Color("AccentColor"))
                         .font(.title3)
-                        .accessibilityHidden(true)
-                Text("Quantidade restantes: \(medication.remainingQuantity)")
+                Text("Quantidade restante: \(medication.remainingQuantity)")
                 Text("Quantidade na caixa: \(medication.boxQuantity)")
                 Text("Modo de Ingestão: \(medication.notificationType ?? "")")
                 Group {
@@ -60,7 +59,7 @@ struct MedicationDetailView: View {
                     Text("Renovar Medicamentos")
                         .frame(minWidth: 0, maxWidth: .infinity, alignment: .center)
                         .padding()
-                        .background(Color("main"))
+                        .background(Color("AccentColor"))
                         .cornerRadius(10.0)
                         .foregroundColor(.white)
                 }
@@ -75,9 +74,8 @@ struct MedicationDetailView: View {
                 GroupBox {
                     VStack(alignment: .leading, spacing: 10.0){
                             Label("Notas", systemImage: "note.text")
-                                .foregroundColor(Color("main"))
+                                .foregroundColor(Color("AccentColor"))
                                 .font(.title3)
-                                .accessibilityHidden(true)
                         Text("\(medication.notes ?? "")")
                             .padding()
                     }
@@ -91,9 +89,8 @@ struct MedicationDetailView: View {
         GroupBox {
             VStack(alignment: .leading, spacing: 10.0) {
                     Label("Próximos Medicamentos", systemImage: "calendar")
-                        .foregroundColor(Color("main"))
+                        .foregroundColor(Color("AccentColor"))
                         .font(.title3)
-                        .accessibilityHidden(true)
                 ForEach(dates, id: \.self){ date in
                         Text("\(date, formatter: itemFormatter)")
                     }
