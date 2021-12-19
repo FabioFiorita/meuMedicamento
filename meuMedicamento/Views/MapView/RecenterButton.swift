@@ -9,7 +9,7 @@ struct RecenterButton: View {
             Label("Centralizar", systemImage: "triangle")
         }).padding(10)
         .foregroundColor(.white)
-        .background(Color("main"))
+        .background(Color("AccentColor"))
         .clipShape(RoundedRectangle(cornerRadius: 16.0, style: /*@START_MENU_TOKEN@*/.continuous/*@END_MENU_TOKEN@*/))
     }
 }

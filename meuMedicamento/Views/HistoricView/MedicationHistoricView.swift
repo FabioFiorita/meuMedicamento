@@ -10,10 +10,10 @@ import SwiftUI
 struct MedicationHistoricView: View {
     @ObservedObject var medicationManager: MedicationManager
     @ObservedObject var medication: Medication
-    @State private var inTime7 = 0
+    @State private var onTime7 = 0
     @State private var late7 = 0
     @State private var missed7 = 0
-    @State private var inTime30 = 0
+    @State private var onTime30 = 0
     @State private var late30 = 0
     @State private var missed30 = 0
     @State private var historicCount = 7
@@ -26,7 +26,7 @@ struct MedicationHistoricView: View {
                         GroupBox {
                             VStack(alignment: .center, spacing: 5) {
                                 Text("Últimos 7 dias")
-                                    HistoricComponents(inTime: $inTime7, late: $late7, missed: $missed7, isTotal: false)
+                                    HistoricComponents(onTime: $onTime7, late: $late7, missed: $missed7, isTotal: false)
                             }
                             .frame(maxWidth: .infinity)
                         }
@@ -34,7 +34,7 @@ struct MedicationHistoricView: View {
                         GroupBox {
                             VStack(alignment: .center, spacing: 5) {
                                 Text("Últimos 30 dias")
-                                    HistoricComponents(inTime: $inTime30, late: $late30, missed: $missed30, isTotal: false)
+                                    HistoricComponents(onTime: $onTime30, late: $late30, missed: $missed30, isTotal: false)
                             }
                             .frame(maxWidth: .infinity)
                         }
@@ -50,10 +50,10 @@ struct MedicationHistoricView: View {
                 }
                 .padding()
                 .onAppear {
-                    inTime7 = medicationManager.fetchHistoric(forStatus: .inTime, forType: .medication7Days, medication: medication)
+                    onTime7 = medicationManager.fetchHistoric(forStatus: .onTime, forType: .medication7Days, medication: medication)
                     late7 = medicationManager.fetchHistoric(forStatus: .late, forType: .medication7Days, medication: medication)
                     missed7 = medicationManager.fetchHistoric(forStatus: .missed, forType: .medication7Days, medication: medication)
-                    inTime30 = medicationManager.fetchHistoric(forStatus: .inTime, forType: .medication30Days, medication: medication)
+                    onTime30 = medicationManager.fetchHistoric(forStatus: .onTime, forType: .medication30Days, medication: medication)
                     late30 = medicationManager.fetchHistoric(forStatus: .late, forType: .medication30Days, medication: medication)
                     missed30 = medicationManager.fetchHistoric(forStatus: .missed, forType: .medication30Days, medication: medication)
                 }
@@ -101,9 +101,13 @@ struct MedicationHistoricView: View {
             .accessibilityAdjustableAction { value in
                 switch value {
                 case .increment:
-                    historicCount += 1
+                    if historicCount < 31 {
+                        historicCount += 1
+                    }
                 case .decrement:
-                    historicCount -= 1
+                    if historicCount > 0 {
+                        historicCount -= 1
+                    }
                 default:
                     print("Não utilizado")
                 }

@@ -76,7 +76,7 @@ struct SettingsView: View {
                     Text("Salvar Configurações")
                         .frame(minWidth: 0, maxWidth: .infinity, alignment: .center)
                         .padding()
-                        .background(Color("main"))
+                        .background(Color("AccentColor"))
                         .cornerRadius(10.0)
                         .foregroundColor(.white)
                 }

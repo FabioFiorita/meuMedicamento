@@ -19,7 +19,7 @@ struct LandmarkCategoryView: View {
                         Text(category)
                     }).padding(15)
                     .foregroundColor(Color.white)
-                    .background(selectedCategory == category ? Color("main"): Color.gray)
+                    .background(selectedCategory == category ? Color("AccentColor"): Color.gray)
                     .clipShape(RoundedRectangle(cornerRadius: 16.0, style: /*@START_MENU_TOKEN@*/.continuous/*@END_MENU_TOKEN@*/))
                     
                     

@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct HistoricComponents: View {
-    @Binding var inTime: Int
+    @Binding var onTime: Int
     @Binding var late: Int
     @Binding var missed: Int
     @State var isTotal: Bool
@@ -27,11 +27,11 @@ struct HistoricComponents: View {
                     .accessibility(label: Text("Sem atraso"))
                     .font(.title)
                     //.imageScale(.large)
-                Text("\(inTime)")
+                Text("\(onTime)")
                     .font(.title)
             }
             .accessibilityElement(children: .ignore)
-            .accessibilityLabel("Sem Atraso: \(inTime)")
+            .accessibilityLabel("Sem Atraso: \(onTime)")
             Spacer()
             VStack(alignment: .center, spacing: 10) {
                 if isTotal {
