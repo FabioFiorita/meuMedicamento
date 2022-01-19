@@ -1,0 +1,117 @@
+/* 
+  Localizable.strings
+  meuMedicamento
+
+  Created by Fabio Fiorita on 18/01/22.
+  
+*/
+
+"Medicamentos" = "Medications";
+"Hoje" = "Today";
+"Medicamentos restantes" = "Remaining medications";
+"Próximo" = "Upcoming";
+"Próximos" = "Upcoming";
+"Novo Medicamento" = "New Medication";
+"Nome do Medicamento" = "Medication Name";
+"Quantidade Restante" = "Remaining Quantity";
+"Quantidade na Caixa" = "Quantity in the Box";
+"Após Conclusão" = "After Completion";
+"Regularmente" = "Regularly";
+"O próximo medicamento será agendado seguindo a data da última conclusão" = "
+The next medication will be scheduled following the last completion date";
+"O próximo medicamento será agendado seguindo a data definida" = "
+The next medication will be scheduled following the defined date";
+"Data de Início" = "Start date";
+"Repetir" = "Repeat";
+"Nunca" = "Never";
+"1 hora" = "1 hour";
+"2 hora" = "2 hours";
+"4 hora" = "4 hours";
+"6 hora" = "6 hours";
+"8 hora" = "8 hours";
+"12 hora" = "12 hours";
+"1 dia" = "1 day";
+"2 dias" = "2 days";
+"5 dias" = "5 days";
+"1 semana" = "1 week";
+"1 mês" = "1 month";
+"3 meses" = "3 months";
+"6 meses" = "6 months";
+"Notas" = "Notes";
+"Cancelar" = "Cancel";
+"Salvar" =  "Save";
+"Editar" = "Edit";
+"Abrir Ajustes" = "Open Settings";
+"Abra o App Ajustes e habilite as notificações para monitorar seus medicamentos" = "Open the Settings App and enable notifications to monitor your medications";
+"Tomar Medicamento" = "Take medicine";
+"Editar Medicamento" = "Edit Medication";
+"Configure a data de início novamente" = "Set the start date again";
+"Histórico" = "Historic";
+"Mapa" = "Map";
+"Ajustes" = "Settings";
+"Adicionar novo medicamento" = "add new medication";
+"Notificações desativadas" = "Notifications are turned off";
+"Renovar Quantidade" = "Renew Quantity";
+"Ver Histórico" = "View History";
+"Deletar Medicamento" = "Delete Medication";
+"Apagar" = "Delete";
+"Erro na hora de agendar a notificação" = "Error when scheduling notification";
+"Erro na hora de cadastrar o medicamento" = "Error when registering the medication";
+"Reinicie o aplicativo" = "Restart the app";
+"OK" = "OK";
+"Sem Título" = "Untitled";
+"Total" = "Total";
+"Últimos 7 dias" = "Last 7 days";
+"Últimos 30 dias" = "Last 30 days";
+"Sem Atraso" = "On Time";
+"Atrasado" = "Late";
+"Não tomou" = "Missed";
+"Situação não encontrada" = "Situation not found";
+"Status Inderteminado" = "Indeterminate Status";
+"Histórico dos últimos" = "History of the last";
+"medicamentos" = "medications";
+"Quantidade no Histórico" = "Quantity in History";
+"Histórico dos últimos medicamentos" = "History of the last medications";
+"Não utilizado" = "Not used";
+"No Horário" = "On Time";
+"Buscar" = "Search";
+"Selecione" = "Select";
+"Lista" = "List";
+"Centralizar" = "Centralize";
+"Farmácias" = "Pharmacies";
+"Hospitais" = "Hospitals";
+"Erro na criação do medicamento" = "Error when creating the medication";
+"Cadastre novamente" = "Register Again";
+"Editar Medicamento" = "Edit Medication";
+"Erro na edição do medicamento" = "Error when editing the medication";
+"Campo anterior" = "Previous Field";
+"Próximo Campo" = "Next Field";
+"Tipo de Notificação" = "Notification Type";
+"Detalhes" = "Details";
+"Modo de Ingestão" = "Ingestion Mode";
+"Repetição: A Cada" = "Repeat: Every";
+"Renovar Medicamentos" = "Renew Medicines";
+"Próximos Medicamentos" = "Upcoming Medications";
+"Deseja ser notificado quando estiver acabando seus remédios?" = "Want to be notified when your meds are running low?";
+"Começar a notificar quando a quantidade chegar em" = "Start notifying when quantity reaches";
+"do total" = "of the total";
+"Porcentagem do Total" = "Percentage of Total";
+"Começar a notificar quando a quantidade chegar % do total" = "Start notifying when quantity reaches % of total";
+"Não utilizado" = "Not used";
+"Horario para as notificações" = "Time for notifications";
+"Seletor de Horário" = "Time Selector";
+"Salvar Configurações" = "Save Settings";
+"Configurações atualizadas com sucesso" = "Settings updated successfully";
+"Avalie!" = "Rate!";
+"Sobre-nós" = "About Us";
+"Fale Conosco" = "Contact us";
+"Termos de Uso" = "Terms of Use";
+"Política de Privacidade" = "Privacy Policy";
+"Bem Vindo ao meuMedicamento." = "Welcome to meuMedication.";
+"Organize seus medicamentos" = "Organize your medications";
+"Confira uma lista dos seus medicamentos, controle a sua frequência e receba alertas quando seus remédios estiverem acabando." = "Check a list of your medicines, control your frequency and get alert when your medicines are running low.";
+"Controle suas ingestões" = "Control your intakes";
+"Acompanhe um histórico, verificando se os remédios foram tomados no horário correto, atrasados ou esquecidos." = "Keep track of a history, checking if medications were taken at the correct time, late or forgotten.";
+"Mapa Integrado" = "Integrated Map";
+"Encontre farmácias e hospitais próximos." = "Find nearby pharmacies and hospitals.";
+"Começar a usar" = "Start Using";

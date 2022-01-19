@@ -22,7 +22,7 @@ struct CellComponents: View {
     }
     
     private func medicationName(forMedication medication: Medication) -> some View {
-        Text(medication.name ?? "Untitled").font(.title)
+        Text(medication.name ?? "Sem Título").font(.title)
     }
     private func medicationRemainingQuantity(forMedication medication: Medication) -> some View {
         Group {
