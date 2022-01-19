@@ -15,10 +15,10 @@ struct AddMedicationView: View {
     var body: some View {
         NavigationView {
             RegistrationComponents(name: $name, remainingQuantity: $remainingQuantity, boxQuantity: $boxQuantity, notificationType: $notificationType, date: $date, repeatPeriod: $repeatPeriod, notes: $notes)
-            .navigationBarTitle("Novo Medicamento")
+            .navigationBarTitle(LocalizedStringKey("Novo Medicamento"))
             .toolbar {
                 ToolbarItem {
-                    Button("Salvar", action: {
+                    Button(LocalizedStringKey("Salvar"), action: {
                         if addMedication() == .sucess {
                             showAlert = false
                             dismiss()
@@ -29,13 +29,13 @@ struct AddMedicationView: View {
                         
                     })
                     .alert(isPresented: $showAlert, content: {
-                        let alert = Alert(title: Text("Erro na criação do medicamento"), message: Text("Cadastre novamente"), dismissButton: Alert.Button.default(Text("OK")))
+                        let alert = Alert(title: Text(LocalizedStringKey("Erro na criação do medicamento")), message: Text(LocalizedStringKey("Cadastre novamente")), dismissButton: Alert.Button.default(Text(LocalizedStringKey("OK"))))
                         return alert
                     })
                     .keyboardShortcut("s")
                 }
                 ToolbarItem(placement: .navigationBarLeading) {
-                    Button("Cancelar", action: {
+                    Button(LocalizedStringKey("Cancelar"), action: {
                         dismiss()
                     })
                 }

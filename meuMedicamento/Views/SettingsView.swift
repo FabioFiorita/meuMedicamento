@@ -29,7 +29,7 @@ struct SettingsView: View {
                         }
                     .padding()
                 }
-                .navigationBarTitle("Ajustes")
+                .navigationBarTitle(LocalizedStringKey("Ajustes"))
         }
         .navigationViewStyle(.stack)
     }
@@ -37,17 +37,17 @@ struct SettingsView: View {
         GroupBox {
             VStack(alignment: .leading, spacing: 10.0) {
                 Toggle(isOn: $limitNotification) {
-                    Text("Deseja ser notificado quando estiver acabando seus remédios?")
+                    Text(LocalizedStringKey("Deseja ser notificado quando estiver acabando seus remédios?"))
                 }
                 .accessibility(identifier: "Toggle")
                 HStack {
-                    Text("Começar a notificar quando a quantidade chegar em: ") + Text("\(Int(limitMedication))%").foregroundColor(.red).bold() + Text(" do total")
+                    Text(LocalizedStringKey("Começar a notificar quando a quantidade chegar em: ")) + Text("\(Int(limitMedication))%").foregroundColor(.red).bold() + Text(LocalizedStringKey(" do total"))
                     Spacer()
-                    Stepper("Porcentagem do Total", value: $limitMedication, in: 0.0...100.0)
+                    Stepper(LocalizedStringKey("Porcentagem do Total"), value: $limitMedication, in: 0.0...100.0)
                         .labelsHidden()
                 }
                 .accessibilityElement(children: .ignore)
-                .accessibilityLabel("Começar a notificar quando a quantidade chegar % do total")
+                .accessibilityLabel(LocalizedStringKey("Começar a notificar quando a quantidade chegar % do total"))
                 .accessibilityValue(String(limitMedication))
                 .accessibilityAdjustableAction { value in
                     switch value {
@@ -61,9 +61,9 @@ struct SettingsView: View {
                 }
                 
                 HStack {
-                    Text("Horario para as notificações:")
+                    Text(LocalizedStringKey("Horario para as notificações:"))
                     Spacer()
-                    DatePicker("Seletor de Horário", selection: $limitDate, displayedComponents: .hourAndMinute)
+                    DatePicker(LocalizedStringKey("Seletor de Horário"), selection: $limitDate, displayedComponents: .hourAndMinute)
                         .labelsHidden()
                 }
                 .accessibilityElement(children: .combine)
@@ -73,7 +73,7 @@ struct SettingsView: View {
                     userSettings.limitDate = limitDate
                     didSave = true
                 }) {
-                    Text("Salvar Configurações")
+                    Text(LocalizedStringKey("Salvar Configurações"))
                         .frame(minWidth: 0, maxWidth: .infinity, alignment: .center)
                         .padding()
                         .background(Color("AccentColor"))
@@ -81,7 +81,7 @@ struct SettingsView: View {
                         .foregroundColor(.white)
                 }
                 .alert(isPresented: $didSave, content: {
-                    Alert(title: Text("Configurações atualizadas com sucesso"), message: nil, dismissButton: .cancel(Text("OK")))
+                    Alert(title: Text(LocalizedStringKey("Configurações atualizadas com sucesso")), message: nil, dismissButton: .cancel(Text(LocalizedStringKey("OK"))))
                 })
             }
             .onAppear {
@@ -113,7 +113,7 @@ struct SettingsView: View {
                         userSettings.reviewCount += 1
                     }
                 }) {
-                    Text("Avalie!")
+                    Text(LocalizedStringKey("Avalie!"))
                     Spacer()
                     Image(systemName: "chevron.right")
                         .foregroundColor(Color.secondary)
@@ -123,7 +123,7 @@ struct SettingsView: View {
                 Button(action: {
                     openURL(URL(string: "https://fabiofiorita.github.io/meuMedicamento")!)
                 }) {
-                    Text("Sobre-nós")
+                    Text(LocalizedStringKey("Sobre-nós"))
                     Spacer()
                     Image(systemName: "chevron.right")
                         .foregroundColor(Color.secondary)
@@ -133,7 +133,7 @@ struct SettingsView: View {
                 Button(action: {
                     showEmailComposer = true
                 }) {
-                    Text("Fale Conosco")
+                    Text(LocalizedStringKey("Fale Conosco"))
                     Spacer()
                     Image(systemName: "chevron.right")
                         .foregroundColor(Color.secondary)
@@ -154,7 +154,7 @@ struct SettingsView: View {
                 Button(action: {
                     openURL(URL(string: "https://fabiofiorita.github.io/meuMedicamento/Terms&Conditions.html")!)
                 }) {
-                    Text("Termos de Uso")
+                    Text(LocalizedStringKey("Termos de Uso"))
                     Spacer()
                     Image(systemName: "chevron.right")
                         .foregroundColor(Color.secondary)
@@ -164,7 +164,7 @@ struct SettingsView: View {
                 Button(action: {
                     openURL(URL(string: "https://fabiofiorita.github.io/meuMedicamento/privacyPolicy.html")!)
                 }, label: {
-                    Text("Política de Privacidade")
+                    Text(LocalizedStringKey("Política de Privacidade"))
                     Spacer()
                     Image(systemName: "chevron.right")
                         .foregroundColor(Color.secondary)

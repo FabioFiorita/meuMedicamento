@@ -18,13 +18,13 @@ struct HistoricComponents: View {
             Spacer()
             VStack(alignment: .center, spacing: 10) {
                 if isTotal {
-                    Text("No Horário")
+                    Text(LocalizedStringKey("No Horário"))
                         //.font(.title3)
                         .accessibilityHidden(true)
                 }
                 Image(systemName: "checkmark.circle.fill")
                     .foregroundColor(.green)
-                    .accessibility(label: Text("Sem atraso"))
+                    .accessibility(label: Text(LocalizedStringKey("Sem atraso")))
                     .font(.title)
                     //.imageScale(.large)
                 Text("\(onTime)")
@@ -35,13 +35,13 @@ struct HistoricComponents: View {
             Spacer()
             VStack(alignment: .center, spacing: 10) {
                 if isTotal {
-                    Text("Atrasado")
+                    Text(LocalizedStringKey("Atrasado"))
                         //.font(.title3)
                         .accessibilityHidden(true)
                 }
                 Image(systemName: "clock.fill")
                     .foregroundColor(.yellow)
-                    .accessibility(label: Text("Atrasado"))
+                    .accessibility(label: Text(LocalizedStringKey("Atrasado")))
                     .font(.title)
                     //.imageScale(.large)
                 Text("\(late)")
@@ -52,13 +52,13 @@ struct HistoricComponents: View {
             Spacer()
             VStack(alignment: .center, spacing: 10) {
                 if isTotal {
-                    Text("Não tomou")
+                    Text(LocalizedStringKey("Não tomou"))
                         //.font(.title3)
                         .accessibilityHidden(true)
                 }
                 Image(systemName: "xmark.circle.fill")
                     .foregroundColor(.red)
-                    .accessibility(label: Text("Não tomou"))
+                    .accessibility(label: Text(LocalizedStringKey("Não tomou")))
                     .font(.title)
                     //.imageScale(.large)
                 Text("\(missed)")

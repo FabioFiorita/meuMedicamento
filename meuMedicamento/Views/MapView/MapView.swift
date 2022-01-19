@@ -29,7 +29,7 @@ struct MapView: View {
                 Color(UIColor.systemGroupedBackground).ignoresSafeArea()
                 VStack {
                     VStack {
-                        TextField("Buscar", text: $searchTerm, onEditingChanged: { _ in
+                        TextField(LocalizedStringKey("Buscar"), text: $searchTerm, onEditingChanged: { _ in
                         }, onCommit: {
                                 // get all landmarks
                             placeListVM.searchLandmarks(searchTerm: searchTerm)
@@ -41,9 +41,9 @@ struct MapView: View {
                             placeListVM.searchLandmarks(searchTerm: category)
                         }
                         
-                        Picker("Selecione", selection: $displayType) {
-                            Text("Mapa").tag(DisplayType.map)
-                            Text("Lista").tag(DisplayType.list)
+                        Picker(LocalizedStringKey("Selecione"), selection: $displayType) {
+                            Text(LocalizedStringKey("Mapa")).tag(DisplayType.map)
+                            Text(LocalizedStringKey("Lista")).tag(DisplayType.list)
                         }.pickerStyle(.segmented)
                     }.padding()
                     if displayType == .map {
@@ -68,7 +68,7 @@ struct MapView: View {
                     }
                     
                 }
-                .navigationTitle("Mapa")
+                .navigationTitle(LocalizedStringKey("Mapa"))
             }
         }
         .navigationViewStyle(.stack)

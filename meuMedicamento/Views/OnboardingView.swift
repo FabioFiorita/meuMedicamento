@@ -21,7 +21,7 @@ struct OnboardingView: View {
                         .aspectRatio(contentMode: .fit)
                         .frame(width: 150)
                         .accessibilityHidden(true)
-                    Text("Bem Vindo ao meuMedicamento.")
+                    Text(LocalizedStringKey("Bem Vindo ao meuMedicamento."))
                         .foregroundColor(.white)
                         .font(.title)
                         .bold()
@@ -33,11 +33,11 @@ struct OnboardingView: View {
                                 .foregroundColor(.white)
                                 .accessibilityHidden(true)
                             VStack(alignment: .leading, spacing: 5.0) {
-                                Text("Organize seus medicamentos")
+                                Text(LocalizedStringKey("Organize seus medicamentos"))
                                     .bold()
                                     .font(.title3)
                                     .foregroundColor(.white)
-                                Text("Confira uma lista dos seus medicamentos, controle a sua frequência e receba alertas quando seus remédios estiverem acabando.")
+                                Text(LocalizedStringKey("Confira uma lista dos seus medicamentos, controle a sua frequência e receba alertas quando seus remédios estiverem acabando."))
                                     .foregroundColor(.white)
                             }
                         }
@@ -49,11 +49,11 @@ struct OnboardingView: View {
                                 .foregroundColor(.white)
                                 .accessibilityHidden(true)
                             VStack(alignment: .leading, spacing: 5.0) {
-                                Text("Controle suas ingestões")
+                                Text(LocalizedStringKey("Controle suas ingestões"))
                                     .bold()
                                     .font(.title3)
                                     .foregroundColor(.white)
-                                Text("Acompanhe um histórico, verificando se os remédios foram tomados no horário correto, atrasados ou esquecidos.")
+                                Text(LocalizedStringKey("Acompanhe um histórico, verificando se os remédios foram tomados no horário correto, atrasados ou esquecidos."))
                                     .foregroundColor(.white)
                             }
                         }
@@ -65,11 +65,11 @@ struct OnboardingView: View {
                                 .foregroundColor(.white)
                                 .accessibilityHidden(true)
                             VStack(alignment: .leading, spacing: 5.0) {
-                                Text("Mapa Integrado")
+                                Text(LocalizedStringKey("Mapa Integrado"))
                                     .bold()
                                     .font(.title3)
                                     .foregroundColor(.white)
-                                Text("Encontre farmácias e hospitais próximos.")
+                                Text(LocalizedStringKey("Encontre farmácias e hospitais próximos."))
                                     .foregroundColor(.white)
                             }
                     }
@@ -80,7 +80,7 @@ struct OnboardingView: View {
                             dismiss()
                         }
                     } label: {
-                        Text("Começar a usar")
+                        Text(LocalizedStringKey("Começar a usar"))
                             .bold()
                             .font(.title3)
                             .frame(minWidth: 0, maxWidth: .infinity, alignment: .center)

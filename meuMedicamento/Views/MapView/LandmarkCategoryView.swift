@@ -16,7 +16,7 @@ struct LandmarkCategoryView: View {
                         selectedCategory = category
                         onSelectedCategory(category)
                     }, label: {
-                        Text(category)
+                        Text(LocalizedStringKey(category))
                     }).padding(15)
                     .foregroundColor(Color.white)
                     .background(selectedCategory == category ? Color("AccentColor"): Color.gray)

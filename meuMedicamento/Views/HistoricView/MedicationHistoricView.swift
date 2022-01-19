@@ -25,7 +25,7 @@ struct MedicationHistoricView: View {
                     HStack {
                         GroupBox {
                             VStack(alignment: .center, spacing: 5) {
-                                Text("Últimos 7 dias")
+                                Text(LocalizedStringKey("Últimos 7 dias"))
                                     HistoricComponents(onTime: $onTime7, late: $late7, missed: $missed7, isTotal: false)
                             }
                             .frame(maxWidth: .infinity)
@@ -33,7 +33,7 @@ struct MedicationHistoricView: View {
                         .groupBoxStyle(PrimaryGroupBoxStyle())
                         GroupBox {
                             VStack(alignment: .center, spacing: 5) {
-                                Text("Últimos 30 dias")
+                                Text(LocalizedStringKey("Últimos 30 dias"))
                                     HistoricComponents(onTime: $onTime30, late: $late30, missed: $missed30, isTotal: false)
                             }
                             .frame(maxWidth: .infinity)
@@ -59,7 +59,7 @@ struct MedicationHistoricView: View {
                 }
             
         }
-        .navigationTitle(("\(medication.name ?? "Medicamento")"))
+        .navigationTitle(("\(medication.name ?? "Medication")"))
     }
     
     private func medicationDateHistory(forHistoric historic: Historic) -> some View {
@@ -70,18 +70,18 @@ struct MedicationHistoricView: View {
                 Group {
                     switch historic.medicationStatus {
                     case "Sem Atraso":
-                        Image(systemName: "checkmark.circle.fill").foregroundColor(.green).accessibility(label: Text("Sem atraso"))
+                        Image(systemName: "checkmark.circle.fill").foregroundColor(.green).accessibility(label: Text(LocalizedStringKey("Sem atraso")))
                     case "Atrasado":
-                        Image(systemName: "clock.fill").foregroundColor(.yellow).accessibility(label: Text("Atrasado"))
+                        Image(systemName: "clock.fill").foregroundColor(.yellow).accessibility(label: Text(LocalizedStringKey("Atrasado")))
                     case "Não tomou":
-                        Image(systemName: "xmark.circle.fill").foregroundColor(.red).accessibility(label: Text("Não tomou"))
+                        Image(systemName: "xmark.circle.fill").foregroundColor(.red).accessibility(label: Text(LocalizedStringKey("Não tomou")))
                     default:
-                        Image(systemName: "questionmark").foregroundColor(.red).accessibility(label: Text("Situação não encontrada"))
+                        Image(systemName: "questionmark").foregroundColor(.red).accessibility(label: Text(LocalizedStringKey("Situação não encontrada")))
                     }
                 }
             }
             .accessibilityElement(children: .ignore)
-            .accessibilityLabel("\(historic.dates ?? Date(), formatter: itemFormatter) \(historic.medicationStatus ?? "Status Inderteminado")")
+            .accessibilityLabel("\(historic.dates ?? Date(), formatter: itemFormatter) \(historic.medicationStatus ?? "Indeterminate Status")")
             
         }
         .groupBoxStyle(PrimaryGroupBoxStyle())
@@ -90,13 +90,13 @@ struct MedicationHistoricView: View {
     private var stepperHistory : some View {
         GroupBox {
             HStack {
-                Text("Histórico dos últimos ") + Text("\(historicCount)").bold().foregroundColor(.orange) + Text(" medicamentos")
+                Text(LocalizedStringKey("Histórico dos últimos")) + Text(" \(historicCount) ").bold().foregroundColor(.orange) + Text(LocalizedStringKey("medicamentos"))
                 Spacer()
-                Stepper("Quantidade no Histórico", value: $historicCount, in: 0...31).labelsHidden()
+                Stepper(LocalizedStringKey("Quantidade no Histórico"), value: $historicCount, in: 0...31).labelsHidden()
             }
             .frame(minWidth: 0, maxWidth: .infinity)
             .accessibilityElement()
-            .accessibilityLabel("Histórico dos últimos medicamentos")
+            .accessibilityLabel(LocalizedStringKey("Histórico dos últimos medicamentos"))
             .accessibilityValue(String(historicCount))
             .accessibilityAdjustableAction { value in
                 switch value {

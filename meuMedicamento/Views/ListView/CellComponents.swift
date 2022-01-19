@@ -22,12 +22,12 @@ struct CellComponents: View {
     }
     
     private func medicationName(forMedication medication: Medication) -> some View {
-        Text(medication.name ?? "Sem Título").font(.title)
+        Text(medication.name ?? "Untitled").font(.title)
     }
     private func medicationRemainingQuantity(forMedication medication: Medication) -> some View {
         Group {
             HStack {
-                Text("Medicamentos restantes:")
+                Text(LocalizedStringKey("Medicamentos restantes:"))
                     .font(.body)
                     .fontWeight(.light)
                 if Double(medication.remainingQuantity) <= Double(medication.boxQuantity) * (userSettings.limitMedication/100.0) {
@@ -46,15 +46,20 @@ struct CellComponents: View {
     private func medicationDate(forMedication medication: Medication) -> some View {
         Group {
             if medication.date?.timeIntervalSinceNow ?? 1.0 <= 0.0 {
-                Text("Proximo: ") +
-                Text("\(medication.date ?? Date() ,formatter: itemFormatter)")
-                    .font(.body)
-                    .fontWeight(.light)
-                    .foregroundColor(.red)
+                HStack {
+                    Text(LocalizedStringKey("Próximo:"))
+                    Text(" \(medication.date ?? Date() ,formatter: itemFormatter)")
+                        .font(.body)
+                        .fontWeight(.light)
+                        .foregroundColor(.red)
+                }
             } else {
-                Text("Proximo: \(medication.date ?? Date() ,formatter: itemFormatter)")
-                    .font(.body)
-                    .fontWeight(.light)
+                HStack {
+                    Text(LocalizedStringKey("Próximo:"))
+                    Text(" \(medication.date ?? Date() ,formatter: itemFormatter)")
+                       .font(.body)
+                       .fontWeight(.light)
+                }
             }
         }
     }

@@ -27,7 +27,7 @@ struct HistoricView: View {
                     VStack {
                         GroupBox {
                             VStack {
-                                Text("Total")
+                                Text(LocalizedStringKey("Total"))
                                     .font(.largeTitle)
                                     .bold()
                                     HistoricComponents(onTime: $onTime, late: $late, missed: $missed, isTotal: true)
@@ -39,7 +39,7 @@ struct HistoricView: View {
                         HStack {
                             GroupBox {
                                 VStack(alignment: .center, spacing: 5) {
-                                    Text("Últimos 7 dias")
+                                    Text(LocalizedStringKey("Últimos 7 dias"))
                                         HistoricComponents(onTime: $onTime7, late: $late7, missed: $missed7, isTotal: false)
                                 }
                                 .frame(maxWidth: .infinity)
@@ -48,7 +48,7 @@ struct HistoricView: View {
                             .groupBoxStyle(PrimaryGroupBoxStyle())
                             GroupBox {
                                 VStack(alignment: .center, spacing: 5) {
-                                    Text("Últimos 30 dias")
+                                    Text(LocalizedStringKey("Últimos 30 dias"))
                                         HistoricComponents(onTime: $onTime30, late: $late30, missed: $missed30, isTotal: false)
                                 }
                                 .frame(maxWidth: .infinity)
@@ -61,7 +61,7 @@ struct HistoricView: View {
                     List {
                         ForEach(medicationManager.savedMedications, id: \.self) { medication in
                             HStack {
-                                NavigationLink(medication.name ?? "Medicamento") {
+                                NavigationLink(medication.name ?? "Medication") {
                                     MedicationHistoricView(medicationManager: medicationManager, medication: medication)
                                 }
                             }
@@ -86,7 +86,7 @@ struct HistoricView: View {
                 }
                 
             }
-            .navigationBarTitle("Histórico",displayMode: .automatic)
+            .navigationBarTitle(LocalizedStringKey("Histórico"),displayMode: .automatic)
         }
         .navigationViewStyle(.stack)
     }
