@@ -6,7 +6,7 @@ struct RecenterButton: View {
     
     var body: some View {
         Button(action: onTapped, label: {
-            Label(LocalizedStringKey("Centralizar"), systemImage: "triangle")
+            Label(LocalizedStringKey("Centralize"), systemImage: "triangle")
         }).padding(10)
         .foregroundColor(.white)
         .background(Color("AccentColor"))

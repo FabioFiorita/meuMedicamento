@@ -25,22 +25,22 @@ struct CellView: View {
                 Button {
                     updateQuantity(medication: medication)
                 } label: {
-                        Label(LocalizedStringKey("Tomar Medicamento"), systemImage: "checkmark")
+                        Label(LocalizedStringKey("TakeMedication"), systemImage: "checkmark")
                 }
                 Button {
                     medicationManager.refreshRemainingQuantity(medication: medication)
                 } label: {
-                        Label(LocalizedStringKey("Renovar Quantidade"), systemImage: "clock.arrow.circlepath")
+                        Label(LocalizedStringKey("RenewQuantity"), systemImage: "clock.arrow.circlepath")
                 }
                 Button {
                     showModalHistory = true
                 } label: {
-                        Label(LocalizedStringKey("Ver Histórico"), systemImage: "calendar")
+                        Label(LocalizedStringKey("CheckHistory"), systemImage: "calendar")
                 }
                 Button(role: .destructive) {
                     medicationManager.deleteMedication(medication: medication)
                 } label: {
-                        Label(LocalizedStringKey("Deletar Medicamento"), systemImage: "trash")
+                        Label(LocalizedStringKey("DeleteMedication"), systemImage: "trash")
                 }
             })
             .sheet(isPresented: $showModalHistory, onDismiss: {
@@ -50,7 +50,7 @@ struct CellView: View {
             })
         }
         .swipeActions(edge: .trailing ,allowsFullSwipe: false) {
-            Button(LocalizedStringKey("Apagar"), role: .destructive) {
+            Button(LocalizedStringKey("Delete"), role: .destructive) {
                 medicationManager.deleteMedication(medication: medication)
             }
         }
@@ -73,29 +73,29 @@ struct CellView: View {
             Image(systemName: "checkmark.circle")
                 .font(.largeTitle)
                 .imageScale(.large)
-                .accessibility(label: Text(LocalizedStringKey("Tomar Medicamento")))
+                .accessibility(label: Text(LocalizedStringKey("TakeMedication")))
                 .accessibilityAddTraits(.isButton)
                 .accessibilityRemoveTraits(.isImage)
                 .foregroundColor(medication.isSelected ? Color.green : Color.primary)
         }
         .buttonStyle(.plain)
-        .alert(LocalizedStringKey("Erro na hora de agendar a notificação"), isPresented: $showTimeIntervalAlert) {
+        .alert(LocalizedStringKey("ScheduleNotificationAlertTitle"), isPresented: $showTimeIntervalAlert) {
             Button {
                 self.showModalEdit = true
             } label: {
-                Text(LocalizedStringKey("Editar Medicamento"))
+                Text(LocalizedStringKey("EditMedication"))
             }
-            Button(LocalizedStringKey("Cancelar"), role: .cancel) { }
+            Button(LocalizedStringKey("Cancel"), role: .cancel) { }
         } message: {
-            Text(LocalizedStringKey("Configure a data de início novamente"))
+            Text(LocalizedStringKey("ScheduleNotificationAlertBody"))
         }
         .sheet(isPresented: $showModalEdit, onDismiss: medicationManager.fetchMedications, content: {
             EditMedicationView(medication: medication)
         })
-        .alert(LocalizedStringKey("Erro na hora de cadastrar o medicamento"), isPresented: $showViewContextAlert) {
+        .alert(LocalizedStringKey("RegisterMedicationAlertTitle"), isPresented: $showViewContextAlert) {
             Button(LocalizedStringKey("OK"),role: .destructive) { }
         } message: {
-            Text(LocalizedStringKey("Reinicie o aplicativo"))
+            Text(LocalizedStringKey("RegisterMedicationAlertBody"))
         }
     }
     

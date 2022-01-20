@@ -19,7 +19,7 @@ struct ListView: View {
                         }
                     }
                 } header: {
-                    Text(LocalizedStringKey("Hoje"))
+                    Text(LocalizedStringKey("Today"))
                 }
                 Section {
                     ForEach(searchResults, id: \.self) { medication in
@@ -28,14 +28,14 @@ struct ListView: View {
                         }
                     }
                 } header: {
-                    Text(LocalizedStringKey("Próximos"))
+                    Text(LocalizedStringKey("Upcoming"))
                 }
                 
             }
             .refreshable {
                 medicationManager.fetchMedications()
             }
-            .navigationBarTitle(LocalizedStringKey("Medicamentos"),displayMode: .automatic)
+            .navigationBarTitle(LocalizedStringKey("Medications"),displayMode: .automatic)
             .searchable(text: $searchMedication)
             .listStyle(.insetGrouped)
             .toolbar(content: {
@@ -43,7 +43,7 @@ struct ListView: View {
                     Button {
                         self.showModalAdd = true
                     } label: {
-                        Label(LocalizedStringKey("Adicionar novo medicamento"), systemImage: "plus")
+                        Label(LocalizedStringKey("AddNewMedication"), systemImage: "plus")
                     }.sheet(isPresented: $showModalAdd, onDismiss: medicationManager.fetchMedications) {
                         AddMedicationView()
                     }
@@ -71,17 +71,17 @@ struct ListView: View {
             .onReceive(NotificationCenter.default.publisher(for: UIApplication.willEnterForegroundNotification)) { _ in
                 notificationManager.reloadAuthorizationStatus()
             }
-            .alert(LocalizedStringKey("Notificações desativadas"), isPresented: $authorizationDenied, actions: {
-                Button(LocalizedStringKey("Cancelar"), role: .cancel) { }
+            .alert(LocalizedStringKey("DisabledNotifications"), isPresented: $authorizationDenied, actions: {
+                Button(LocalizedStringKey("Cancel"), role: .cancel) { }
                 Button {
                     if let url = URL(string: UIApplication.openSettingsURLString), UIApplication.shared.canOpenURL(url) {
                         UIApplication.shared.open(url, options: [:], completionHandler: nil)
                     }
                 } label: {
-                    Text(LocalizedStringKey("Abrir Ajustes"))
+                    Text(LocalizedStringKey("OpenSettingsAlertTitle"))
                 }
             }, message: {
-                Text(LocalizedStringKey("Abra o App Ajustes e habilite as notificações para monitorar seus medicamentos"))
+                Text(LocalizedStringKey("OpenSettingsAlertBody"))
             })
             .environmentObject(medicationManager)
         }

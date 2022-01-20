@@ -27,22 +27,22 @@ struct MainView: View {
                 TabView {
                     ListView(userSettings: userSettings, medicationManager: medicationManager)
                         .tabItem {
-                            Label(LocalizedStringKey("Medicamentos"), systemImage: "pills")
+                            Label(LocalizedStringKey("Medications"), systemImage: "pills")
                         }.badge(medicationManager.calculateLateMedications())
                     
                     HistoricView(medicationManager: medicationManager)
                         .tabItem {
-                            Label(LocalizedStringKey("Histórico"), systemImage: "calendar")
+                            Label(LocalizedStringKey("Historic"), systemImage: "calendar")
                         }
                     
                     MapView()
                         .tabItem {
-                            Label(LocalizedStringKey("Mapa"), systemImage: "map")
+                            Label(LocalizedStringKey("Map"), systemImage: "map")
                         }
                     
                     SettingsView(userSettings: userSettings)
                         .tabItem {
-                            Label(LocalizedStringKey("Ajustes"), systemImage: "gear")
+                            Label(LocalizedStringKey("Settings"), systemImage: "gear")
                         }
                 }
             }

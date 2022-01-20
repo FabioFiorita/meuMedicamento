@@ -27,7 +27,7 @@ struct MedicationDetailView: View {
                     Button(action: {
                         self.showModal = true
                     }) {
-                        Text(LocalizedStringKey("Editar"))
+                        Text(LocalizedStringKey("Edit"))
                     }.sheet(isPresented: self.$showModal) {
                         EditMedicationView(medication: medication)
                     }
@@ -41,34 +41,27 @@ struct MedicationDetailView: View {
     private func medicationInformation(forMedication medication: Medication) -> some View {
         GroupBox {
             VStack(alignment: .leading, spacing: 10.0) {
-                    Label(LocalizedStringKey("Detalhes"), systemImage: "doc.text")
+                    Label(LocalizedStringKey("Details"), systemImage: "doc.text")
                         .foregroundColor(Color("AccentColor"))
                         .font(.title3)
-                HStack {
-                    Text(LocalizedStringKey("Quantidade restante:"))
-                    Text(" \(medication.remainingQuantity)")
-                }
-                HStack {
-                    Text(LocalizedStringKey("Quantidade na caixa:"))
-                    Text(" \(medication.boxQuantity)")
-                }
-                HStack {
-                    Text(LocalizedStringKey("Modo de Ingestão:"))
-                    Text(LocalizedStringKey(" \(medication.notificationType ?? "")"))
-                }
+                    Text(LocalizedStringKey("RemainingQuantity")) +
+                    Text(": \(medication.remainingQuantity)")
+                    Text(LocalizedStringKey("BoxQuantity")) +
+                    Text(": \(medication.boxQuantity)")
+                    Text(LocalizedStringKey("NotificationType")) +
+                    Text(": ") +
+                    Text(LocalizedStringKey(medication.notificationType ?? ""))
                 Group {
                     if medication.repeatPeriod != "Nunca" {
-                        HStack {
-                            Text(LocalizedStringKey("Repetição: A Cada"))
-                            Text(LocalizedStringKey(" \(medication.repeatPeriod ?? "")"))
-                        }
+                        Text(LocalizedStringKey("RepeatEach")) +
+                        Text(LocalizedStringKey(medication.repeatPeriod ?? ""))
                     }
                 }
                 Button(action: {
                     medicationManager.refreshRemainingQuantity(medication: medication)
                     dismiss()
                 }) {
-                    Text(LocalizedStringKey("Renovar Medicamentos"))
+                    Text(LocalizedStringKey("RenewMedication"))
                         .frame(minWidth: 0, maxWidth: .infinity, alignment: .center)
                         .padding()
                         .background(Color("AccentColor"))
@@ -85,7 +78,7 @@ struct MedicationDetailView: View {
         Group {
                 GroupBox {
                     VStack(alignment: .leading, spacing: 10.0){
-                            Label(LocalizedStringKey("Notas"), systemImage: "note.text")
+                            Label(LocalizedStringKey("Notes"), systemImage: "note.text")
                                 .foregroundColor(Color("AccentColor"))
                                 .font(.title3)
                         Text("\(medication.notes ?? "")")
@@ -100,7 +93,7 @@ struct MedicationDetailView: View {
     private func medicationNextDates(forMedication medication: Medication) -> some View {
         GroupBox {
             VStack(alignment: .leading, spacing: 10.0) {
-                    Label(LocalizedStringKey("Próximos Medicamentos"), systemImage: "calendar")
+                    Label(LocalizedStringKey("UpcomingMedications"), systemImage: "calendar")
                         .foregroundColor(Color("AccentColor"))
                         .font(.title3)
                 ForEach(dates, id: \.self){ date in

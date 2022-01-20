@@ -27,7 +27,7 @@ struct CellComponents: View {
     private func medicationRemainingQuantity(forMedication medication: Medication) -> some View {
         Group {
             HStack {
-                Text(LocalizedStringKey("Medicamentos restantes:"))
+                Text(LocalizedStringKey("RemainingMedications"))
                     .font(.body)
                     .fontWeight(.light)
                 if Double(medication.remainingQuantity) <= Double(medication.boxQuantity) * (userSettings.limitMedication/100.0) {
@@ -47,7 +47,7 @@ struct CellComponents: View {
         Group {
             if medication.date?.timeIntervalSinceNow ?? 1.0 <= 0.0 {
                 HStack {
-                    Text(LocalizedStringKey("Próximo:"))
+                    Text(LocalizedStringKey("Next"))
                     Text(" \(medication.date ?? Date() ,formatter: itemFormatter)")
                         .font(.body)
                         .fontWeight(.light)
@@ -55,7 +55,7 @@ struct CellComponents: View {
                 }
             } else {
                 HStack {
-                    Text(LocalizedStringKey("Próximo:"))
+                    Text(LocalizedStringKey("Next"))
                     Text(" \(medication.date ?? Date() ,formatter: itemFormatter)")
                        .font(.body)
                        .fontWeight(.light)

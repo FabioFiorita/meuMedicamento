@@ -18,13 +18,13 @@ struct HistoricComponents: View {
             Spacer()
             VStack(alignment: .center, spacing: 10) {
                 if isTotal {
-                    Text(LocalizedStringKey("No Horário"))
+                    Text(LocalizedStringKey("OnTime"))
                         //.font(.title3)
                         .accessibilityHidden(true)
                 }
                 Image(systemName: "checkmark.circle.fill")
                     .foregroundColor(.green)
-                    .accessibility(label: Text(LocalizedStringKey("Sem atraso")))
+                    .accessibility(label: Text(LocalizedStringKey("OnTime")))
                     .font(.title)
                     //.imageScale(.large)
                 Text("\(onTime)")
@@ -35,13 +35,13 @@ struct HistoricComponents: View {
             Spacer()
             VStack(alignment: .center, spacing: 10) {
                 if isTotal {
-                    Text(LocalizedStringKey("Atrasado"))
+                    Text(LocalizedStringKey("Late"))
                         //.font(.title3)
                         .accessibilityHidden(true)
                 }
                 Image(systemName: "clock.fill")
                     .foregroundColor(.yellow)
-                    .accessibility(label: Text(LocalizedStringKey("Atrasado")))
+                    .accessibility(label: Text(LocalizedStringKey("Late")))
                     .font(.title)
                     //.imageScale(.large)
                 Text("\(late)")
@@ -52,13 +52,13 @@ struct HistoricComponents: View {
             Spacer()
             VStack(alignment: .center, spacing: 10) {
                 if isTotal {
-                    Text(LocalizedStringKey("Não tomou"))
+                    Text(LocalizedStringKey("Missed"))
                         //.font(.title3)
                         .accessibilityHidden(true)
                 }
                 Image(systemName: "xmark.circle.fill")
                     .foregroundColor(.red)
-                    .accessibility(label: Text(LocalizedStringKey("Não tomou")))
+                    .accessibility(label: Text(LocalizedStringKey("Missed")))
                     .font(.title)
                     //.imageScale(.large)
                 Text("\(missed)")

@@ -21,22 +21,22 @@ struct RegistrationComponents: View {
     
     var body: some View {
         Form {
-            TextField(LocalizedStringKey("Nome do Medicamento"), text: $name)
+            TextField(LocalizedStringKey("MedicationName"), text: $name)
                 .disableAutocorrection(true)
                 .focused($focusedField, equals: .name)
                 .submitLabel(.next)
-            TextField(LocalizedStringKey("Quantidade Restante"), text: $remainingQuantity)
+            TextField(LocalizedStringKey("RemainingQuantity"), text: $remainingQuantity)
                 .focused($focusedField, equals: .remainingQuantity)
                 .keyboardType(.numberPad)
                 .tint(Color("AccentColor"))
-            TextField(LocalizedStringKey("Quantidade na Caixa"), text: $boxQuantity)
+            TextField(LocalizedStringKey("BoxQuantity"), text: $boxQuantity)
                 .focused($focusedField, equals: .boxQuantity)
                 .keyboardType(.numberPad)
                 .tint(Color("AccentColor"))
             Section {
                 notificationTypePicker
                 Group {
-                    Text(LocalizedStringKey("Data de Início:")) + Text(" \(date, formatter: itemFormatter)").foregroundColor(showDatePicker ? .blue : .secondary)
+                    Text(LocalizedStringKey("InitialDate")) + Text(" \(date, formatter: itemFormatter)").foregroundColor(showDatePicker ? .blue : .secondary)
                 }.onTapGesture(perform: {
                     focusedField = .none
                     showDatePicker.toggle()
@@ -44,14 +44,14 @@ struct RegistrationComponents: View {
                 if showDatePicker {
                     DatePicker("", selection: $date, in: Date()...).datePickerStyle(.graphical)
                 }
-                Picker(selection: $repeatPeriod, label: Text(LocalizedStringKey("Repetir"))) {
+                Picker(selection: $repeatPeriod, label: Text(LocalizedStringKey("Repeat"))) {
                     ForEach(RepeatPeriod.periods, id: \.self) { periods in
                         Text(LocalizedStringKey(periods)).tag(periods)
                     }
                 }
             }
             Section{
-                Text(LocalizedStringKey("Notas"))
+                Text(LocalizedStringKey("Notes"))
                 TextEditor(text: $notes)
             }
         }
@@ -79,7 +79,7 @@ struct RegistrationComponents: View {
                         break
                     }
                 } label: {
-                    Label(LocalizedStringKey("Campo anterior"), systemImage: "arrow.up")
+                    Label(LocalizedStringKey("PreviousField"), systemImage: "arrow.up")
                         .tint(Color("AccentColor"))
                 }
                 Button {
@@ -94,7 +94,7 @@ struct RegistrationComponents: View {
                         break
                     }
                 } label: {
-                    Label(LocalizedStringKey("Próximo Campo"), systemImage: "arrow.down")
+                    Label(LocalizedStringKey("NextField"), systemImage: "arrow.down")
                         .tint(Color("AccentColor"))
                 }
             }
@@ -103,16 +103,16 @@ struct RegistrationComponents: View {
     
     private var notificationTypePicker: some View {
         Group {
-            Picker(selection: $notificationType, label: Text(LocalizedStringKey("Tipo de Notificação"))) {
+            Picker(selection: $notificationType, label: Text(LocalizedStringKey("NotificationType"))) {
                 ForEach(NotificationType.type, id: \.self) { type in
-                    Text(type).tag(type)
+                    Text(LocalizedStringKey(type)).tag(type)
                 }
             }
             .pickerStyle(.segmented)
             if notificationType == "Regularmente" {
-                Text(LocalizedStringKey("O próximo medicamento será agendando seguindo a data definida"))
+                Text(LocalizedStringKey("RegularlyText"))
             } else {
-                Text(LocalizedStringKey("O próximo medicamento será agendando seguindo a data da última conclusão"))
+                Text(LocalizedStringKey("AfterConclusionText"))
             }
         }
         

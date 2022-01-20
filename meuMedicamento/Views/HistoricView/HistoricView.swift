@@ -39,7 +39,7 @@ struct HistoricView: View {
                         HStack {
                             GroupBox {
                                 VStack(alignment: .center, spacing: 5) {
-                                    Text(LocalizedStringKey("Últimos 7 dias"))
+                                    Text(LocalizedStringKey("Last7Days"))
                                         HistoricComponents(onTime: $onTime7, late: $late7, missed: $missed7, isTotal: false)
                                 }
                                 .frame(maxWidth: .infinity)
@@ -48,7 +48,7 @@ struct HistoricView: View {
                             .groupBoxStyle(PrimaryGroupBoxStyle())
                             GroupBox {
                                 VStack(alignment: .center, spacing: 5) {
-                                    Text(LocalizedStringKey("Últimos 30 dias"))
+                                    Text(LocalizedStringKey("Last30Days"))
                                         HistoricComponents(onTime: $onTime30, late: $late30, missed: $missed30, isTotal: false)
                                 }
                                 .frame(maxWidth: .infinity)
@@ -86,7 +86,7 @@ struct HistoricView: View {
                 }
                 
             }
-            .navigationBarTitle(LocalizedStringKey("Histórico"),displayMode: .automatic)
+            .navigationBarTitle(LocalizedStringKey("Historic"),displayMode: .automatic)
         }
         .navigationViewStyle(.stack)
     }

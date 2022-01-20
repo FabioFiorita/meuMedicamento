@@ -25,7 +25,7 @@ struct MedicationHistoricView: View {
                     HStack {
                         GroupBox {
                             VStack(alignment: .center, spacing: 5) {
-                                Text(LocalizedStringKey("Últimos 7 dias"))
+                                Text(LocalizedStringKey("Last7Days"))
                                     HistoricComponents(onTime: $onTime7, late: $late7, missed: $missed7, isTotal: false)
                             }
                             .frame(maxWidth: .infinity)
@@ -33,7 +33,7 @@ struct MedicationHistoricView: View {
                         .groupBoxStyle(PrimaryGroupBoxStyle())
                         GroupBox {
                             VStack(alignment: .center, spacing: 5) {
-                                Text(LocalizedStringKey("Últimos 30 dias"))
+                                Text(LocalizedStringKey("Last30Days"))
                                     HistoricComponents(onTime: $onTime30, late: $late30, missed: $missed30, isTotal: false)
                             }
                             .frame(maxWidth: .infinity)
@@ -70,13 +70,13 @@ struct MedicationHistoricView: View {
                 Group {
                     switch historic.medicationStatus {
                     case "Sem Atraso":
-                        Image(systemName: "checkmark.circle.fill").foregroundColor(.green).accessibility(label: Text(LocalizedStringKey("Sem atraso")))
+                        Image(systemName: "checkmark.circle.fill").foregroundColor(.green).accessibility(label: Text(LocalizedStringKey("OnTime")))
                     case "Atrasado":
-                        Image(systemName: "clock.fill").foregroundColor(.yellow).accessibility(label: Text(LocalizedStringKey("Atrasado")))
+                        Image(systemName: "clock.fill").foregroundColor(.yellow).accessibility(label: Text(LocalizedStringKey("Late")))
                     case "Não tomou":
-                        Image(systemName: "xmark.circle.fill").foregroundColor(.red).accessibility(label: Text(LocalizedStringKey("Não tomou")))
+                        Image(systemName: "xmark.circle.fill").foregroundColor(.red).accessibility(label: Text(LocalizedStringKey("Missed")))
                     default:
-                        Image(systemName: "questionmark").foregroundColor(.red).accessibility(label: Text(LocalizedStringKey("Situação não encontrada")))
+                        Image(systemName: "questionmark").foregroundColor(.red).accessibility(label: Text(LocalizedStringKey("SituationNotFound")))
                     }
                 }
             }
@@ -90,9 +90,9 @@ struct MedicationHistoricView: View {
     private var stepperHistory : some View {
         GroupBox {
             HStack {
-                Text(LocalizedStringKey("Histórico dos últimos")) + Text(" \(historicCount) ").bold().foregroundColor(.orange) + Text(LocalizedStringKey("medicamentos"))
+                Text(LocalizedStringKey("HistoricOfTheLast")) + Text(" \(historicCount) ").bold().foregroundColor(.orange) + Text(LocalizedStringKey("medications"))
                 Spacer()
-                Stepper(LocalizedStringKey("Quantidade no Histórico"), value: $historicCount, in: 0...31).labelsHidden()
+                Stepper(LocalizedStringKey("HistoricQuantity"), value: $historicCount, in: 0...31).labelsHidden()
             }
             .frame(minWidth: 0, maxWidth: .infinity)
             .accessibilityElement()
