@@ -31,7 +31,7 @@ struct HistoricComponents: View {
                     .font(.title)
             }
             .accessibilityElement(children: .ignore)
-            .accessibilityLabel("Sem Atraso: \(onTime)")
+            .accessibilityLabel(Text(LocalizedStringKey("OnTime")) + Text(": \(onTime)"))
             Spacer()
             VStack(alignment: .center, spacing: 10) {
                 if isTotal {
@@ -48,7 +48,7 @@ struct HistoricComponents: View {
                     .font(.title)
             }
             .accessibilityElement(children: .ignore)
-            .accessibilityLabel("Atrasado: \(late)")
+            .accessibilityLabel(Text(LocalizedStringKey("Late")) + Text(": \(late)"))
             Spacer()
             VStack(alignment: .center, spacing: 10) {
                 if isTotal {
@@ -65,7 +65,7 @@ struct HistoricComponents: View {
                     .font(.title)
             }
             .accessibilityElement(children: .ignore)
-            .accessibilityLabel("Não tomou: \(missed)")
+            .accessibilityLabel(Text(LocalizedStringKey("Missed")) + Text(": \(missed)"))
             Spacer()
         }
     }

@@ -42,6 +42,7 @@
 		C1DE8CFF26C40F53004E7754 /* RecenterButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1DE8CF526C40F53004E7754 /* RecenterButton.swift */; };
 		C1DE8D0026C40F53004E7754 /* LandmarkListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1DE8CF626C40F53004E7754 /* LandmarkListView.swift */; };
 		C1DE8D0126C40F53004E7754 /* LandmarkCategoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1DE8CF726C40F53004E7754 /* LandmarkCategoryView.swift */; };
+		C1F6C09F2799D8810051812F /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = C1F6C0A12799D8810051812F /* InfoPlist.strings */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -96,6 +97,8 @@
 		C1DE8CF626C40F53004E7754 /* LandmarkListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LandmarkListView.swift; sourceTree = "<group>"; };
 		C1DE8CF726C40F53004E7754 /* LandmarkCategoryView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LandmarkCategoryView.swift; sourceTree = "<group>"; };
 		C1DEFDA32798B5A20015D6EA /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		C1F6C0A02799D8810051812F /* pt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pt; path = pt.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		C1F6C0A22799D8820051812F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -147,6 +150,7 @@
 				C1DE8CC526C40ABE004E7754 /* Managers */,
 				C1DE8CC626C40AD9004E7754 /* Models */,
 				C1DE8CE726C40EF8004E7754 /* Extensions */,
+				C1F6C0A12799D8810051812F /* InfoPlist.strings */,
 				C1B58AA327979CC00036F9CF /* Localizable.strings */,
 				C1D9471826C408A500A05884 /* Assets.xcassets */,
 				C1D9471D26C408A500A05884 /* Info.plist */,
@@ -322,6 +326,7 @@
 				C1B58AA127979CC00036F9CF /* Localizable.strings in Resources */,
 				C1D9471C26C408A500A05884 /* Preview Assets.xcassets in Resources */,
 				C1D9471926C408A500A05884 /* Assets.xcassets in Resources */,
+				C1F6C09F2799D8810051812F /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -373,6 +378,15 @@
 				C1DEFDA32798B5A20015D6EA /* en */,
 			);
 			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		C1F6C0A12799D8810051812F /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				C1F6C0A02799D8810051812F /* pt */,
+				C1F6C0A22799D8820051812F /* en */,
+			);
+			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
