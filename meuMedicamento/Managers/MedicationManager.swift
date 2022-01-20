@@ -220,7 +220,8 @@ final class MedicationManager: ObservableObject {
             }
             if timeInterval > 0 {
                 notificationManager.deleteLocalNotifications(identifiers: [identifier])
-                notificationManager.createLocalNotificationByTimeInterval(identifier: identifier, title: "Tomar \(newMedication.name ?? "Medicamento")", timeInterval: timeInterval) { error in
+                let title = NSLocalizedString("Take", comment: "") + " \(newMedication.name ?? "Medication")"
+                notificationManager.createLocalNotificationByTimeInterval(identifier: identifier, title: title, timeInterval: timeInterval) { error in
                     if error == nil {
                         print("Notificação criada com id: \(identifier)")
                         situation = .sucess
@@ -261,7 +262,8 @@ final class MedicationManager: ObservableObject {
         }
         if timeInterval > 0 {
             notificationManager.deleteLocalNotifications(identifiers: [identifier, identifierRepeat])
-            notificationManager.createLocalNotificationByTimeInterval(identifier: identifier, title: "Tomar \(medication.name ?? "Medicamento")", timeInterval: timeInterval) { error in
+            let title = NSLocalizedString("Take", comment: "") + " \(medication.name ?? "Medication")"
+            notificationManager.createLocalNotificationByTimeInterval(identifier: identifier, title: title, timeInterval: timeInterval) { error in
                 if error == nil {
                     print("Notificação criada com id: \(identifier)")
                     situation = .sucess
@@ -311,8 +313,9 @@ func scheduleQuantityNotification(forMedication medication: Medication) -> medic
                 let dateMatching = Calendar.current.dateComponents([.hour,.minute], from: userSettings.limitDate)
                 let hour = dateMatching.hour
                 let minute = dateMatching.minute
+                let title = NSLocalizedString("Buy", comment: "") + " \(medication.name ?? "Medication")"
                 notificationManager.deleteLocalNotifications(identifiers: [identifier])
-                notificationManager.createLocalNotificationByDateMatching(identifier: identifier, title: "Comprar \(medication.name ?? "Medicamento")", hour: hour ?? 12, minute: minute ?? 00) { error in
+                notificationManager.createLocalNotificationByDateMatching(identifier: identifier, title: title, hour: hour ?? 12, minute: minute ?? 00) { error in
                     if error == nil {
                         situation = .sucess
                         print("Notificação criada com id: \(identifier)")
@@ -353,7 +356,8 @@ func rescheduleNotification(forMedication medication: Medication, forHistoric hi
     guard let identifier = medication.id else {return}
     if timeInterval > 0 {
         notificationManager.deleteLocalNotifications(identifiers: [identifier])
-        notificationManager.createLocalNotificationByTimeInterval(identifier: identifier, title: "Tomar \(medication.name ?? "Medicamento")", timeInterval: timeInterval) { error in
+        let title = NSLocalizedString("Take", comment: "") + " \(medication.name ?? "Medication")"
+        notificationManager.createLocalNotificationByTimeInterval(identifier: identifier, title: title, timeInterval: timeInterval) { error in
             if error == nil {}
         }
     } else {
@@ -369,8 +373,9 @@ func reloadNotifications() {
         if date.timeIntervalSinceNow > 0.0 {
             let timeInterval = date.timeIntervalSinceNow
             guard let identifier = medication.id else {return}
+            let title = NSLocalizedString("Take", comment: "") + " \(medication.name ?? "Medication")"
             print("Reagendando notificação para \(medication.name ?? "Medicamento")")
-            notificationManager.createLocalNotificationByTimeInterval(identifier: identifier, title: "Tomar \(medication.name ?? "Medicamento")", timeInterval: timeInterval) { error in
+            notificationManager.createLocalNotificationByTimeInterval(identifier: identifier, title: title, timeInterval: timeInterval) { error in
                 if error == nil {}
             }
         }

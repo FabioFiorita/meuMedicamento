@@ -8,9 +8,11 @@
 
 //Notifications
 //------------------------------------------------------------------------------
-
+"TimeIntervalNotificationBody" = "Open the App to take the Medicine!";
+"DateMachingNotificationBody" = "Open the App to find the nearest pharmacies!";
+"Buy" = "Buy";
+"Take" = "Take";
 //------------------------------------------------------------------------------
-
 
 //OnboardingView
 //------------------------------------------------------------------------------

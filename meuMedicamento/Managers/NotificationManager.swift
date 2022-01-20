@@ -35,7 +35,8 @@ final class NotificationManager: ObservableObject {
         let notificationContent = UNMutableNotificationContent()
         notificationContent.title = title
         notificationContent.sound = .default
-        notificationContent.body = "Abra o App para encontrar as farmácias mais próximas!"
+        //notificationContent.body = "Abra o App para encontrar as farmácias mais próximas!"
+        notificationContent.body = NSLocalizedString("DateMachingNotificationBody", comment: "")
         
         let request = UNNotificationRequest(identifier: identifier, content: notificationContent, trigger: trigger)
         
@@ -50,7 +51,8 @@ final class NotificationManager: ObservableObject {
         let notificationContent = UNMutableNotificationContent()
         notificationContent.title = title
         notificationContent.sound = .default
-        notificationContent.body = "Abra o App para tomar o Medicamento!"
+        //notificationContent.body = "Abra o App para tomar o Medicamento!"
+        notificationContent.body = NSLocalizedString("TimeIntervalNotificationBody", comment: "")
         notificationContent.interruptionLevel = .timeSensitive
         
         let request = UNNotificationRequest(identifier: identifier, content: notificationContent, trigger: trigger)
