@@ -40,11 +40,18 @@ enum Field {
     case boxQuantity
 }
 
-let itemFormatter: DateFormatter = {
+let longDateFormatter: DateFormatter = {
          let formatter = DateFormatter()
-         formatter.dateStyle = .long
+         formatter.dateStyle = .full
          formatter.timeStyle = .short
          //formatter.locale = Locale(identifier: "pt-BR")
          return formatter
      }()
 
+let shortDateFormatter: DateFormatter = {
+         let formatter = DateFormatter()
+        formatter.dateStyle = .short
+         formatter.timeStyle = .short
+         //formatter.locale = Locale(identifier: "pt-BR")
+         return formatter
+     }()

@@ -97,7 +97,7 @@ struct MedicationDetailView: View {
                         .foregroundColor(Color("AccentColor"))
                         .font(.title3)
                 ForEach(dates, id: \.self){ date in
-                        Text("\(date, formatter: itemFormatter)")
+                        Text("\(date, formatter: longDateFormatter)")
                     }
             }
             .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)

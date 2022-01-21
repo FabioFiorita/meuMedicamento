@@ -36,7 +36,7 @@ struct RegistrationComponents: View {
             Section {
                 notificationTypePicker
                 Group {
-                    Text(LocalizedStringKey("InitialDate")) + Text(" \(date, formatter: itemFormatter)").foregroundColor(showDatePicker ? .blue : .secondary)
+                    Text(LocalizedStringKey("InitialDate")) + Text(" \(date, formatter: longDateFormatter)").foregroundColor(showDatePicker ? .blue : .secondary)
                 }.onTapGesture(perform: {
                     focusedField = .none
                     showDatePicker.toggle()

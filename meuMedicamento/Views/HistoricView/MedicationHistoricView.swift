@@ -65,7 +65,7 @@ struct MedicationHistoricView: View {
     private func medicationDateHistory(forHistoric historic: Historic) -> some View {
         GroupBox {
             HStack {
-                Text("\(historic.dates ?? Date(),formatter: itemFormatter)" )
+                Text("\(historic.dates ?? Date(),formatter: longDateFormatter)" )
                 Spacer()
                 Group {
                     switch historic.medicationStatus {
@@ -81,7 +81,7 @@ struct MedicationHistoricView: View {
                 }
             }
             .accessibilityElement(children: .ignore)
-            .accessibilityLabel("\(historic.dates ?? Date(), formatter: itemFormatter) \(historic.medicationStatus ?? "Indeterminate Status")")
+            .accessibilityLabel("\(historic.dates ?? Date(), formatter: longDateFormatter) \(historic.medicationStatus ?? "Indeterminate Status")")
             
         }
         .groupBoxStyle(PrimaryGroupBoxStyle())

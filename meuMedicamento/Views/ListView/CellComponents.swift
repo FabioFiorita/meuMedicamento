@@ -48,17 +48,21 @@ struct CellComponents: View {
             if medication.date?.timeIntervalSinceNow ?? 1.0 <= 0.0 {
                 HStack {
                     Text(LocalizedStringKey("Next"))
-                    Text(" \(medication.date ?? Date() ,formatter: itemFormatter)")
                         .font(.body)
                         .fontWeight(.light)
+                    Text(" \(medication.date ?? Date() ,formatter: shortDateFormatter)")
                         .foregroundColor(.red)
+                        .font(.body)
+                        .fontWeight(.light)
                 }
             } else {
                 HStack {
                     Text(LocalizedStringKey("Next"))
-                    Text(" \(medication.date ?? Date() ,formatter: itemFormatter)")
-                       .font(.body)
-                       .fontWeight(.light)
+                        .font(.body)
+                        .fontWeight(.light)
+                    Text(" \(medication.date ?? Date() ,formatter: shortDateFormatter)")
+                        .font(.body)
+                        .fontWeight(.light)
                 }
             }
         }
