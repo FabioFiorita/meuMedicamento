@@ -1,0 +1,182 @@
+/* 
+  Localizable.strings
+  meuMedicamento
+
+  Created by Fabio Fiorita on 18/01/22.
+  
+*/
+
+//Notifications
+//------------------------------------------------------------------------------
+"TimeIntervalNotificationBody" = "Ouvrez l'application pour prendre le médicament !";
+"DateMachingNotificationBody" = "Ouvrez l'application pour trouver les pharmacies les plus proches !";
+"Buy" = "Acheter";
+"Take" = "Prendre";
+//------------------------------------------------------------------------------
+
+//OnboardingView
+//------------------------------------------------------------------------------
+"OnboardingWelcome" = "Bienvenue sur meuMédicament.";
+"OnboardingOrganizeTitle" = "Organisez vos médicaments";
+"OnboardingOrganizeBody" = "Consultez une liste de vos médicaments, contrôlez leur fréquence et recevez des alertes lorsque vos médicaments s'épuisent.";
+"OnboardingControlTitle" = "Contrôlez vos apports";
+"OnboardingControlBody" = "Gardez une trace d'un historique, en vérifiant si les médicaments ont été pris au bon moment, en retard ou oubliés.";
+"OnboardingMapTitle" = "Carte intégrée";
+"OnboardingMapBody" = "Trouvez les pharmacies et les hôpitaux à proximité.";
+"OnboardingButton" = "commencer à utiliser";
+//------------------------------------------------------------------------------
+
+//MainView
+//------------------------------------------------------------------------------
+"Medications" = "Médicaments";
+"Historic" = "Historique";
+"Map" = "Carte";
+"Settings" = "Réglages";
+//------------------------------------------------------------------------------
+
+//ListView
+//------------------------------------------------------------------------------
+"Today" = "Aujourd'hui";
+"Upcoming" = "Suivant";
+"AddNewMedication" = "Ajouter un nouveau médicament";
+"DisabledNotifications" = "Notifications désactivées";
+"Cancel" = "Annuler";
+"OpenSettingsAlertTitle" = "Ouvrir les paramètres";
+"OpenSettingsAlertBody" = "Ouvrez l'application Paramètres et activez les notifications pour surveiller vos médicaments.";
+//------------------------------------------------------------------------------
+
+//CellView
+//------------------------------------------------------------------------------
+"TakeMedication" = "Prendre des médicaments";
+"RenewQuantity" = "Renouveler la quantité";
+"CheckHistory" = "Voir l'historique";
+"DeleteMedication" = "Supprimer un médicament";
+"Delete" = "Éteindre";
+"ScheduleNotificationAlertTitle" = "Erreur lors de la planification de la notification";
+"ScheduleNotificationAlertBody" = "Définir à nouveau la date de début";
+"EditMedication" = "Modifier le médicament";
+"RegisterMedicationAlertTitle" = "Erreur lors de l'enregistrement du médicament";
+"RegisterMedicationAlertBody" = "Redémarrer l'application";
+"OK" = "D'accord";
+//------------------------------------------------------------------------------
+
+//CellComponents
+//------------------------------------------------------------------------------
+"RemainingMedications" = "Médicaments restants:";
+"Next" = "Suivant:";
+//------------------------------------------------------------------------------
+
+//HistoricView
+//------------------------------------------------------------------------------
+"Total" = "Le total";
+"Last7Days" = "les 7 derniers jours";
+"Last30Days" = "Les 30 derniers jours";
+//------------------------------------------------------------------------------
+
+//MedicationHistoricView
+//------------------------------------------------------------------------------
+"OnTime" = "Sans délai";
+"Late" = "En retard";
+"Missed" = "N'a pas pris";
+"SituationNotFound" = "Situation introuvable";
+"HistoricOfTheLast" = "Histoire du dernier";
+"medications" = "médicaments";
+"HistoricQuantity" = "Quantité dans l'historique";
+"HistoricOfTheLastMedications" = "Historique des derniers médicaments";
+//------------------------------------------------------------------------------
+
+//HistoricComponents
+//------------------------------------------------------------------------------
+//*******
+//------------------------------------------------------------------------------
+
+//MapView
+//------------------------------------------------------------------------------
+"Search" = "Chercher";
+"Select" = "Sélectionner";
+"List" = "Lister";
+//------------------------------------------------------------------------------
+
+//RecenterButton
+//------------------------------------------------------------------------------
+"Centralize" = "Centraliser";
+//------------------------------------------------------------------------------
+
+//LandmarkCategoryView
+//------------------------------------------------------------------------------
+"Farmácias" = "Pharmacies";
+"Hospitais" = "Hôpitaux";
+//------------------------------------------------------------------------------
+
+//AddMedicationView
+//------------------------------------------------------------------------------
+"NewMedication" = "Nouvelle médecine";
+"Save" = "Sauver";
+"CreationMedicationAlertTitle" = "Erreur dans la création du médicament";
+"CreationMedicationAlertBody" = "Enregistrez-vous à nouveau";
+//------------------------------------------------------------------------------
+
+//EditMedicationView
+//------------------------------------------------------------------------------
+"EditingMedicationAlertTitle" = "Erreur d'édition de médicament";
+"EditingMedicationAlertBody" = "Enregistrez-vous à nouveau";
+//------------------------------------------------------------------------------
+
+//RegistrationComponents
+//------------------------------------------------------------------------------
+"MedicationName" = "Nom du médicament";
+"RemainingQuantity" = "Quantité restante";
+"BoxQuantity" = "Quantité dans la boîte";
+"InitialDate" = "Date de début:";
+"Regularmente" = "Régulièrement";
+"Após Conclusão" = "Après achèvement";
+"Repeat" = "Répéter";
+"Nunca" = "Jamais";
+"1 hora" = "1 heure";
+"2 horas" = "2 heures";
+"4 horas" = "4 heures";
+"6 horas" = "6 heures";
+"8 horas" = "8 heures";
+"12 horas" = "12 heures";
+"1 dia" = "Un jour";
+"2 dias" = "2 jours";
+"5 dias" = "5 jours";
+"1 semana" = "1 semaine";
+"2 semanas" = "2 semaines";
+"1 mês" = "1 mois";
+"3 meses" = "3 mois";
+"6 meses" = "6 mois";
+"Notes" = "Notes";
+"PreviousField" = "Champ précédent";
+"NextField" = "Champ suivant";
+"NotificationType" = "Type d'intégration";
+"RegularlyText" = "Le prochain médicament sera programmé après la date définie";
+"AfterConclusionText" = "Le prochain médicament sera programmé après la dernière date d'achèvement";
+//------------------------------------------------------------------------------
+
+//MedicationDetailView
+//------------------------------------------------------------------------------
+"Edit" = "Éditer";
+"Details" = "Des détails";
+"RepeatEach" = "Répéter: tous les ";
+"RenewMedication" = "Renouveler les médicaments";
+"UpcomingMedications" = "Médicaments à venir";
+//------------------------------------------------------------------------------
+
+//SettingsView
+//------------------------------------------------------------------------------
+"MedicationsRunningOut" = "Voulez-vous être averti lorsque vos médicaments s'épuisent ?";
+"StartNotifying" = "Commencer à notifier lorsque la quantité atteint: ";
+"FromTotal" = " du total";
+"PercentageOfTotal" = "Pourcentage du total";
+"AccessibilityLabelStartNotifying" = "Commencer à notifier lorsque la quantité atteint % du total";
+"NotificationTime" = "Le temps des notifications:";
+"TimeSelector" = "sélecteur de temps";
+"SaveSettings" = "Enregistrer les paramètres";
+"SettingsAlertTitle" = "Paramètres mis à jour avec succès";
+"Rate" = "Évaluer!";
+"AboutUs" = "À propos de nous";
+"ContactUs" = "Nous contacter";
+"TermsOfUsafe" = "Conditions d'utilisation";
+"PrivacyPolicy" = "Politique de confidentialité";
+//------------------------------------------------------------------------------

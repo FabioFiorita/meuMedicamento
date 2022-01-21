@@ -1,0 +1,182 @@
+/* 
+  Localizable.strings
+  meuMedicamento
+
+  Created by Fabio Fiorita on 18/01/22.
+  
+*/
+
+//Notifications
+//------------------------------------------------------------------------------
+"TimeIntervalNotificationBody" = "Abra o App para tomar o Medicamento!";
+"DateMachingNotificationBody" = "Abra o App para encontrar as farmácias mais próximas!";
+"Buy" = "Comprar";
+"Take" = "Tomar";
+//------------------------------------------------------------------------------
+
+//OnboardingView
+//------------------------------------------------------------------------------
+"OnboardingWelcome" = "Bem Vindo ao meuMedicamento.";
+"OnboardingOrganizeTitle" = "Organize seus medicamentos";
+"OnboardingOrganizeBody" = "Confira uma lista dos seus medicamentos, controle a sua frequência e receba alertas quando seus remédios estiverem acabando.";
+"OnboardingControlTitle" = "Controle suas ingestões";
+"OnboardingControlBody" = "Acompanhe um histórico, verificando se os remédios foram tomados no horário correto, atrasados ou esquecidos.";
+"OnboardingMapTitle" = "Mapa Integrado";
+"OnboardingMapBody" = "Encontre farmácias e hospitais próximos.";
+"OnboardingButton" = "Começar a usar";
+//------------------------------------------------------------------------------
+
+//MainView
+//------------------------------------------------------------------------------
+"Medications" = "Medicamentos";
+"Historic" = "Histórico";
+"Map" = "Mapa";
+"Settings" = "Ajustes";
+//------------------------------------------------------------------------------
+
+//ListView
+//------------------------------------------------------------------------------
+"Today" = "Hoje";
+"Upcoming" = "Próximo";
+"AddNewMedication" = "Adicionar novo medicamento";
+"DisabledNotifications" = "Notificações desativadas";
+"Cancel" = "Cancelar";
+"OpenSettingsAlertTitle" = "Abrir Ajustes";
+"OpenSettingsAlertBody" = "Abra o App Ajustes e habilite as notificações para monitorar seus medicamentos.";
+//------------------------------------------------------------------------------
+
+//CellView
+//------------------------------------------------------------------------------
+"TakeMedication" = "Tomar Medicamento";
+"RenewQuantity" = "Renovar Quantidade";
+"CheckHistory" = "Ver Histórico";
+"DeleteMedication" = "Deletar Medicamento";
+"Delete" = "Apagar";
+"ScheduleNotificationAlertTitle" = "Erro na hora de agendar a notificação";
+"ScheduleNotificationAlertBody" = "Configure a data de início novamente";
+"EditMedication" = "Editar Medicamento";
+"RegisterMedicationAlertTitle" = "Erro na hora de cadastrar o medicamento";
+"RegisterMedicationAlertBody" = "Reinicie o aplicativo";
+"OK" = "OK";
+//------------------------------------------------------------------------------
+
+//CellComponents
+//------------------------------------------------------------------------------
+"RemainingMedications" = "Medicamentos restantes:";
+"Next" = "Próximo:";
+//------------------------------------------------------------------------------
+
+//HistoricView
+//------------------------------------------------------------------------------
+"Total" = "Total";
+"Last7Days" = "Últimos 7 dias";
+"Last30Days" = "Últimos 30 dias";
+//------------------------------------------------------------------------------
+
+//MedicationHistoricView
+//------------------------------------------------------------------------------
+"OnTime" = "Sem atraso";
+"Late" = "Atrasado";
+"Missed" = "Não tomou";
+"SituationNotFound" = "Situação não encontrada";
+"HistoricOfTheLast" = "Histórico dos últimos";
+"medications" = "medicamentos";
+"HistoricQuantity" = "Quantidade no Histórico";
+"HistoricOfTheLastMedications" = "Histórico dos últimos medicamentos";
+//------------------------------------------------------------------------------
+
+//HistoricComponents
+//------------------------------------------------------------------------------
+//*******
+//------------------------------------------------------------------------------
+
+//MapView
+//------------------------------------------------------------------------------
+"Search" = "Buscar";
+"Select" = "Selecione";
+"List" = "Lista";
+//------------------------------------------------------------------------------
+
+//RecenterButton
+//------------------------------------------------------------------------------
+"Centralize" = "Centralizar";
+//------------------------------------------------------------------------------
+
+//LandmarkCategoryView
+//------------------------------------------------------------------------------
+"Farmácias" = "Farmácias";
+"Hospitais" = "Hospitais";
+//------------------------------------------------------------------------------
+
+//AddMedicationView
+//------------------------------------------------------------------------------
+"NewMedication" = "Novo Medicamento";
+"Save" = "Salvar";
+"CreationMedicationAlertTitle" = "Erro na criação do medicamento";
+"CreationMedicationAlertBody" = "Cadastre novamente";
+//------------------------------------------------------------------------------
+
+//EditMedicationView
+//------------------------------------------------------------------------------
+"EditingMedicationAlertTitle" = "Erro na edição do medicamento";
+"EditingMedicationAlertBody" = "Cadastre novamente";
+//------------------------------------------------------------------------------
+
+//RegistrationComponents
+//------------------------------------------------------------------------------
+"MedicationName" = "Nome do Medicamento";
+"RemainingQuantity" = "Quantidade Restante";
+"BoxQuantity" = "Quantidade na Caixa";
+"InitialDate" = "Data de Início:";
+"Regularmente" = "Regularmente";
+"Após Conclusão" = "Após Conclusão";
+"Repeat" = "Repetir";
+"Nunca" = "Nunca";
+"1 hora" = "1 hora";
+"2 horas" = "2 horas";
+"4 horas" = "4 horas";
+"6 horas" = "6 horas";
+"8 horas" = "8 horas";
+"12 horas" = "12 horas";
+"1 dia" = "1 dia";
+"2 dias" = "2 dias";
+"5 dias" = "5 dias";
+"1 semana" = "1 semana";
+"2 semanas" = "2 semanas";
+"1 mês" = "1 mês";
+"3 meses" = "3 meses";
+"6 meses" = "6 meses";
+"Notes" = "Notas";
+"PreviousField" = "Campo anterior";
+"NextField" = "Próximo Campo";
+"NotificationType" = "Tipo de Ingestão";
+"RegularlyText" = "O próximo medicamento será agendando seguindo a data definida";
+"AfterConclusionText" = "O próximo medicamento será agendando seguindo a data da última conclusão";
+//------------------------------------------------------------------------------
+
+//MedicationDetailView
+//------------------------------------------------------------------------------
+"Edit" = "Editar";
+"Details" = "Detalhes";
+"RepeatEach" = "Repetição: A Cada ";
+"RenewMedication" = "Renovar Medicamentos";
+"UpcomingMedications" = "Próximos Medicamentos";
+//------------------------------------------------------------------------------
+
+//SettingsView
+//------------------------------------------------------------------------------
+"MedicationsRunningOut" = "Deseja ser notificado quando estiver acabando seus remédios?";
+"StartNotifying" = "Começar a notificar quando a quantidade chegar em: ";
+"FromTotal" = " do total";
+"PercentageOfTotal" = "Porcentagem do Total";
+"AccessibilityLabelStartNotifying" = "Começar a notificar quando a quantidade chegar % do total";
+"NotificationTime" = "Horario para as notificações:";
+"TimeSelector" = "Seletor de Horário";
+"SaveSettings" = "Salvar Configurações";
+"SettingsAlertTitle" = "Configurações atualizadas com sucesso";
+"Rate" = "Avalie!";
+"AboutUs" = "Sobre-nós";
+"ContactUs" = "Fale Conosco";
+"TermsOfUsafe" = "Termos de Uso";
+"PrivacyPolicy" = "Política de Privacidade";
+//------------------------------------------------------------------------------

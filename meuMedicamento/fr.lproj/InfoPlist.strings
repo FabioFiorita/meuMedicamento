@@ -1,0 +1,15 @@
+/* 
+  InfoPlist.strings
+  meuMedicamento
+
+  Created by Fabio Fiorita on 20/01/22.
+  
+*/
+
+//App Info
+//------------------------------------------------------------------------------
+"CFBundleDisplayName" = "Médicaments";
+"CFBundleName" = "meuMédicament";
+
+"NSLocationWhenInUseUsageDescription" = "meuMédicament doit accéder à votre emplacement pour trouver des pharmacies à proximité de votre emplacement";
+//------------------------------------------------------------------------------
