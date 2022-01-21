@@ -26,6 +26,7 @@ struct MedicationHistoricView: View {
                         GroupBox {
                             VStack(alignment: .center, spacing: 5) {
                                 Text(LocalizedStringKey("Last7Days"))
+                                    .fixedSize(horizontal: false, vertical: true)
                                     HistoricComponents(onTime: $onTime7, late: $late7, missed: $missed7, isTotal: false)
                             }
                             .frame(maxWidth: .infinity)
@@ -34,6 +35,7 @@ struct MedicationHistoricView: View {
                         GroupBox {
                             VStack(alignment: .center, spacing: 5) {
                                 Text(LocalizedStringKey("Last30Days"))
+                                    .fixedSize(horizontal: false, vertical: true)
                                     HistoricComponents(onTime: $onTime30, late: $late30, missed: $missed30, isTotal: false)
                             }
                             .frame(maxWidth: .infinity)

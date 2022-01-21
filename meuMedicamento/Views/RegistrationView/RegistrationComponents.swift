@@ -105,14 +105,17 @@ struct RegistrationComponents: View {
         Group {
             Picker(selection: $notificationType, label: Text(LocalizedStringKey("NotificationType"))) {
                 ForEach(NotificationType.type, id: \.self) { type in
-                    Text(LocalizedStringKey(type)).tag(type)
+                    Text(LocalizedStringKey(type))
+                        .tag(type)
                 }
             }
             .pickerStyle(.segmented)
             if notificationType == "Regularmente" {
                 Text(LocalizedStringKey("RegularlyText"))
+                    .fixedSize(horizontal: false, vertical: true)
             } else {
                 Text(LocalizedStringKey("AfterConclusionText"))
+                    .fixedSize(horizontal: false, vertical: true)
             }
         }
         
