@@ -1,7 +1,7 @@
 ## meuMedicamento: Controle de Medicamentos
 ### Continuação do projeto [MedControl](https://github.com/FabioFiorita/MedControl)
 
-meuMedicamento tem como objetivo ajudar pessoas a controlar seus medicamentos, por meio dele o usuário consegue receber notificações, alertas se o medicamento estiver acabando e é preciso comprar mais e visualizar um mapa com todas as farmácias próximas da sua localização.
+Aplicativo desenvolvido utilizando a linguagem Swift e o framework SwiftUI que tem como objetivo o controle de medicamentos, com acompanhamento de histórico de ingestões, alertas e controle de quantidade de comprimidos, o aplicativo conta também com um mapa integrado mostrando farmácias e hospitais próximos da localização do usuário.
 
 <img src="https://raw.githubusercontent.com/FabioFiorita/meuMedicamento/gh-pages/images/Logo.png" width="350">
 
