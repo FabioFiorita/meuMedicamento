@@ -1,6 +1,6 @@
 ## meuMedication: Control your medications
 
-meuMedication aims to help people control their medicines, through it the user can receive notifications, alerts if the medicine is running out and it is necessary to buy more and view a map with all the pharmacies near your location.
+Application developed using the Swift and the SwiftUI framework that aims to control medicines, with monitoring of intake history, alerts and control of the amount of tablets, the application also has an integrated map showing pharmacies and hospitals near the user's location.
 
 <img src="https://raw.githubusercontent.com/FabioFiorita/meuMedicamento/gh-pages/images/Logo.png" width="350">
 
