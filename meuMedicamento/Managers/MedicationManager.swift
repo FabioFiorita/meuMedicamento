@@ -1,6 +1,5 @@
 import Foundation
 import CoreData
-import Time
 
 final class MedicationManager: ObservableObject {
     enum dateSection {
@@ -75,8 +74,8 @@ final class MedicationManager: ObservableObject {
     
     func fetchHistoric (forStatus status: historicStatus, forType type: historicType, medication: Medication? = nil) -> Int {
         fetchHistories()
-        let sevenDays = 7.days.inSeconds.value * -1
-        let thirtyDays = 30.days.inSeconds.value  * -1
+        let sevenDays = 604800.0 * -1
+        let thirtyDays = 2628000.0  * -1
         switch status {
         case .onTime:
             switch type {
@@ -404,39 +403,40 @@ func refreshRemainingQuantity(medication: Medication) {
     notificationManager.deleteLocalNotifications(identifiers: [identifier])
 }
 
+    
 func convertToSeconds(_ time: String) -> Double {
     var seconds = 3.0
     switch time {
     case "Nunca":
         seconds = 0.0
     case "1 hora":
-        seconds = 1.hours.inSeconds.value
+        seconds = 3600
     case "2 horas":
-        seconds = 2.hours.inSeconds.value
+        seconds = 3600 * 2
     case "4 horas":
-        seconds = 4.hours.inSeconds.value
+        seconds = 3600 * 4
     case "6 horas":
-        seconds = 6.hours.inSeconds.value
+        seconds = 3600 * 6
     case "8 horas":
-        seconds = 8.hours.inSeconds.value
+        seconds = 3600 * 8
     case "12 horas":
-        seconds = 12.hours.inSeconds.value
+        seconds = 3600 * 12
     case "1 dia":
-        seconds = 1.days.inSeconds.value
+        seconds = 86400
     case "2 dias":
-        seconds = 2.days.inSeconds.value
+        seconds = 86400 * 2
     case "5 dias":
-        seconds = 5.days.inSeconds.value
+        seconds = 86400 * 5
     case "1 semana":
-        seconds = 7.days.inSeconds.value
+        seconds = 604800
     case "2 semanas":
-        seconds = 14.days.inSeconds.value
+        seconds = 604800 * 2
     case "1 mês":
-        seconds = 30.days.inSeconds.value
+        seconds = 2628000
     case "3 meses":
-        seconds = 90.days.inSeconds.value
+        seconds = 2628000 * 3
     case "6 meses":
-        seconds = 180.days.inSeconds.value
+        seconds = 2628000 * 6
     default:
         break
     }
